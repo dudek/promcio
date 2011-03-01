@@ -13,7 +13,6 @@ public class RankBean  implements Serializable{
 	
 	
 	private String name;
-
 	private float hourSalary;
 
 	public void setName(String name) {
