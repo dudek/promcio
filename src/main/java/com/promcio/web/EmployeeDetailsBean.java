@@ -9,7 +9,7 @@ import javax.inject.Named;
 @Named
 public class EmployeeDetailsBean implements Serializable {
 
-	private static final long serialVersionUID = -2966477448613458981L;
+	 private static final long serialVersionUID = 1L;
 	
 	private String city;
 	private String postCode;

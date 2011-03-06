@@ -4,23 +4,28 @@
       <string>currentBuild</string>
       <path-set>
         <pathsSet class="linked-hash-set">
-          <string>META-INF/context.xml</string>
-          <string>index.jsp</string>
           <string>resources/gfx/banner.png</string>
           <string>resources/gfx/weld.png</string>
           <string>resources/css/screen.css</string>
-          <string>WEB-INF/faces-config.xml</string>
-          <string>WEB-INF/beans.xml</string>
+          <string>index.jsp</string>
+          <string>META-INF/context.xml</string>
+          <string>META-INF/MANIFEST.MF</string>
           <string>WEB-INF/templates/default.xhtml</string>
           <string>WEB-INF/web.xml</string>
+          <string>WEB-INF/beans.xml</string>
+          <string>WEB-INF/faces-config.xml</string>
           <string>home.xhtml</string>
-          <string>WEB-INF/classes/META-INF/persistence.xml</string>
-          <string>WEB-INF/classes/com/promcio/domain/Employment.class</string>
-          <string>WEB-INF/classes/com/promcio/domain/Employee.class</string>
-          <string>WEB-INF/classes/com/promcio/domain/EmployeeDetails.class</string>
-          <string>WEB-INF/classes/com/promcio/domain/Rank.class</string>
-          <string>WEB-INF/classes/com/promcio/domain/Account.class</string>
           <string>WEB-INF/classes/import.sql</string>
+          <string>WEB-INF/classes/META-INF/persistence.xml</string>
+          <string>WEB-INF/classes/com/promcio/domain/Rank.class</string>
+          <string>WEB-INF/classes/com/promcio/domain/Employment.class</string>
+          <string>WEB-INF/classes/com/promcio/domain/EmployeeDetails.class</string>
+          <string>WEB-INF/classes/com/promcio/domain/Account.class</string>
+          <string>WEB-INF/classes/com/promcio/domain/Employee.class</string>
+          <string>WEB-INF/classes/com/promcio/web/EmployeeBean.class</string>
+          <string>WEB-INF/classes/com/promcio/web/EmploymentBean.class</string>
+          <string>WEB-INF/classes/com/promcio/web/RankBean.class</string>
+          <string>WEB-INF/classes/com/promcio/web/EmployeeDetailsBean.class</string>
           <string>WEB-INF/lib/el-impl-2.1.2-b04.jar</string>
         </pathsSet>
       </path-set>

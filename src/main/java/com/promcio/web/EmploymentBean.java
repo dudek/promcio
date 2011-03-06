@@ -9,7 +9,7 @@ import javax.inject.Named;
 @Named
 public class EmploymentBean   implements Serializable{
 
-	private static final long serialVersionUID = -3679226781930552208L;
+	 private static final long serialVersionUID = 1L;
 	
 	private String contractType;
 	private float salary;

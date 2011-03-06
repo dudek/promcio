@@ -1,0 +1,28 @@
+<testng-results>
+  <reporter-output>
+  </reporter-output>
+  <suite name="Command line suite">
+    <groups>
+    </groups>
+    <test name="Command line test">
+      <class name="com.promcio.tests.EmployeeManagerTest">
+        <test-method status="PASS" signature="testAddEmployee()" name="testAddEmployee" duration-ms="3" started-at="2011-03-06T10:33:32Z" finished-at="2011-03-06T10:33:32Z">
+        </test-method>
+        <test-method status="PASS" signature="testAddEmployeeDetails()" name="testAddEmployeeDetails" duration-ms="1" started-at="2011-03-06T10:33:32Z" finished-at="2011-03-06T10:33:32Z">
+        </test-method>
+        <test-method status="PASS" signature="testAddEmployment()" name="testAddEmployment" duration-ms="0" started-at="2011-03-06T10:33:32Z" finished-at="2011-03-06T10:33:32Z">
+        </test-method>
+        <test-method status="PASS" signature="testAddRank()" name="testAddRank" duration-ms="0" started-at="2011-03-06T10:33:32Z" finished-at="2011-03-06T10:33:32Z">
+        </test-method>
+        <test-method status="PASS" signature="testRemoveEmployee()" name="testRemoveEmployee" duration-ms="0" started-at="2011-03-06T10:33:32Z" finished-at="2011-03-06T10:33:32Z">
+        </test-method>
+        <test-method status="PASS" signature="testRemoveEmployeeDetails()" name="testRemoveEmployeeDetails" duration-ms="0" started-at="2011-03-06T10:33:32Z" finished-at="2011-03-06T10:33:32Z">
+        </test-method>
+        <test-method status="PASS" signature="testRemoveEmployment()" name="testRemoveEmployment" duration-ms="0" started-at="2011-03-06T10:33:32Z" finished-at="2011-03-06T10:33:32Z">
+        </test-method>
+        <test-method status="PASS" signature="testRemoveRank()" name="testRemoveRank" duration-ms="0" started-at="2011-03-06T10:33:32Z" finished-at="2011-03-06T10:33:32Z">
+        </test-method>
+      </class>
+    </test>
+  </suite>
+</testng-results>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Command line test" failures="0" tests="8" time="0.04" errors="0">
+  <properties/>
+  <testcase name="testAddEmployee" time="0.0030" classname="com.promcio.tests.EmployeeManagerTest"/>
+  <testcase name="testAddEmployeeDetails" time="0.0010" classname="com.promcio.tests.EmployeeManagerTest"/>
+  <testcase name="testAddEmployment" time="0.0" classname="com.promcio.tests.EmployeeManagerTest"/>
+  <testcase name="testAddRank" time="0.0" classname="com.promcio.tests.EmployeeManagerTest"/>
+  <testcase name="testRemoveEmployee" time="0.0" classname="com.promcio.tests.EmployeeManagerTest"/>
+  <testcase name="testRemoveEmployeeDetails" time="0.0" classname="com.promcio.tests.EmployeeManagerTest"/>
+  <testcase name="testRemoveEmployment" time="0.0" classname="com.promcio.tests.EmployeeManagerTest"/>
+  <testcase name="testRemoveRank" time="0.0" classname="com.promcio.tests.EmployeeManagerTest"/>
+</testsuite>

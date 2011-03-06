@@ -9,8 +9,7 @@ import javax.inject.Named;
 @Named
 public class RankBean  implements Serializable{
 
-	private static final long serialVersionUID = -6961978690202962358L;
-	
+	 private static final long serialVersionUID = 1L;
 	
 	private String name;
 	private float hourSalary;
