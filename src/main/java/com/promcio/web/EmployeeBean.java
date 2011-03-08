@@ -21,7 +21,7 @@ public @Model class EmployeeBean implements java.io.Serializable {
 	private String firstname;
 	private String surname;
 	private Integer yearOfBirth;
-	private Integer pesel;
+	private String pesel;
 	private Integer nip;
 	private Integer privileges;
 	
@@ -61,11 +61,11 @@ public @Model class EmployeeBean implements java.io.Serializable {
 	public Integer getYearOfBirth() {
 		return yearOfBirth;
 	}
-	public void setPesel(Integer pesel) {
+	public void setPesel(String pesel) {
 		this.pesel = pesel;
 	}
 	
-	public Integer getPesel() {
+	public String getPesel() {
 		return pesel;
 	}
 	public void setNip(Integer nip) {
