@@ -5,64 +5,68 @@
    xmlns:h="http://java.sun.com/jsf/html"
    template="/WEB-INF/templates/default.xhtml">
    <ui:define name="content">
-      <h1>Hello World!</h1>
-      <p>Your CDI bean <code>HelloWorld</code> says <span style="color: blue;">#{helloWorld.text}</span> using the Unified EL.</p>
-
       <h:form id="bv">
-         <h2>Bean Validation examples</h2>
-         <p>Enforces annotation-based constraints defined on the model class.</p>
+   <h2>Dodaj Pracownika</h2>
          <table>
-            <tr>
-               <th style="text-align: right;">
-                  <h:outputLabel for="letters" value="Letters:"/>
+             <tr>
+               <th  style="text-align: right;">
+                  <h:outputLabel for="firstname" value="Imię:"/>
                </th>
                <td>
-                  <h:inputText id="letters" value="#{helloWorld.letters}"/>
-                  <h:message for="letters" errorClass="invalid"/>
+                  <h:inputText id="firstname" value="#{employeeBean.firstname}"/>
+                  <h:message for="firstname" errorClass="invalid"/>
                </td>
             </tr>
             <tr>
-               <th style="text-align: right;">
-                  <h:outputLabel for="numbers" value="Numbers:"/>
+               <th  style="text-align: right;">
+                  <h:outputLabel for="surname" value="Nazwisko:"/>
                </th>
                <td>
-                  <h:inputText id="numbers" value="#{helloWorld.numbers}"/>
-                  <h:message for="numbers" errorClass="invalid"/>
+                  <h:inputText id="surname" value="#{employeeBean.surname}"/>
+                  <h:message for="surname" errorClass="invalid"/>
                </td>
             </tr>
             <tr>
-               <th style="text-align: right;">
-                  <h:outputLabel for="email" value="Email:"/>
+               <th  style="text-align: right;">
+                  <h:outputLabel for="yearOfBirth" value="Rok urodzenia"/>
                </th>
                <td>
-                  <h:inputText id="email" value="#{helloWorld.email}"/>
-                  <h:message for="email" errorClass="invalid"/>
+                  <h:inputText id="yearOfBirth" value="#{employeeBean.yearOfBirth}"/>
+                  <h:message for="yearOfBirth" errorClass="invalid"/>
+               </td>
+            </tr>
+            <tr>
+               <th  style="text-align: right;">
+                  <h:outputLabel for="pesel" value="Pesel:"/>
+               </th>
+               <td>
+                  <h:inputText id="pesel" value="#{employeeBean.pesel}"/>
+                  <h:message for="pesel" errorClass="invalid"/>
+               </td>
+            </tr>
+            <tr>
+               <th  style="text-align: right;">
+                  <h:outputLabel for="nip" value="Nip:"/>
+               </th>
+               <td>
+                  <h:inputText id="nip" value="#{employeeBean.nip}"/>
+                  <h:message for="nip" errorClass="invalid"/>
+               </td>
+            </tr>
+            <tr>
+               <th  style="text-align: right;">
+                  <h:outputLabel for="privileges" value="Przywileje?:"/>
+               </th>
+               <td>
+                  <h:inputText id="privileges" value="#{employeeBean.privileges}"/>
+                  <h:message for="privileges" errorClass="invalid"/>
                </td>
             </tr>
          </table>
          <p>
-            <h:commandButton id="check" action="check" value="Check values"/>
-            <h:outputText value=" All clear!" rendered="#{facesContext.postback and empty facesContext.messageList}" style="color: green;"/>
+            <h:commandButton id="check" action="result" value="Dodaj pracownika"/>
+            <h:outputText value=" Wszystko okej" rendered="#{facesContext.postback and empty facesContext.messageList}" style="color: green;"/>
          </p>
       </h:form>
-      <h2>Widgets</h2>
-      <h:dataTable var="_widget" value="#widgets">
-         <h:column>
-            <f:facet name="header">Id</f:facet>
-            #{_widget.id}
-         </h:column>
-         <h:column>
-            <f:facet name="header">Part Number</f:facet>
-            #{_widget.partNumber}
-         </h:column>
-         <h:column>
-            <f:facet name="header">Name</f:facet>
-            #{_widget.name}
-         </h:column>
-         <h:column>
-            <f:facet name="header">Description</f:facet>
-            #{_widget.description}
-         </h:column>
-      </h:dataTable>
    </ui:define>
 </ui:composition>
