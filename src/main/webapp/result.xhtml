@@ -61,6 +61,9 @@
             <h:commandButton id="return" action="home" value="Powrót"/>
             <h:outputText value=" Pracownik dodany poprawnie" rendered="#{facesContext.postback and empty facesContext.messageList}" style="color: green;"/>
          </p>
+         <p>
+         <h:commandButton id="Dodaj" action="employeeDetail" value="Szczegolowe dane pracownika"/>
+         </p>
       </h:form>
    </ui:define>
 </ui:composition>

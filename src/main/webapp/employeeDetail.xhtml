@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:h="http://java.sun.com/jsf/html"
+   template="/WEB-INF/templates/default.xhtml">
+   <ui:define name="content">
+      <h:form id="bv">
+   <h2>Szczegoly pracownika</h2>
+         <table>
+             <tr>
+               <th  style="text-align: right;">
+                  <h:outputLabel for="city" value="Miasto:"/>
+               </th>
+               <td>
+                  <h:inputText id="city" value="#{employeeDetailsBean.city}"/>
+                  <h:message for="city" errorClass="invalid"/>
+               </td>
+            </tr>
+            <tr>
+               <th  style="text-align: right;">
+                  <h:outputLabel for="postCode" value="Kod pocztowy:"/>
+               </th>
+               <td>
+                  <h:inputText id="postCode" value="#{employeeDetailsBean.postCode}"/>
+                  <h:message for="postCode" errorClass="invalid"/>
+               </td>
+            </tr>
+            <tr>
+               <th  style="text-align: right;">
+                  <h:outputLabel for="street" value="Ulica:"/>
+               </th>
+               <td>
+                  <h:inputText id="street" value="#{employeeDetailsBean.street}"/>
+                  <h:message for="street" errorClass="invalid"/>
+               </td>
+            </tr>
+            <tr>
+               <th  style="text-align: right;">
+                  <h:outputLabel for="buildingNumber" value="NUmer budynku"/>
+               </th>
+               <td>
+                  <h:inputText id="buildingNumber" value="#{employeeDetailsBean.buildingNumber}"/>
+                  <h:message for="buildingNumber" errorClass="invalid"/>
+               </td>
+            </tr>
+            <tr>
+               <th  style="text-align: right;">
+                  <h:outputLabel for="apartmentNumber" value="Numer mieszkania:"/>
+               </th>
+               <td>
+                  <h:inputText id="apartmentNumber" value="#{employeeDetailsBean.apartmentNumber}"/>
+                  <h:message for="apartmentNumber" errorClass="invalid"/>
+               </td>
+            </tr>
+            <tr>
+               <th  style="text-align: right;">
+                  <h:outputLabel for="staircaseNumber" value="Pietro?:"/>
+               </th>
+               <td>
+                  <h:inputText id="staircaseNumber" value="#{employeeDetailsBean.staircaseNumber}"/>
+                  <h:message for="staircaseNumber" errorClass="invalid"/>
+               </td>
+            </tr>
+            <tr>
+               <th  style="text-align: right;">
+                  <h:outputLabel for="phoneNumber" value="Numer Tel:"/>
+               </th>
+               <td>
+                  <h:inputText id="phoneNumber" value="#{employeeDetailsBean.phoneNumber}"/>
+                  <h:message for="phoneNumber" errorClass="invalid"/>
+               </td>
+            </tr>
+            <tr>
+               <th  style="text-align: right;">
+                  <h:outputLabel for="email" value="Email:"/>
+               </th>
+               <td>
+                  <h:inputText id="email" value="#{employeeDetailsBean.email}"/>
+                  <h:message for="email" errorClass="invalid"/>
+               </td>
+            </tr>
+         </table>
+         <p>
+            <h:commandButton id="check" action="result" value="Dodaj dane pracownika"/>
+         </p>
+      </h:form>
+   </ui:define>
+</ui:composition>
