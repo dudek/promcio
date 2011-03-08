@@ -4,6 +4,8 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import com.promcio.domain.Employee;
+import com.promcio.domain.EmployeeDetails;
+import com.promcio.domain.Employment;
 import com.promcio.domain.Rank;
 
 @Stateless
@@ -43,5 +45,43 @@ public class EmployeeManager {
 			Rank rank = em.find(Rank.class, id);
 			
 			em.remove(rank);
+	 }
+	 
+	 public void addEmployeeDetails(String city, String postCode, String street, String buildingNumber, 
+			 	 String apartmentNumber,String staircaseNumber, String phoneNumber, String email){
+		 	EmployeeDetails employeeDetails = new EmployeeDetails();
+		 	
+		 	employeeDetails.setCity(city);
+		 	employeeDetails.setPostCode(postCode);
+		 	employeeDetails.setStreet(street);
+		 	employeeDetails.setBuildingNumber(buildingNumber);
+		 	employeeDetails.setApartmentNumber(apartmentNumber);
+		 	employeeDetails.setStaircaseNumber(staircaseNumber);
+		 	employeeDetails.setPhoneNumber(phoneNumber);
+		 	employeeDetails.setEmail(email);
+		 	
+		 	em.persist(employeeDetails);
+	 }
+	 
+	 public void removeEmployeeDetails(long id){
+		 	EmployeeDetails employeDetails = em.find(EmployeeDetails.class, id);
+		 	
+		 	em.remove(employeDetails);
+	 }
+	 
+	 public void addEmployment(String contractType, float salary, int hours){
+		 	Employment employment = new Employment();
+		 	
+		 	employment.setContractType(contractType);
+		 	employment.setSalary(salary);
+		 	employment.setHours(hours);
+		 	
+		 	em.persist(employment);
+	 }
+	 
+	 public void removeEmployment(long id){
+		 	Employment employment = em.find(Employment.class, id);
+		 	
+		 	em.remove(employment);
 	 }
 }
