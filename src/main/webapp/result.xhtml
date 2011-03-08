@@ -56,6 +56,22 @@
                	  #{ employeeBean.privileges }
                </td>
             </tr>
+            <tr>
+               <th style="text-align: right;">
+                  <h:outputLabel for="name" value="Stanowisko:"/>
+               </th>
+               <td>
+               	  #{ rankBean.name }
+               </td>
+            </tr>
+            <tr>
+               <th style="text-align: right;">
+                  <h:outputLabel for="hourSalary" value="Stawka godzinowa:"/>
+               </th>
+               <td>
+               	  #{ rankBean.hourSalary }
+               </td>
+            </tr>
          </table>
          <p>
             <h:commandButton id="return" action="home" value="Powrót"/>
