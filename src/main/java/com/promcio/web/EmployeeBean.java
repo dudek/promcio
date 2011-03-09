@@ -5,11 +5,15 @@ import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Model;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotEmpty;
+
+import com.promcio.service.EmployeeManager;
+import com.promcio.domain.Employee;
 
 
 @SessionScoped
@@ -18,9 +22,12 @@ public @Model class EmployeeBean implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
+	@Inject
+	EmployeeManager employeeManager;
+	
 	private String firstname;
 	private String surname;
-	private Integer yearOfBirth;
+	private Integer yob;
 	private String pesel;
 	private Integer nip;
 	private Integer privileges;
@@ -54,12 +61,12 @@ public @Model class EmployeeBean implements java.io.Serializable {
 	public String getSurname() {
 		return surname;
 	}
-	public void setYearOfBirth(Integer yearOfBirth) {
-		this.yearOfBirth = yearOfBirth;
+	public void setYob(Integer yob) {
+		this.yob = yob;
 	}
 	
-	public Integer getYearOfBirth() {
-		return yearOfBirth;
+	public Integer getYob() {
+		return yob;
 	}
 	public void setPesel(String pesel) {
 		this.pesel = pesel;
@@ -84,7 +91,11 @@ public @Model class EmployeeBean implements java.io.Serializable {
 		return privileges;
 	}
 	
-	
+	public String doAddEmployee(){
+		
+		employeeManager.addEmployee(firstname, surname, pesel, yob, nip);
+		return "result.jsf";
+	}
 	
 	
 }

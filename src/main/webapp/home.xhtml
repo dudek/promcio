@@ -28,11 +28,11 @@
             </tr>
             <tr>
                <th  style="text-align: right;">
-                  <h:outputLabel for="yearOfBirth" value="Rok urodzenia"/>
+                  <h:outputLabel for="yob" value="Rok urodzenia"/>
                </th>
                <td>
-                  <h:inputText id="yearOfBirth" value="#{employeeBean.yearOfBirth}"/>
-                  <h:message for="yearOfBirth" errorClass="invalid"/>
+                  <h:inputText id="yob" value="#{employeeBean.yob}"/>
+                  <h:message for="yob" errorClass="invalid"/>
                </td>
             </tr>
             <tr>
@@ -82,7 +82,7 @@
             </tr>
          </table>
          <p>
-            <h:commandButton id="check" action="result" value="Dodaj pracownika"/>
+            <h:commandButton id="check" action="#{employeeBean.doAddEmployee}" value="Dodaj pracownika"/>
             <h:outputText value=" Wszystko okej" rendered="#{facesContext.postback and empty facesContext.messageList}" style="color: green;"/>
          </p>
       </h:form>
