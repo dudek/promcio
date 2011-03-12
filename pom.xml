@@ -32,6 +32,13 @@
           <name>JBoss Repository</name>
           <url>http://repository.jboss.org/maven2</url>
        </repository>
+       <!-- PrimeFeces.org Repository -->
+       <repository>  
+          <id>prime-repo</id>  
+          <name>Prime Technology Maven Repository</name>  
+          <url>http://repository.prime.com.tr</url>  
+          <layout>default</layout>  
+       </repository>
    </repositories>
 
    <dependencyManagement>
@@ -116,6 +123,13 @@
                <artifactId>el-api</artifactId>
             </exclusion>
          </exclusions>
+      </dependency>
+      
+      <!-- PrimeFaces.org Dependency -->
+      <dependency>  
+         <groupId>org.primefaces</groupId>  
+         <artifactId>primefaces</artifactId>  
+         <version>2.2</version>  
       </dependency>
    </dependencies>
    <build>
