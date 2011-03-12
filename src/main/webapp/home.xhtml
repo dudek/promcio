@@ -1,90 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-   xmlns:ui="http://java.sun.com/jsf/facelets"
-   xmlns:f="http://java.sun.com/jsf/core"
-   xmlns:h="http://java.sun.com/jsf/html"
-   template="/WEB-INF/templates/default.xhtml">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.prime.com.tr/ui" template="/WEB-INF/templates/default.xhtml">
    <ui:define name="content">
       <h:form id="bv">
-   <h2>Dodaj Pracownika</h2>
+         <h2>Dodaj Pracownika</h2>
+         <p:focus /> <!-- podswietlanie textfieldow -->
          <table>
-             <tr>
-               <th  style="text-align: right;">
-                  <h:outputLabel for="firstname" value="Imię:"/>
-               </th>
+            <tr>
+               <th style="text-align: right;"><h:outputLabel for="firstname" value="Imię:" /></th>
                <td>
-                  <h:inputText id="firstname" value="#{employeeBean.firstname}"/>
-                  <h:message for="firstname" errorClass="invalid"/>
-               </td>
+               <!-- Nowy Textfield i ErrorMessage -->
+               <p:inputText id="firstname" required="true" label="Firstname" value="#{employeeBean.firstname}" /> <p:message for="firstname" /></td>
             </tr>
             <tr>
-               <th  style="text-align: right;">
-                  <h:outputLabel for="surname" value="Nazwisko:"/>
-               </th>
-               <td>
-                  <h:inputText id="surname" value="#{employeeBean.surname}"/>
-                  <h:message for="surname" errorClass="invalid"/>
-               </td>
+               <th style="text-align: right;"><h:outputLabel for="surname" value="Nazwisko:" /></th>
+               <td><h:inputText id="surname" value="#{employeeBean.surname}" /> <h:message for="surname" errorClass="invalid" /></td>
             </tr>
             <tr>
-               <th  style="text-align: right;">
-                  <h:outputLabel for="yob" value="Rok urodzenia"/>
-               </th>
-               <td>
-                  <h:inputText id="yob" value="#{employeeBean.yob}"/>
-                  <h:message for="yob" errorClass="invalid"/>
-               </td>
+               <th style="text-align: right;"><h:outputLabel for="yob" value="Rok urodzenia" /></th>
+               <td><h:inputText id="yob" value="#{employeeBean.yob}" /> <h:message for="yob" errorClass="invalid" /></td>
             </tr>
             <tr>
-               <th  style="text-align: right;">
-                  <h:outputLabel for="pesel" value="Pesel:"/>
-               </th>
-               <td>
-                  <h:inputText id="pesel" value="#{employeeBean.pesel}"/>
-                  <h:message for="pesel" errorClass="invalid"/>
-               </td>
+               <th style="text-align: right;"><h:outputLabel for="pesel" value="Pesel:" /></th>
+               <td><h:inputText id="pesel" value="#{employeeBean.pesel}" /> <h:message for="pesel" errorClass="invalid" /></td>
             </tr>
             <tr>
-               <th  style="text-align: right;">
-                  <h:outputLabel for="nip" value="Nip:"/>
-               </th>
-               <td>
-                  <h:inputText id="nip" value="#{employeeBean.nip}"/>
-                  <h:message for="nip" errorClass="invalid"/>
-               </td>
+               <th style="text-align: right;"><h:outputLabel for="nip" value="Nip:" /></th>
+               <td><h:inputText id="nip" value="#{employeeBean.nip}" /> <h:message for="nip" errorClass="invalid" /></td>
             </tr>
             <tr>
-               <th  style="text-align: right;">
-                  <h:outputLabel for="privileges" value="Przywileje?:"/>
-               </th>
-               <td>
-                  <h:inputText id="privileges" value="#{employeeBean.privileges}"/>
-                  <h:message for="privileges" errorClass="invalid"/>
-               </td>
+               <th style="text-align: right;"><h:outputLabel for="privileges" value="Przywileje?:" /></th>
+               <td><h:inputText id="privileges" value="#{employeeBean.privileges}" /> <h:message for="privileges" errorClass="invalid" /></td>
             </tr>
             <tr>
-               <th  style="text-align: right;">
-                  <h:outputLabel for="hourSalary" value="Stawka godzinowa:"/>
-               </th>
-               <td>
-                  <h:inputText id="hourSalary" value="#{rankBean.hourSalary}"/>
-                  <h:message for="hourSalary" errorClass="invalid"/>
-               </td>
+               <th style="text-align: right;"><h:outputLabel for="hourSalary" value="Stawka godzinowa:" /></th>
+               <td><h:inputText id="hourSalary" value="#{rankBean.hourSalary}" /> <h:message for="hourSalary" errorClass="invalid" /></td>
             </tr>
             <tr>
-               <th  style="text-align: right;">
-                  <h:outputLabel for="name" value="Stanowisko:"/>
-               </th>
-               <td>
-                  <h:inputText id="name" value="#{rankBean.name}"/>
-                  <h:message for="name" errorClass="invalid"/>
-               </td>
+               <th style="text-align: right;"><h:outputLabel for="name" value="Stanowisko:" /></th>
+               <td><h:inputText id="name" value="#{rankBean.name}" /> <h:message for="name" errorClass="invalid" /></td>
             </tr>
          </table>
-         <p>
-            <h:commandButton id="check" action="#{employeeBean.doAddEmployee}" value="Dodaj pracownika"/>
-            <h:outputText value=" Wszystko okej" rendered="#{facesContext.postback and empty facesContext.messageList}" style="color: green;"/>
-         </p>
+         <p><h:commandButton id="check" action="#{employeeBean.doAddEmployee}" value="Dodaj pracownika" /> <h:outputText value=" Wszystko okej"
+            rendered="#{facesContext.postback and empty facesContext.messageList}" style="color: green;" /></p>
       </h:form>
    </ui:define>
 </ui:composition>
