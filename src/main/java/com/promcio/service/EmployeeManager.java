@@ -1,5 +1,6 @@
 package com.promcio.service;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -83,5 +84,36 @@ public class EmployeeManager {
 		 	Employment employment = em.find(Employment.class, id);
 		 	
 		 	em.remove(employment);
+	 }
+	 
+	 public void joinEmployeeWithDetails(long employeeId, long employeeDetailsId) {
+			Employee employee = em.find(Employee.class, employeeId);
+			EmployeeDetails employeeDetails = em.find(EmployeeDetails.class, employeeDetailsId);
+			
+			employee.setDetails(employeeDetails);
+			
+			em.persist(employee);
+	 }
+	 
+	 public void joinEmployeeWithRank(long employeeId, long rankId) {
+			Employee employee = em.find(Employee.class, employeeId);
+			Rank rank = em.find(Rank.class, rankId);
+			
+			employee.setRank(rank);
+			
+			em.persist(employee);
+	 }
+	 
+	 public void joinEmployeeWithEmployment(long employeeId, long employmentId) {
+			Employee employee = em.find(Employee.class, employeeId);
+			Employment employment = em.find(Employment.class, employmentId);
+			
+			List<Employment> employments = employee.getEmployments();
+			
+			employments.add(employment);
+			
+			employee.setEmployments(employments);
+			
+			em.persist(employee);
 	 }
 }
