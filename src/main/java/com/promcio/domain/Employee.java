@@ -1,8 +1,9 @@
 package com.promcio.domain;
 
 import java.util.List;
-
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -11,98 +12,110 @@ import javax.persistence.OneToOne;
 @Entity
 public class Employee {
 
-	@Id
-	@GeneratedValue
-	private long id;
-	
-	private String firstname;
-	private String surname;
-	private String pesel;
-	
-	private int yob;
-	private int nip;
+	 private long id;
 
-	@OneToOne
-	private EmployeeDetails details;
-	@OneToOne
-	private Rank rank;
-	@OneToMany
-	private List<Employment> employments;
-	
-		
-	public long getId() {
-		return id;
-	}
+	 private String firstname;
+	 private String surname;
+	 private String pesel;
+	 private int yob;
+	 private int nip;
 
-	public void setId(long id) {
-		this.id = id;
-	}
+	 private EmployeeDetails details;
+	 private Rank rank;
+	 private List<Employment> employments;
 
-	public String getFirstname() {
-		return firstname;
-	}
+	 /* --------------------------------------- */
 
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
-	}
+	 public Employee(long id, String firstname, String surname, String pesel, int yob, int nip) {
+			super();
+			this.id = id;
+			this.firstname = firstname;
+			this.surname = surname;
+			this.pesel = pesel;
+			this.yob = yob;
+			this.nip = nip;
+	 }
 
-	public String getSurname() {
-		return surname;
-	}
+	 public Employee() {
+			super();
+	 }
 
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}
+	 /* --------------------------------------- */
 
-	public String getPesel() {
-		return pesel;
-	}
+	 @Id
+	 @GeneratedValue
+	 public long getId() {
+			return id;
+	 }
 
-	public void setPesel(String pesel) {
-		this.pesel = pesel;
-	}
+	 public void setId(long id) {
+			this.id = id;
+	 }
 
-	public int getYob() {
-		return yob;
-	}
+	 public String getFirstname() {
+			return firstname;
+	 }
 
-	public void setYob(int yob) {
-		this.yob = yob;
-	}
+	 public void setFirstname(String firstname) {
+			this.firstname = firstname;
+	 }
 
-	public int getNip() {
-		return nip;
-	}
+	 public String getSurname() {
+			return surname;
+	 }
 
-	public void setNip(int nip) {
-		this.nip = nip;
-	}
+	 public void setSurname(String surname) {
+			this.surname = surname;
+	 }
 
-	public EmployeeDetails getDetails() {
-		return details;
-	}
+	 public String getPesel() {
+			return pesel;
+	 }
 
-	public void setDetails(EmployeeDetails details) {
-		this.details = details;
-	}
+	 public void setPesel(String pesel) {
+			this.pesel = pesel;
+	 }
 
-	public Rank getRank() {
-		return rank;
-	}
+	 public int getYob() {
+			return yob;
+	 }
 
-	public void setRank(Rank rank) {
-		this.rank = rank;
-	}
+	 public void setYob(int yob) {
+			this.yob = yob;
+	 }
 
-	public List<Employment> getEmployments() {
-		return employments;
-	}
+	 public int getNip() {
+			return nip;
+	 }
 
-	public void setEmployments(List<Employment> employments) {
-		this.employments = employments;
-	}
+	 public void setNip(int nip) {
+			this.nip = nip;
+	 }
 
-	public Employee() {
-	}
+	 @OneToOne
+	 public EmployeeDetails getDetails() {
+			return details;
+	 }
 
+	 public void setDetails(EmployeeDetails details) {
+			this.details = details;
+	 }
+
+	 @OneToOne
+	 public Rank getRank() {
+			return rank;
+	 }
+
+	 public void setRank(Rank rank) {
+			this.rank = rank;
+	 }
+
+	 @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	 public List<Employment> getEmployments() {
+			return employments;
+	 }
+
+	 public void setEmployments(List<Employment> employments) {
+			this.employments = employments;
+	 }
 }

@@ -6,40 +6,37 @@ import javax.persistence.Id;
 
 @Entity
 public class Rank {
-	
-	@Id
-	@GeneratedValue
-	private long id;
-	
-	private String name;
-	
-	private float hourSalary;
-	
-	public long getId() {
-		return id;
-	}
 
-	public void setId(long id) {
-		this.id = id;
-	}
+	 private long id;
 
-	public String getName() {
-		return name;
-	}
+	 private String name;
+	 private float hourSalary;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+	 /* --------------------------------------- */
 
-	public float getHourSalary() {
-		return hourSalary;
-	}
+	 @Id
+	 @GeneratedValue
+	 public long getId() {
+			return id;
+	 }
 
-	public void setHourSalary(float hourSalary) {
-		this.hourSalary = hourSalary;
-	}
+	 public void setId(long id) {
+			this.id = id;
+	 }
 
-	public Rank() {
-	}
+	 public String getName() {
+			return name;
+	 }
 
+	 public void setName(String name) {
+			this.name = name;
+	 }
+
+	 public float getHourSalary() {
+			return hourSalary;
+	 }
+
+	 public void setHourSalary(float hourSalary) {
+			this.hourSalary = hourSalary;
+	 }
 }
