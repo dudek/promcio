@@ -116,4 +116,8 @@ public class EmployeeManager {
 			
 			em.persist(employee);
 	 }
+	 
+	 public List<Employee> getAllEmployees() {
+			return em.createQuery("SELECT NEW Employee(e.id, e.firstname, e.surname, e.pesel, e,yob, e.nip) FROM Employee e").getResultList();
+	 }
 }
