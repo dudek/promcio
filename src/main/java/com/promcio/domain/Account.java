@@ -7,18 +7,20 @@ import javax.persistence.OneToOne;
 
 @Entity
 public class Account {
-	@Id
-	@GeneratedValue
+
 	private long id;
 	
 	private String login;
 	private String password;
 	
 	private int privilages;
-	
-	@OneToOne
+
 	private Employee employee;
 	
+	/* --------------------------------------- */
+	
+	@Id
+	@GeneratedValue
 	public long getId() {
 		return id;
 	}
@@ -50,7 +52,9 @@ public class Account {
 	public void setPrivilages(int privilages) {
 		this.privilages = privilages;
 	}
-
+	
+	
+	@OneToOne
 	public Employee getEmployee() {
 		return employee;
 	}

@@ -7,8 +7,7 @@ import javax.persistence.Id;
 @Entity
 public class Employment {
 	
-	@Id
-	@GeneratedValue
+
 	private long id;
 	//private Calendar contractStart;
 	//private Calendar contractEnd;
@@ -16,7 +15,11 @@ public class Employment {
 	
 	private float salary;
 	private int hours;
-		
+	
+	/* --------------------------------------- */
+	
+	@Id
+	@GeneratedValue
 	public long getId() {
 		return id;
 	}

@@ -4,6 +4,8 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
+import com.promcio.domain.Company;
 import com.promcio.domain.Employee;
 import com.promcio.domain.Rank;
 

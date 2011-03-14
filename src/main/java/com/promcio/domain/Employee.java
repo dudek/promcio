@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -20,6 +21,8 @@ public class Employee {
 	 private int yob;
 	 private int nip;
 
+	 private Company company;
+	 
 	 private EmployeeDetails details;
 	 private Rank rank;
 	 private List<Employment> employments;
@@ -117,5 +120,13 @@ public class Employee {
 
 	 public void setEmployments(List<Employment> employments) {
 			this.employments = employments;
+	 }
+	 @ManyToOne
+	 public Company getCompany() {
+	    	return company;
+	 }
+
+	 public void setCompany(Company company) {
+		 	this.company = company;
 	 }
 }

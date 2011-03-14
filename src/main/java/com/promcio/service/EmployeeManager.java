@@ -1,5 +1,7 @@
 package com.promcio.service;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -14,6 +16,12 @@ public class EmployeeManager {
 	 
 	 @PersistenceContext
 	 EntityManager em;
+	 public static <T> List<T> castList(Class<? extends T> clazz, Collection<?> c) {
+		 	List<T> r = new ArrayList<T>(c.size());
+		 	for(Object o: c)
+		 		r.add(clazz.cast(o));
+		 	return r;
+	 }
 	 
 	 public void addEmployee(String firstname, String surname, String pesel, int yob, int nip) {
 			Employee employee = new Employee();
@@ -118,6 +126,6 @@ public class EmployeeManager {
 	 }
 	 
 	 public List<Employee> getAllEmployees() {
-			return em.createQuery("SELECT NEW Employee(e.id, e.firstname, e.surname, e.pesel, e,yob, e.nip) FROM Employee e").getResultList();
+			return castList(Employee.class, em.createQuery("SELECT NEW Employee(e.id, e.firstname, e.surname, e.pesel, e,yob, e.nip) FROM Employee e").getResultList());
 	 }
 }
