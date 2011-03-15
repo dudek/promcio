@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:p="http://primefaces.prime.com.tr/ui"
+   template="/WEB-INF/templates/default.xhtml">
+   <ui:define name="content">
+      <h:form prependId="false" id="bv">
+        <p:panel id="panel" header="Dodaj Pracownika" style="margin-bottom:10px;">  
+        <p:messages id="msgs" showDetail="true"/>  
+        <h:panelGrid>
+        
+         <p:focus /> <!-- podswietlanie textfieldow -->
+         
+               <h:outputLabel for="firstname" value="Imię:" />
+               <!-- Nowy Textfield i ErrorMessage -->
+               <p:inputText id="firstname" required="true" label="Firstname" value="#{employeeBean.firstname}" />
+               <p:message for="firstname" errorClass="invalid" />
+               
+            <h:outputLabel for="surname" value="Nazwisko:" />
+              <p:inputText id="surname" value="#{employeeBean.surname}" />
+               <p:message for="surname" errorClass="invalid" />
+               
+               <h:outputLabel for="yob" value="Rok urodzenia" />
+               <p:inputText id="yob" value="#{employeeBean.yob}" /> 
+               <p:message for="yob" errorClass="invalid" />
+               
+               <h:outputLabel for="pesel" value="Pesel:" />
+               <p:inputText id="pesel" value="#{employeeBean.pesel}" /> 
+               <p:message for="pesel" errorClass="invalid" />
+               
+               <h:outputLabel for="nip" value="Nip:" />
+               <p:inputText id="nip" value="#{employeeBean.nip}" /> 
+               <p:message for="nip" errorClass="invalid" />
+            
+               <h:outputLabel for="privileges" value="Przywileje?:" />
+               <p:inputText id="privileges" value="#{employeeBean.privileges}" />
+                <p:message for="privileges" errorClass="invalid" />
+            
+               <h:outputLabel for="hourSalary" value="Stawka godzinowa:" />
+               <p:inputText id="hourSalary" value="#{rankBean.hourSalary}" />
+                <p:message for="hourSalary" errorClass="invalid" />
+            
+               <h:outputLabel for="name" value="Stanowisko:" />
+               <p:inputText id="name" value="#{rankBean.name}" />
+                <p:message for="name" errorClass="invalid" />
+                
+          </h:panelGrid>  
+    </p:panel>  
+         <p><p:commandButton update="panel,display, msgs" id="check" actionListener="#{employeeBean.doAddEmployee}" value="Dodaj pracownika" /> </p>
+		<a href="home.jsf">Powrot</a>
+      </h:form>
+   </ui:define>
+</ui:composition>

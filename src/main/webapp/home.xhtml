@@ -2,51 +2,14 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
    xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.prime.com.tr/ui" template="/WEB-INF/templates/default.xhtml">
    <ui:define name="content">
-      <h:form id="bv">
-        <center><p:panel id="panel" header="Dodaj Pracownika" style="margin-bottom:10px;">  
-        <p:messages />  
-        <h:panelGrid>
-         <p:focus /> <!-- podswietlanie textfieldow -->
-         <table>
-            <tr>
-               <th style="text-align: right;"><h:outputLabel for="firstname" value="Imię:" /></th>
-               <td>
-               <!-- Nowy Textfield i ErrorMessage -->
-               <p:inputText id="firstname" required="true" label="Firstname" value="#{employeeBean.firstname}" /> <p:message for="firstname" errorClass="invalid" /></td>
-            </tr>
-            <tr>
-               <th style="text-align: right;"><h:outputLabel for="surname" value="Nazwisko:" /></th>
-               <td><p:inputText id="surname" value="#{employeeBean.surname}" /> <p:message for="surname" errorClass="invalid" /></td>
-            </tr>
-            <tr>
-               <th style="text-align: right;"><h:outputLabel for="yob" value="Rok urodzenia" /></th>
-               <td><p:inputText id="yob" value="#{employeeBean.yob}" /> <p:message for="yob" errorClass="invalid" /></td>
-            </tr>
-            <tr>
-               <th style="text-align: right;"><h:outputLabel for="pesel" value="Pesel:" /></th>
-               <td><p:inputText id="pesel" value="#{employeeBean.pesel}" /> <p:message for="pesel" errorClass="invalid" /></td>
-            </tr>
-            <tr>
-               <th style="text-align: right;"><h:outputLabel for="nip" value="Nip:" /></th>
-               <td><p:inputText id="nip" value="#{employeeBean.nip}" /> <p:message for="nip" errorClass="invalid" /></td>
-            </tr>
-            <tr>
-               <th style="text-align: right;"><h:outputLabel for="privileges" value="Przywileje?:" /></th>
-               <td><p:inputText id="privileges" value="#{employeeBean.privileges}" /> <p:message for="privileges" errorClass="invalid" /></td>
-            </tr>
-            <tr>
-               <th style="text-align: right;"><h:outputLabel for="hourSalary" value="Stawka godzinowa:" /></th>
-               <td><p:inputText id="hourSalary" value="#{rankBean.hourSalary}" /> <p:message for="hourSalary" errorClass="invalid" /></td>
-            </tr>
-            <tr>
-               <th style="text-align: right;"><h:outputLabel for="name" value="Stanowisko:" /></th>
-               <td><p:inputText id="name" value="#{rankBean.name}" /> <p:message for="name" errorClass="invalid" /></td>
-            </tr>
-         </table>
-          </h:panelGrid>  
-    </p:panel></center>  
-         <p><p:commandButton update="panel,display" id="check" action="#{employeeBean.doAddEmployee}" value="Dodaj pracownika" /> <h:outputText value=" Wszystko okej"
-            rendered="#{facesContext.postback and empty facesContext.messageList}" style="color: green;" /></p>
-      </h:form>
+       <a href="addemployee.jsf">Dodaj pracownika</a>
+       <h:dataTable value="#{employeeBean.allEmployees}" var="current">
+        <h:column>
+        <h>O imieniu :</h>
+          <h:outputText value="#{current.firstname}" /> <br/>
+        <h>Nazwisko :</h>
+          <h:outputText value="#{current.surname}" /> <br/>
+        </h:column>
+      </h:dataTable><br/><br/>
    </ui:define>
 </ui:composition>

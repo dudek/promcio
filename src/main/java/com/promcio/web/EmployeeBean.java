@@ -1,7 +1,11 @@
 package com.promcio.web;
 
+import java.util.List;
+
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Model;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.NotNull;
@@ -9,6 +13,7 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.promcio.domain.Employee;
 import com.promcio.service.EmployeeManager;
 
 
@@ -90,8 +95,13 @@ public @Model class EmployeeBean implements java.io.Serializable {
 	public String doAddEmployee(){
 		
 		employeeManager.addEmployee(firstname, surname, pesel, yob, nip);
-		return "result.jsf";
-	}
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Info:", "Pracownik dodany!"));
+		return null;
+	} 
 	
+	public List<Employee> getAllEmployees(){
+		return employeeManager.getAllEmployees();
+	}
+	 
 	
 }
