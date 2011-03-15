@@ -28,9 +28,9 @@ public @Model class EmployeeBean implements java.io.Serializable {
 	
 	private String firstname;
 	private String surname;
-	private Integer yob;
 	private String pesel;
-	private Integer nip;
+	private String nip;
+	private Integer yob;
 	private Integer privileges;
 	
 
@@ -76,12 +76,12 @@ public @Model class EmployeeBean implements java.io.Serializable {
 	public String getPesel() {
 		return pesel;
 	}
-	public void setNip(Integer nip) {
+	public void setNip(String nip) {
 		this.nip = nip;
 	}
 	
 	
-	public Integer getNip() {
+	public String getNip() {
 		return nip;
 	}
 	public void setPrivileges(Integer privileges) {
@@ -94,7 +94,7 @@ public @Model class EmployeeBean implements java.io.Serializable {
 	
 	public String doAddEmployee(){
 		
-		employeeManager.addEmployee(firstname, surname, pesel, yob, nip);
+		employeeManager.addEmployee(firstname, surname, pesel, nip, yob);
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Info:", "Pracownik dodany!"));
 		return null;
 	} 

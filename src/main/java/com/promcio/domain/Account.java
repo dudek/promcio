@@ -16,6 +16,7 @@ public class Account {
 	private int privilages;
 
 	private Employee employee;
+	private Company company;
 	
 	/* --------------------------------------- */
 	
@@ -63,6 +64,14 @@ public class Account {
 		this.employee = employee;
 	}	
 	
+	@OneToOne
+	public Company getCompany() {
+		return company;
+	}
+
+	public void setCompany(Company company) {
+		this.company = company;
+	}
 	public Account() {
 	}
 

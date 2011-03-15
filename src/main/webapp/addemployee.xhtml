@@ -22,34 +22,27 @@
               <p:inputText id="surname" value="#{employeeBean.surname}" />
                <p:message for="surname" errorClass="invalid" />
                
-               <h:outputLabel for="yob" value="Rok urodzenia" />
-               <p:inputText id="yob" value="#{employeeBean.yob}" /> 
-               <p:message for="yob" errorClass="invalid" />
                
                <h:outputLabel for="pesel" value="Pesel:" />
                <p:inputText id="pesel" value="#{employeeBean.pesel}" /> 
                <p:message for="pesel" errorClass="invalid" />
                
+               
+               <h:outputLabel for="yob" value="Rok urodzenia" />
+               <p:inputText id="yob" value="#{employeeBean.yob}" /> 
+               <p:message for="yob" errorClass="invalid" />
+               
                <h:outputLabel for="nip" value="Nip:" />
                <p:inputText id="nip" value="#{employeeBean.nip}" /> 
                <p:message for="nip" errorClass="invalid" />
+               
+               
             
-               <h:outputLabel for="privileges" value="Przywileje?:" />
-               <p:inputText id="privileges" value="#{employeeBean.privileges}" />
-                <p:message for="privileges" errorClass="invalid" />
-            
-               <h:outputLabel for="hourSalary" value="Stawka godzinowa:" />
-               <p:inputText id="hourSalary" value="#{rankBean.hourSalary}" />
-                <p:message for="hourSalary" errorClass="invalid" />
-            
-               <h:outputLabel for="name" value="Stanowisko:" />
-               <p:inputText id="name" value="#{rankBean.name}" />
-                <p:message for="name" errorClass="invalid" />
-                
-          </h:panelGrid>  
+          </h:panelGrid> 
+          <p><p:commandButton update="panel,display, msgs" id="check" actionListener="#{employeeBean.doAddEmployee}" value="Dodaj pracownika" /> </p>
+		<a href="home.jsf">Powrot</a> 
     </p:panel>  
-         <p><p:commandButton update="panel,display, msgs" id="check" actionListener="#{employeeBean.doAddEmployee}" value="Dodaj pracownika" /> </p>
-		<a href="home.jsf">Powrot</a>
+         
       </h:form>
    </ui:define>
 </ui:composition>
