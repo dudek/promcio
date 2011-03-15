@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
-   xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.prime.com.tr/ui" template="/WEB-INF/templates/default.xhtml">
+   xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.prime.com.tr/ui" xmlns:fn="http://java.sun.com/jsp/jstl/functions" template="/WEB-INF/templates/default.xhtml">
    <ui:define name="content">
        <a href="addemployee.jsf">Dodaj pracownika</a>
       <h:form>  
@@ -36,7 +36,7 @@
         </p:column>
   
         <f:facet name="footer">  
-            In total there 
+            Liczba pracownikow: #{fn:length(employeeBean.firstname)}
         </f:facet>  
   
     </p:dataTable>  
