@@ -35,8 +35,9 @@
            <h:outputText value="#{current.nip}" />
         </p:column>
   
+  		<!-- zmienic, zeby nie powielalo zapytania do bazyy -->
         <f:facet name="footer">  
-            Liczba pracownikow: #{fn:length(employeeBean.firstname)}
+            Liczba pracownikow: #{fn:length(employeeBean.allEmployees)}
         </f:facet>  
   
     </p:dataTable>  
