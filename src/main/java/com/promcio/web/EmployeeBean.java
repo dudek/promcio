@@ -1,8 +1,5 @@
 package com.promcio.web;
 
-import java.io.Serializable;
-
-import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
@@ -13,7 +10,6 @@ import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.promcio.service.EmployeeManager;
-import com.promcio.domain.Employee;
 
 
 @SessionScoped
