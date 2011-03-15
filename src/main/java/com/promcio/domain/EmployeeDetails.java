@@ -3,6 +3,7 @@ package com.promcio.domain;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class EmployeeDetails {
@@ -18,6 +19,7 @@ public class EmployeeDetails {
 	 private String phoneNumber;
 	 private String email;
 
+	 private Employee employee;
 	 /* --------------------------------------- */
 
 	 @Id
@@ -93,4 +95,13 @@ public class EmployeeDetails {
 	 public void setEmail(String email) {
 			this.email = email;
 	 }
+	 @OneToOne
+	 public Employee getEmployee() {
+		 	return employee;
+	 }
+
+	 public void setEmployee(Employee employee) {
+		 	this.employee = employee;
+	 }
+	 
 }

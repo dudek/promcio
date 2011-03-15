@@ -15,9 +15,20 @@ public class CompanyManager {
 	 @PersistenceContext
 	 EntityManager em;
 	 
-	 //TODO addCompany()
+	 public void addCompany(String name, String nip, String regon){
+		 	Company company = new Company();
+		 	company.setName(name);
+		 	company.setNip(nip);
+		 	company.setRegon(regon);
+		 
+		 	em.persist(company);
+	 }
 	 
-	 //TODO removeCompany()
+	 public void removeCompany(long id){
+		 	Company company = em.find(Company.class, id);
+		 	
+		 	em.remove(company);
+	 }
 	 
 	 public void joinCompanyWithEmployee(long companyId, long employeeId) {
 			Company company = em.find(Company.class, companyId);

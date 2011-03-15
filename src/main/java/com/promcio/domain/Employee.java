@@ -18,8 +18,8 @@ public class Employee {
 	 private String firstname;
 	 private String surname;
 	 private String pesel;
+	 private String nip;
 	 private int yob;
-	 private int nip;
 
 	 private Company company;
 	 
@@ -29,7 +29,7 @@ public class Employee {
 
 	 /* --------------------------------------- */
 
-	 public Employee(long id, String firstname, String surname, String pesel, int yob, int nip) {
+	 public Employee(long id, String firstname, String surname, String pesel, String nip, int yob) {
 			super();
 			this.id = id;
 			this.firstname = firstname;
@@ -87,11 +87,11 @@ public class Employee {
 			this.yob = yob;
 	 }
 
-	 public int getNip() {
+	 public String getNip() {
 			return nip;
 	 }
 
-	 public void setNip(int nip) {
+	 public void setNip(String nip) {
 			this.nip = nip;
 	 }
 
