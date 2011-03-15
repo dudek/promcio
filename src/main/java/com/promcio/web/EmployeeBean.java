@@ -1,6 +1,6 @@
 package com.promcio.web;
 
-import java.util.List;
+import java.util.List; 
 
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Model;
@@ -15,6 +15,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import com.promcio.domain.Employee;
 import com.promcio.service.EmployeeManager;
+
 
 
 @SessionScoped

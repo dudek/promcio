@@ -3,20 +3,45 @@
    xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.prime.com.tr/ui" template="/WEB-INF/templates/default.xhtml">
    <ui:define name="content">
        <a href="addemployee.jsf">Dodaj pracownika</a>
-       <h:dataTable value="#{employeeBean.allEmployees}" var="current">
-        <h:column>
-        <h>O imieniu :</h>
-          <h:outputText value="#{current.firstname}" /> <br/>
-        <h>Nazwisko :</h>
-          <h:outputText value="#{current.surname}" /> <br/>
-          <h>Pesel :</h>
-          <h:outputText value="#{current.pesel}" /> <br/>
-          
-          <h>Rok ur :</h>
-          <h:outputText value="#{current.yob}" /> <br/>
-          <h>NIp :</h>
-          <h:outputText value="#{current.nip}" /> <br/>
-        </h:column>
-      </h:dataTable><br/><br/>
+      <h:form>  
+    <p:dataTable value="#{employeeBean.allEmployees}" var="current">  
+  
+        <f:facet name="header">  
+            Lista pracownikow 
+        </f:facet>  
+  
+        <p:column>  
+            <f:facet name="header">  
+                Imie  
+            </f:facet>  
+  
+             <h:outputText value="#{current.firstname}" />
+   
+        </p:column>  
+  
+        <p:column headerText="Nazwisko">  
+             <h:outputText value="#{current.surname}" />  
+        </p:column>  
+  
+        <p:column headerText="pesel">  
+            <h:outputText value="#{current.pesel}" /> 
+        </p:column>  
+  
+        <p:column headerText="Rok ur">  
+           <h:outputText value="#{current.yob}" /> 
+        </p:column> 
+        
+         <p:column headerText="Nip">  
+           <h:outputText value="#{current.nip}" />
+        </p:column>
+  
+        <f:facet name="footer">  
+            In total there 
+        </f:facet>  
+  
+    </p:dataTable>  
+  
+</h:form>  
+      <br/><br/>
    </ui:define>
 </ui:composition>
