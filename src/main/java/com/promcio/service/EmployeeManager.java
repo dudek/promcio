@@ -47,7 +47,7 @@ public class EmployeeManager {
 		 	//em.persist(employee);
 	 }
 	 
-	 public void removeEmplyee(long id) {
+	 public void removeEmployee(long id) {
 			Employee employee = em.find(Employee.class, id);
 			
 			em.remove(employee);

@@ -27,6 +27,8 @@ public @Model class EmployeeBean implements java.io.Serializable {
 	@Inject
 	EmployeeManager employeeManager;
 	
+	private long rmId;
+	
 	private String firstname;
 	private String surname;
 	private String pesel;
@@ -102,6 +104,19 @@ public @Model class EmployeeBean implements java.io.Serializable {
 	
 	public List<Employee> getAllEmployees(){
 		return employeeManager.getAllEmployees();
+	}
+	
+	public String doRemoveEmployee(){
+		employeeManager.removeEmployee(rmId);
+		return null;
+	}
+
+	public void setRmId(long rmId) {
+		this.rmId = rmId;
+	}
+
+	public long getRmId() {
+		return rmId;
 	}
 	 
 	

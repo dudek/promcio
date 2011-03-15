@@ -34,6 +34,12 @@
          <p:column headerText="Nip">  
            <h:outputText value="#{current.nip}" />
         </p:column>
+        
+        <p:column headerText="">  
+           <h:commandButton value="usun" action="#{employeeBean.doRemoveEmployee}" > 
+           <f:setPropertyActionListener target="#{employeeBean.rmId}" value="#{current.id}" />
+           </h:commandButton>
+        </p:column> 
   
   		<!-- zmienic, zeby nie powielalo zapytania do bazyy -->
         <f:facet name="footer">  
