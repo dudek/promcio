@@ -3,7 +3,8 @@
    xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.prime.com.tr/ui" xmlns:fn="http://java.sun.com/jsp/jstl/functions" template="/WEB-INF/templates/default.xhtml">
    <ui:define name="content">
        <a href="addemployee.jsf">Dodaj pracownika</a>
-      <h:form>  
+      <h:form prependId="false">  
+      <p:panel id="panel" style="margin-bottom:10px;" >
     <p:dataTable value="#{employeeBean.allEmployees}" var="current">  
   
         <f:facet name="header">  
@@ -36,9 +37,9 @@
         </p:column>
         
         <p:column headerText="">  
-           <h:commandButton value="usun" action="#{employeeBean.doRemoveEmployee}" > 
+           <p:commandButton update= "panel, display" value="usun" action="#{employeeBean.doRemoveEmployee}" > 
            <f:setPropertyActionListener target="#{employeeBean.rmId}" value="#{current.id}" />
-           </h:commandButton>
+           </p:commandButton>
         </p:column> 
   
   		<!-- zmienic, zeby nie powielalo zapytania do bazyy -->
@@ -47,7 +48,7 @@
         </f:facet>  
   
     </p:dataTable>  
-  
+  </p:panel>
 </h:form>  
       <br/><br/>
    </ui:define>
