@@ -22,7 +22,7 @@ public class Employee {
 	 private int yob;
 
 	 private Company company;
-	 
+
 	 private EmployeeDetails details;
 	 private Rank rank;
 	 private List<Employment> employments;
@@ -113,7 +113,7 @@ public class Employee {
 			this.rank = rank;
 	 }
 
-	 @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	 @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	 public List<Employment> getEmployments() {
 			return employments;
 	 }
@@ -121,12 +121,13 @@ public class Employee {
 	 public void setEmployments(List<Employment> employments) {
 			this.employments = employments;
 	 }
+
 	 @ManyToOne
 	 public Company getCompany() {
-	    	return company;
+			return company;
 	 }
 
 	 public void setCompany(Company company) {
-		 	this.company = company;
+			this.company = company;
 	 }
 }
