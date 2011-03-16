@@ -113,7 +113,7 @@ public class Employee {
 			this.rank = rank;
 	 }
 
-	 @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	 @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	 public List<Employment> getEmployments() {
 			return employments;
 	 }

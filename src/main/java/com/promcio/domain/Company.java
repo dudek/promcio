@@ -1,9 +1,7 @@
 package com.promcio.domain;
 
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -56,7 +54,7 @@ public class Company {
 			this.regon = regon;
 	 }
 
-	 @OneToMany(mappedBy = "company", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	 @OneToMany(mappedBy="company")
 	 public List<Employee> getEmployees() {
 			return employees;
 	 }
