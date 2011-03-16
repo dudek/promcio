@@ -8,71 +8,66 @@ import javax.persistence.OneToOne;
 @Entity
 public class Account {
 
-	private long id;
-	
-	private String login;
-	private String password;
-	
-	private int privilages;
+	 private long id;
 
-	private Employee employee;
-	private Company company;
-	
-	/* --------------------------------------- */
-	
-	@Id
-	@GeneratedValue
-	public long getId() {
-		return id;
-	}
+	 private String login;
+	 private String password;
+	 private int privilages;
 
-	public void setId(long id) {
-		this.id = id;
-	}
+	 private Employee employee;
+	 private Company company;
 
-	public String getLogin() {
-		return login;
-	}
+	 /* --------------------------------------- */
 
-	public void setLogin(String login) {
-		this.login = login;
-	}
+	 @Id
+	 @GeneratedValue
+	 public long getId() {
+			return id;
+	 }
 
-	public String getPassword() {
-		return password;
-	}
+	 public void setId(long id) {
+			this.id = id;
+	 }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+	 public String getLogin() {
+			return login;
+	 }
 
-	public int getPrivilages() {
-		return privilages;
-	}
+	 public void setLogin(String login) {
+			this.login = login;
+	 }
 
-	public void setPrivilages(int privilages) {
-		this.privilages = privilages;
-	}
-	
-	
-	@OneToOne
-	public Employee getEmployee() {
-		return employee;
-	}
+	 public String getPassword() {
+			return password;
+	 }
 
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
-	}	
-	
-	@OneToOne
-	public Company getCompany() {
-		return company;
-	}
+	 public void setPassword(String password) {
+			this.password = password;
+	 }
 
-	public void setCompany(Company company) {
-		this.company = company;
-	}
-	public Account() {
-	}
+	 public int getPrivilages() {
+			return privilages;
+	 }
 
+	 public void setPrivilages(int privilages) {
+			this.privilages = privilages;
+	 }
+
+	 @OneToOne
+	 public Employee getEmployee() {
+			return employee;
+	 }
+
+	 public void setEmployee(Employee employee) {
+			this.employee = employee;
+	 }
+
+	 @OneToOne
+	 public Company getCompany() {
+			return company;
+	 }
+
+	 public void setCompany(Company company) {
+			this.company = company;
+	 }
 }

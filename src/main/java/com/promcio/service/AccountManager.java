@@ -35,8 +35,5 @@ public class AccountManager {
 	
 			//em.persist(account)
 	}
-	
-	public AccountManager() {
-	}
 
 }

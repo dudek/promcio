@@ -20,6 +20,7 @@ public class EmployeeDetails {
 	 private String email;
 
 	 private Employee employee;
+
 	 /* --------------------------------------- */
 
 	 @Id
@@ -95,13 +96,13 @@ public class EmployeeDetails {
 	 public void setEmail(String email) {
 			this.email = email;
 	 }
+
 	 @OneToOne
 	 public Employee getEmployee() {
-		 	return employee;
+			return employee;
 	 }
 
 	 public void setEmployee(Employee employee) {
-		 	this.employee = employee;
+			this.employee = employee;
 	 }
-	 
 }

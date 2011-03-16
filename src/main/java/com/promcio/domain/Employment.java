@@ -6,53 +6,48 @@ import javax.persistence.Id;
 
 @Entity
 public class Employment {
-	
 
-	private long id;
-	//private Calendar contractStart;
-	//private Calendar contractEnd;
-	private String contractType;
-	
-	private float salary;
-	private int hours;
-	
-	/* --------------------------------------- */
-	
-	@Id
-	@GeneratedValue
-	public long getId() {
-		return id;
-	}
+	 private long id;
+	 // private Calendar contractStart;
+	 // private Calendar contractEnd;
+	 private String contractType;
 
-	public void setId(long id) {
-		this.id = id;
-	}
+	 private float salary;
+	 private int hours;
 
-	public String getContractType() {
-		return contractType;
-	}
+	 /* --------------------------------------- */
 
-	public void setContractType(String contractType) {
-		this.contractType = contractType;
-	}
+	 @Id
+	 @GeneratedValue
+	 public long getId() {
+			return id;
+	 }
 
-	public float getSalary() {
-		return salary;
-	}
+	 public void setId(long id) {
+			this.id = id;
+	 }
 
-	public void setSalary(float salary) {
-		this.salary = salary;
-	}
+	 public String getContractType() {
+			return contractType;
+	 }
 
-	public int getHours() {
-		return hours;
-	}
+	 public void setContractType(String contractType) {
+			this.contractType = contractType;
+	 }
 
-	public void setHours(int hours) {
-		this.hours = hours;
-	}
+	 public float getSalary() {
+			return salary;
+	 }
 
-	public Employment() {
-	}
+	 public void setSalary(float salary) {
+			this.salary = salary;
+	 }
 
+	 public int getHours() {
+			return hours;
+	 }
+
+	 public void setHours(int hours) {
+			this.hours = hours;
+	 }
 }
