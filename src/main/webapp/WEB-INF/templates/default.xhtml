@@ -2,26 +2,42 @@
    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
    xmlns:h="http://java.sun.com/jsf/html"
-   xmlns:ui="http://java.sun.com/jsf/facelets">
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:p="http://primefaces.prime.com.tr/ui">
    <h:head>
       <title>Java EE 6 Starter Application</title>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
       <h:outputStylesheet name="css/screen.css"/>
    </h:head>
    <h:body>
-      <div id="container">
-         <div id="content">
-            <ui:insert name="content">
-               [Template content will be inserted here]
-            </ui:insert>
-         </div>
-         <div id="footer">
-            <h:graphicImage value="/resources/gfx/weld.png" alt="Weld logo"/>
-            <p>
-               This project was generated from a Maven archetype maintained by the Weld team.<br/>
-               Weld is the reference implementation of CDI, released under the Apache License, Version 2.0.<br/>
-            </p>
-         </div>
-      </div>
+      
+      <p:layout fullPage="true">
+        
+                <p:layoutUnit id="top" position="top" resizable="true" height="100" minHeight="100" maxHeight="175">
+                        <h:outputText value="HEADER" style="font-size:36px;position:absolute;top:10px;left:100px;"/>
+                </p:layoutUnit>
+                
+                <p:layoutUnit id="bottom" position="bottom" height="50" zindex="0" scrollable="null">
+                        <h:outputLink value="https://github.com/dudek/promcio" style="position:relative;top:10px;">
+                                https://github.com/dudek/promcio
+                        </h:outputLink>
+                </p:layoutUnit>
+                
+                <p:layoutUnit id="left" position="left" width="200" resizable="null" closable="true" collapsible="true" header="Options" minWidth="200">
+                        LEFT TEST!
+                </p:layoutUnit>
+                
+                <p:layoutUnit id="right" position="right" width="200" header="Gallery" resizable="null" closable="true" collapsible="true">
+                        RIGHT TEST!
+                </p:layoutUnit>
+                
+                <p:layoutUnit id="center" position="center" style="text-align:center;" scrollable="true">
+                        <ui:insert name="content">
+                           [Template content will be inserted here]
+                        </ui:insert>
+                </p:layoutUnit>
+                
+        </p:layout>
+        
    </h:body>
 </html>
