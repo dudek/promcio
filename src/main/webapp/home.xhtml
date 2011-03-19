@@ -1,55 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
-   xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.prime.com.tr/ui" xmlns:fn="http://java.sun.com/jsp/jstl/functions" template="/WEB-INF/templates/default.xhtml">
+   xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.prime.com.tr/ui" xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+   template="/WEB-INF/templates/default.xhtml">
    <ui:define name="content">
-       <a href="addemployee.jsf">Dodaj pracownika</a>
-      <h:form prependId="false">  
-      <p:panel id="panel" style="margin-bottom:10px;" >
-    <p:dataTable value="#{employeeBean.allEmployees}" var="current">  
-  
-        <f:facet name="header">  
-            Lista pracownikow 
-        </f:facet>  
-  
-        <p:column>  
-            <f:facet name="header">  
-                Imie  
-            </f:facet>  
-  
-             <h:outputText value="#{current.firstname}" />
-   
-        </p:column>  
-  
-        <p:column headerText="Nazwisko">  
-             <h:outputText value="#{current.surname}" />  
-        </p:column>  
-  
-        <p:column headerText="pesel">  
-            <h:outputText value="#{current.pesel}" /> 
-        </p:column>  
-  
-        <p:column headerText="Rok ur">  
-           <h:outputText value="#{current.yob}" /> 
-        </p:column> 
-        
-         <p:column headerText="Nip">  
-           <h:outputText value="#{current.nip}" />
-        </p:column>
-        
-        <p:column headerText="">  
-           <p:commandButton update= "panel, display" value="usun" action="#{employeeBean.doRemoveEmployee}" > 
-           <f:setPropertyActionListener target="#{employeeBean.rmId}" value="#{current.id}" />
-           </p:commandButton>
-        </p:column> 
-  
-  		<!-- zmienic, zeby nie powielalo zapytania do bazyy -->
-        <f:facet name="footer">  
-            Liczba pracownikow: #{fn:length(employeeBean.allEmployees)}
-        </f:facet>  
-  
-    </p:dataTable>  
-  </p:panel>
-</h:form>  
-      <br/><br/>
+      <h:form prependId="false" style="font-size: 14px; padding: 30px;">
+         <h1>Welcome</h1>
+         <p><h:graphicImage value="/resources/gfx/weld.png" alt="Weld logo" />
+         This project was generated from a Maven archetype maintained by the Weld team.<br />
+         Weld is the reference implementation of CDI, released under the Apache License, Version 2.0.<br />
+         </p>
+      </h:form>
    </ui:define>
 </ui:composition>

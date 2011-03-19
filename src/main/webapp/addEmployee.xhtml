@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.prime.com.tr/ui" template="/WEB-INF/templates/default.xhtml">
+   <ui:define name="content">
+      <h:form prependId="false" id="bv">
+         <p:panel id="panel" header="Dodaj Pracownika" style="margin-bottom:10px;">
+            <p:messages id="msgs" showDetail="true" />
+            <p:focus />
+            <h:panelGrid columns="3">
+
+               <h:outputLabel for="firstname" value="Imię:" style="float: right;" />
+               <p:inputText id="firstname" required="true" label="Firstname" value="#{employeeBean.firstname}" />
+               <p:message for="firstname" errorClass="invalid" />
+
+               <h:outputLabel for="surname" value="Nazwisko:" style="float: right;" />
+               <p:inputText id="surname" required="true" label="Surname" value="#{employeeBean.surname}" />
+               <p:message for="surname" errorClass="invalid" />
+
+               <h:outputLabel for="pesel" value="PESEL:" style="float: right;" />
+               <p:inputText id="pesel" required="true" label="PESEL" value="#{employeeBean.pesel}" />
+               <p:message for="pesel" errorClass="invalid" />
+
+               <h:outputLabel for="yob" value="Rok urodzenia:" style="float: right;" />
+               <p:inputText id="yob" required="true" label="YoB" value="#{employeeBean.yob}" />
+               <p:message for="yob" errorClass="invalid" />
+
+               <h:outputLabel for="nip" value="NIP:" style="float: right;" />
+               <p:inputText id="nip" required="true" label="NIP" value="#{employeeBean.nip}" />
+               <p:message for="nip" errorClass="invalid" />
+
+            </h:panelGrid>
+            <p><p:commandButton update="panel, display, msgs" id="check" actionListener="#{employeeBean.doAddEmployee}" value="Dodaj pracownika" /></p>
+         </p:panel>
+
+      </h:form>
+   </ui:define>
+</ui:composition>

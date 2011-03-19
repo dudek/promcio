@@ -12,13 +12,16 @@
    <p:layout fullPage="true">
 
       <p:layoutUnit id="top" position="top" resizable="true" height="100" minHeight="100" maxHeight="140">
-         <h:outputText value="HEADER" style="font-size:36px;position:absolute;top:10px;left:100px;" />
+         <h:outputText value="Header test" style="font-size:36px;position:absolute;top:20px;left:100px;" />
+         <div id="auth">
+         <p>LOGIN | REGISTER</p>
+         </div>
       </p:layoutUnit>
 
       <p:layoutUnit id="bottom" position="bottom" height="50" zindex="0" scrollable="null">
-         <h:outputLink value="https://github.com/dudek/promcio" style="position:relative;top:10px;">
-                                https://github.com/dudek/promcio
-                        </h:outputLink>
+         <h:outputLink value="https://github.com/dudek/promcio" style="position:relative;top:10px;color:gray;">
+            https://github.com/dudek/promcio
+         </h:outputLink>
       </p:layoutUnit>
 
       <p:layoutUnit id="left" position="left" width="170" resizable="null" closable="null" collapsible="true">
@@ -27,20 +30,20 @@
                <p:menuitem value="Home" url="home.jsf" update="display" icon="ui-icon ui-icon-home" />
             </p:submenu>
             <p:submenu label="Employees">
-               <p:menuitem value="Listing" url="home.jsf" update="display" icon="ui-icon ui-icon-newwin" />
-               <p:menuitem value="Add" url="addemployee.jsf" update="display" icon="ui-icon ui-icon-disk" />
+               <p:menuitem value="Listing" url="listingEmployees.jsf" update="display" icon="ui-icon ui-icon-newwin" />
+               <p:menuitem value="Add" url="addEmployee.jsf" update="display" icon="ui-icon ui-icon-disk" />
             </p:submenu>
          </p:menu>
       </p:layoutUnit>
 
       <p:layoutUnit id="right" position="right" width="200" header="test" resizable="null" closable="null" collapsible="true">
-                        RIGHT TEST!
-                </p:layoutUnit>
+         RIGHT TEST!
+      </p:layoutUnit>
 
-      <p:layoutUnit id="center" position="center" style="text-align:center;" scrollable="true">
+      <p:layoutUnit id="center" position="center" scrollable="true">
          <ui:insert name="content">
-                           [Template content will be inserted here]
-                        </ui:insert>
+            [Template content will be inserted here]
+         </ui:insert>
       </p:layoutUnit>
 
    </p:layout>
