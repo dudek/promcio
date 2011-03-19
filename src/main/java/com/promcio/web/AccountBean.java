@@ -1,54 +1,93 @@
 package com.promcio.web;
 
+import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Model;
+import javax.inject.Inject;
 import javax.inject.Named;
-
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotEmpty;
+import com.promcio.domain.Company;
 import com.promcio.domain.Employee;
+import com.promcio.service.AccountManager;
 
-@SessionScoped
+@Model
 @Named
-public @Model class AccountBean implements java.io.Serializable {
-	
-	private static final long serialVersionUID = 1L;
-	
-	private String login;
-	private String password;
-	
-	private int privilages;
+@SessionScoped
+public class AccountBean implements Serializable {
 
-	private Employee employee;
+	 private static final long serialVersionUID = 1L;
 
-	public void setLogin(String login) {
-		this.login = login;
-	}
+	 @Inject
+	 AccountManager accountManager;
 
-	public String getLogin() {
-		return login;
-	}
+	 @NotNull
+	 @NotEmpty
+	 private String login;
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+	 @NotNull
+	 @NotEmpty
+	 private String password;
+	 private int privilages;
 
-	public String getPassword() {
-		return password;
-	}
+	 private Employee employee;
+	 private Company company;
 
-	public void setPrivilages(int privilages) {
-		this.privilages = privilages;
-	}
+	 private boolean isLogged = false;
 
-	public int getPrivilages() {
-		return privilages;
-	}
+	 /* --------------------------------------- */
 
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
-	}
+	 public void setLogin(String login) {
+			this.login = login;
+	 }
 
-	public Employee getEmployee() {
-		return employee;
-	}
+	 public String getLogin() {
+			return login;
+	 }
 
+	 public void setPassword(String password) {
+			this.password = password;
+	 }
+
+	 public String getPassword() {
+			return password;
+	 }
+
+	 public void setPrivilages(int privilages) {
+			this.privilages = privilages;
+	 }
+
+	 public int getPrivilages() {
+			return privilages;
+	 }
+
+	 public void setEmployee(Employee employee) {
+			this.employee = employee;
+	 }
+
+	 public Employee getEmployee() {
+			return employee;
+	 }
+
+	 public Company getCompany() {
+			return company;
+	 }
+
+	 public void setCompany(Company company) {
+			this.company = company;
+	 }
+
+	 public boolean isLogged() {
+			return isLogged;
+	 }
+
+	 /* --------------------------------------- */
+	 // actions
+
+	 public String signIn() {
+			if (accountManager.signIn(login, password)) {
+				 isLogged = true;
+			}
+			return "home";
+	 }
 }

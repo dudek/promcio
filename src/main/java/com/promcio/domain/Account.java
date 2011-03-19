@@ -1,14 +1,11 @@
 package com.promcio.domain;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 @Entity
 public class Account {
-
-	 private long id;
 
 	 private String login;
 	 private String password;
@@ -20,15 +17,6 @@ public class Account {
 	 /* --------------------------------------- */
 
 	 @Id
-	 @GeneratedValue
-	 public long getId() {
-			return id;
-	 }
-
-	 public void setId(long id) {
-			this.id = id;
-	 }
-
 	 public String getLogin() {
 			return login;
 	 }

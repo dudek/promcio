@@ -1,0 +1,1 @@
+insert into account (login, password, privilages) values ('admin', 'pass', 0)

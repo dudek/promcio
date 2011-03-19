@@ -14,7 +14,7 @@
       <p:layoutUnit id="top" position="top" resizable="true" height="100" minHeight="100" maxHeight="140">
          <h:outputText value="Header test" style="font-size:36px;position:absolute;top:20px;left:100px;" />
          <div id="auth">
-         <p>LOGIN | REGISTER</p>
+         <p><h:outputLink value="signIn.jsf" rendered='#{!accountBean.logged}'>SIGN IN</h:outputLink><h:outputText value="Welcome #{accountBean.login}" rendered='#{accountBean.logged}'/> | REGISTER</p>
          </div>
       </p:layoutUnit>
 

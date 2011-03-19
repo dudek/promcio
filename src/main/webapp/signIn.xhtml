@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.prime.com.tr/ui" template="/WEB-INF/templates/default.xhtml">
+   <ui:define name="content">
+      <h:form prependId="false" id="bv">
+         <p:panel id="panel" header="Sign In" style="margin-bottom:10px;">
+            <p:focus />
+            <h:panelGrid columns="3">
+
+               <h:outputLabel for="login" value="Login:" style="float: right;" />
+               <p:inputText id="login" required="true" label="Login" value="#{accountBean.login}" />
+               <p:message for="login" errorClass="invalid" />
+
+               <h:outputLabel for="password" value="Password:" style="float: right;" />
+               <p:inputText id="password" required="true" label="Password" value="#{accountBean.password}" />
+               <p:message for="password" errorClass="invalid" />
+
+            </h:panelGrid>
+            <p><p:commandButton value="Sign In" actionListener="#{accountBean.signIn}" ajax="false" /></p>
+         </p:panel>
+
+      </h:form>
+   </ui:define>
+</ui:composition>
