@@ -14,7 +14,12 @@
       <p:layoutUnit id="top" position="top" resizable="true" height="100" minHeight="100" maxHeight="140">
          <h:outputText value="Header test" style="font-size:36px;position:absolute;top:20px;left:100px;" />
          <div id="auth">
-         <p><h:outputLink value="signIn.jsf" rendered='#{!accountBean.logged}'>SIGN IN</h:outputLink><h:outputText value="Welcome #{accountBean.login}" rendered='#{accountBean.logged}'/> | REGISTER</p>
+         <h:form>
+         <h:outputLink value="createAccount.jsf" rendered='#{!accountBean.logged}' style="color: gray;">Create Account</h:outputLink>
+         <h:outputText value="Welcome #{accountBean.login}" rendered='#{accountBean.logged}'/> | 
+         <h:outputLink value="signIn.jsf" rendered='#{!accountBean.logged}' style="color: gray;">Sign In</h:outputLink>
+         <p:commandLink actionListener="#{accountBean.signOut}" ajax="false" rendered='#{accountBean.logged}' style="color: gray;">Sign Out</p:commandLink>
+         </h:form>
          </div>
       </p:layoutUnit>
 

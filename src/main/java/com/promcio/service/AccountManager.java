@@ -44,4 +44,8 @@ public class AccountManager {
 				 return false;
 			}
 	 }
+	 
+	 public Account getAccount(String login) {
+			return em.find(Account.class, login);
+	 }
 }

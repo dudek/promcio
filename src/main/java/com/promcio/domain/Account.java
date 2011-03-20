@@ -9,7 +9,7 @@ public class Account {
 
 	 private String login;
 	 private String password;
-	 private int privilages;
+	 private int privileges;
 
 	 private Employee employee;
 	 private Company company;
@@ -33,12 +33,12 @@ public class Account {
 			this.password = password;
 	 }
 
-	 public int getPrivilages() {
-			return privilages;
+	 public int getPrivileges() {
+			return privileges;
 	 }
 
-	 public void setPrivilages(int privilages) {
-			this.privilages = privilages;
+	 public void setPrivileges(int privileges) {
+			this.privileges = privileges;
 	 }
 
 	 @OneToOne

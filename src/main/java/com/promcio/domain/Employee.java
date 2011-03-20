@@ -1,9 +1,7 @@
 package com.promcio.domain;
 
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -21,11 +19,11 @@ public class Employee {
 	 private String nip;
 	 private int yob;
 
-	 private Company company;
-
 	 private EmployeeDetails details;
 	 private Rank rank;
 	 private List<Employment> employments;
+
+	 private Company company;
 
 	 /* --------------------------------------- */
 
@@ -113,7 +111,7 @@ public class Employee {
 			this.rank = rank;
 	 }
 
-	 @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	 @OneToMany
 	 public List<Employment> getEmployments() {
 			return employments;
 	 }

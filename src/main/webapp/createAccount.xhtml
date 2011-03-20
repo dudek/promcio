@@ -3,7 +3,7 @@
    xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.prime.com.tr/ui" template="/WEB-INF/templates/default.xhtml">
    <ui:define name="content">
       <h:form prependId="false" id="bv">
-         <p:panel id="panel" header="Sign In" style="margin-bottom:10px;">
+         <p:panel id="panel" header="Create Account" style="margin-bottom:10px;">
             <p:focus />
             <h:panelGrid columns="3">
 
@@ -12,11 +12,18 @@
                <p:message for="login" errorClass="invalid" />
 
                <h:outputLabel for="password" value="Password:" style="float: right;" />
-               <p:password id="password" required="true" label="Password" value="#{accountBean.password}" feedback="false" />
+               <p:password id="password" validator="#{passwordValidation.validateField}" required="true" label="Password"
+                  value="#{accountBean.password}" />
                <p:message for="password" errorClass="invalid" />
 
+               <h:outputLabel for="confirm_password" value="Confirm Password:" style="float: right;" />
+               <p:password id="confirm_password" validator="#{passwordValidation.validateField}" required="true" label="Confirm Password"
+                  value="#{accountBean.password}" feedback="false" />
+               <p:message for="confirm_password" errorClass="invalid" />
+
             </h:panelGrid>
-            <p><p:commandButton value="Sign In" actionListener="#{accountBean.signIn}" ajax="false" /></p>
+            <p:messages id="msgs" showDetail="true" />
+            <p><p:commandButton value="Create" actionListener="#{accountBean.doAddAccount}" ajax="false" /></p>
          </p:panel>
 
       </h:form>

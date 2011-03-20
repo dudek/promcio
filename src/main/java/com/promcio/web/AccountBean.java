@@ -3,6 +3,8 @@ package com.promcio.web;
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Model;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.NotNull;
@@ -28,7 +30,7 @@ public class AccountBean implements Serializable {
 	 @NotNull
 	 @NotEmpty
 	 private String password;
-	 private int privilages;
+	 private int privileges;
 
 	 private Employee employee;
 	 private Company company;
@@ -53,12 +55,12 @@ public class AccountBean implements Serializable {
 			return password;
 	 }
 
-	 public void setPrivilages(int privilages) {
-			this.privilages = privilages;
+	 public void setPrivileges(int privileges) {
+			this.privileges = privileges;
 	 }
 
-	 public int getPrivilages() {
-			return privilages;
+	 public int getPrivileges() {
+			return privileges;
 	 }
 
 	 public void setEmployee(Employee employee) {
@@ -86,8 +88,23 @@ public class AccountBean implements Serializable {
 
 	 public String signIn() {
 			if (accountManager.signIn(login, password)) {
-				 isLogged = true;
+				 this.company = accountManager.getAccount(login).getCompany();
+				 this.isLogged = true;
 			}
-			return "home";
+			return "home.jsf";
+	 }
+
+	 public String signOut() {
+			this.isLogged = false;
+			this.login = null;
+			this.password = null;
+
+			return "home.jsf";
+	 }
+
+	 public String doAddAccount() {
+			accountManager.addAccount(login, password);
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO:", "Konto utworzone!"));
+			return null;
 	 }
 }
