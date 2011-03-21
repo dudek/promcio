@@ -89,6 +89,7 @@ public class AccountBean implements Serializable {
 	 public String signIn() {
 			if (accountManager.signIn(login, password)) {
 				 this.company = accountManager.getAccount(login).getCompany();
+				 this.employee = accountManager.getAccount(login).getEmployee();
 				 this.isLogged = true;
 			}
 			return "home.jsf";
@@ -98,6 +99,8 @@ public class AccountBean implements Serializable {
 			this.isLogged = false;
 			this.login = null;
 			this.password = null;
+			this.company = null;
+			this.employee = null;
 
 			return "home.jsf";
 	 }
