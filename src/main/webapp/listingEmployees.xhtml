@@ -5,10 +5,10 @@
    <ui:define name="content">
       <h:form prependId="false">
          <p:panel id="panel" style="margin-bottom:10px;">
-            <p:dataTable value="#{employeeBean.allEmployees}" var="current">
+            <p:dataTable value="#{companyBean.getCompanyEmployees(accountBean.company.id)}" var="current" style="text-align: center;">
 
                <f:facet name="header">
-                 Lista pracownikow
+                 Lista pracowników
                </f:facet>
 
                <p:column headerText="Imie">
@@ -39,7 +39,7 @@
 
                <!-- TODO: zmienic, zeby nie powielalo zapytania do bazy -->
                <f:facet name="footer">
-                  Liczba pracownikow: #{fn:length(employeeBean.allEmployees)}
+                  Liczba pracowników: #{fn:length(companyBean.getCompanyEmployees(accountBean.company.id))}
                </f:facet>
 
             </p:dataTable>

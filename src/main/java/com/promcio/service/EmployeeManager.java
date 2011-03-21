@@ -165,8 +165,4 @@ public class EmployeeManager {
 	 public List<Employee> getAllEmployees() {
 			return castList(Employee.class, em.createQuery("SELECT NEW Employee(e.id, e.firstname, e.surname, e.pesel, e.nip, e.yob) FROM Employee e").getResultList());
 	 }
-
-	 public List<Employee> getAllCompanyEmployees(long companyId) {
-			return castList(Employee.class, em.createQuery("SELECT NEW Employee(e.id, e.firstname, e.surname, e.pesel, e.nip, e.yob) FROM Employee e WHERE e.company.id ='" + companyId + "'").getResultList());
-	 }
 }
