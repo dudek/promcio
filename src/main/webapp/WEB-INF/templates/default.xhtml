@@ -30,20 +30,25 @@
       </p:layoutUnit>
 
       <p:layoutUnit id="left" position="left" width="170" resizable="null" closable="null" collapsible="true">
-         <p:menu>
-            <p:submenu label="Navigation">
-               <p:menuitem value="Home" url="home.jsf" update="display" icon="ui-icon ui-icon-home" />
-            </p:submenu>
-            <p:submenu label="Employees">
-               <p:menuitem value="Listing" url="listingEmployees.jsf" update="display" icon="ui-icon ui-icon-newwin" />
-               <p:menuitem value="Add" url="addEmployee.jsf" update="display" icon="ui-icon ui-icon-disk" />
-            </p:submenu>
-         </p:menu>
-      </p:layoutUnit>
+         
+      <h:form>  
+    <p:accordionPanel autoHeight="false" dynamic="true" cache="true">  
+        <p:tab title="Navigation">  
+            <h:panelGrid columns="2" cellpadding="10">  
+            <h:outputLink value="home.jsf" update="display">Home</h:outputLink>
+            </h:panelGrid>  
+        </p:tab>  
+        <p:tab title="Employee">  
+            <h:panelGrid columns="1" cellpadding="10">
+               <h:outputLink value="listingEmployees.jsf" update="display">Podglad/Edycja/Usuwanie Pracownikow</h:outputLink>
+               <h:outputLink value="addEmployee.jsf" update="display">Dodawanie Pracownika</h:outputLink>
+            </h:panelGrid>  
+        </p:tab>   
+    </p:accordionPanel>  
+  
+</h:form> 
+      </p:layoutUnit> 
 
-      <p:layoutUnit id="right" position="right" width="200" header="test" resizable="null" closable="null" collapsible="true">
-         RIGHT TEST!
-      </p:layoutUnit>
 
       <p:layoutUnit id="center" position="center" scrollable="true">
          <ui:insert name="content">
