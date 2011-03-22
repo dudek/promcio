@@ -75,23 +75,9 @@ public class EmployeeManager {
 			if ( employments != null )
 				for(Employment employment : employments)
 					em.remove(employment);
-			employee.getCompany().getEmployees().remove(employee);
+			if ( employee.getCompany() != null )
+				employee.getCompany().getEmployees().remove(employee);
 			em.remove(employee);
-	 }
-
-	 public void addRank(String name, float hourSalary) {
-			Rank rank = new Rank();
-
-			rank.setName(name);
-			rank.setHourSalary(hourSalary);
-
-			em.persist(rank);
-	 }
-
-	 public void removeRank(long id) {
-			Rank rank = em.find(Rank.class, id);
-
-			em.remove(rank);
 	 }
 
 	 public void addEmployeeDetails(String city, String postCode, String street, String buildingNumber, String apartmentNumber, String staircaseNumber, String phoneNumber, String email) {
@@ -109,6 +95,23 @@ public class EmployeeManager {
 			em.persist(employeeDetails);
 	 }
 
+	 public void addEmployeeDetails(long employeeId, String city, String postCode, String street, String buildingNumber, String apartmentNumber, String staircaseNumber, String phoneNumber, String email) {
+			Employee employee = em.find(Employee.class, employeeId);
+		 	EmployeeDetails employeeDetails = new EmployeeDetails();
+
+			employeeDetails.setCity(city);
+			employeeDetails.setPostCode(postCode);
+			employeeDetails.setStreet(street);
+			employeeDetails.setBuildingNumber(buildingNumber);
+			employeeDetails.setApartmentNumber(apartmentNumber);
+			employeeDetails.setStaircaseNumber(staircaseNumber);
+			employeeDetails.setPhoneNumber(phoneNumber);
+			employeeDetails.setEmail(email);
+
+			employee.setDetails(employeeDetails);
+			em.persist(employeeDetails);
+	 }	 
+	 
 	 public void updateEmployeeDetails(long employeeId, String city, String postCode, String street, String buildingNumber, String apartmentNumber, String staircaseNumber, String phoneNumber, String email) {
 			EmployeeDetails details = (EmployeeDetails) em.createQuery("SELECT d FROM EmployeeDetails d WHERE d.employee.id='" + employeeId + "'").getSingleResult();
 
@@ -126,7 +129,7 @@ public class EmployeeManager {
 
 	 public void removeEmployeeDetails(long id) {
 			EmployeeDetails employeDetails = em.find(EmployeeDetails.class, id);
-
+			
 			em.remove(employeDetails);
 	 }
 
@@ -137,6 +140,18 @@ public class EmployeeManager {
 			employment.setSalary(salary);
 			employment.setHours(hours);
 
+			em.persist(employment);
+	 }
+	 
+	 public void addEmployment(long employeeId, String contractType, float salary, int hours) {
+			Employee employee = em.find(Employee.class, employeeId);
+		 	Employment employment = new Employment();
+
+			employment.setContractType(contractType);
+			employment.setSalary(salary);
+			employment.setHours(hours);
+
+			employee.getEmployments().add(employment);
 			em.persist(employment);
 	 }
 
