@@ -6,6 +6,8 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
+import com.promcio.domain.Company;
 import com.promcio.domain.Employee;
 import com.promcio.domain.EmployeeDetails;
 import com.promcio.domain.Employment;
@@ -35,7 +37,23 @@ public class EmployeeManager {
 
 			em.persist(employee);
 	 }
+	 
+	 public void addEmployee(long companyId, String firstname, String surname, String pesel, String nip, int yob) {
+			Company company = em.find(Company.class, companyId);
+		 	Employee employee = new Employee();
+			
+			employee.setFirstname(firstname);
+			employee.setSurname(surname);
+			employee.setPesel(pesel);
+			employee.setNip(nip);
+			employee.setYob(yob);
 
+			employee.setCompany(company);
+			company.getEmployees().add(employee);
+			
+			em.persist(employee);
+	 }
+	 
 	 public void updateEmployee(long id, String firstname, String surname, String pesel, String nip, Integer yob) {
 			Employee employee = em.find(Employee.class, id);
 
@@ -50,7 +68,14 @@ public class EmployeeManager {
 
 	 public void removeEmployee(long id) {
 			Employee employee = em.find(Employee.class, id);
-
+			EmployeeDetails details = employee.getDetails();
+			if ( ( details  ) != null )
+				em.remove(details);
+			List<Employment> employments = employee.getEmployments();
+			if ( employments != null )
+				for(Employment employment : employments)
+					em.remove(employment);
+			employee.getCompany().getEmployees().remove(employee);
 			em.remove(employee);
 	 }
 

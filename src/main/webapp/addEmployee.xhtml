@@ -29,7 +29,7 @@
                <p:message for="nip" errorClass="invalid" />
 
             </h:panelGrid>
-            <p><p:commandButton update="panel, display, msgs" id="check" actionListener="#{employeeBean.doAddEmployee}" value="Dodaj pracownika" /></p>
+            <p><p:commandButton update="panel, display, msgs" id="check" actionListener="#{employeeBean.doAddEmployee(accountBean.company.id)}" value="Dodaj pracownika" /></p>
          </p:panel>
 
       </h:form>

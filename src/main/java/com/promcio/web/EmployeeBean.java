@@ -17,7 +17,6 @@ import com.promcio.domain.Employee;
 import com.promcio.service.EmployeeManager;
 
 
-
 @SessionScoped
 @Named
 public @Model class EmployeeBean implements java.io.Serializable {
@@ -96,8 +95,13 @@ public @Model class EmployeeBean implements java.io.Serializable {
 	}
 	
 	public String doAddEmployee(){
-		
 		employeeManager.addEmployee(firstname, surname, pesel, nip, yob);
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Info:", "Pracownik dodany!"));
+		return null;
+	} 
+	
+	public String doAddEmployee(long companyId){
+		employeeManager.addEmployee(companyId, firstname, surname, pesel, nip, yob);
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Info:", "Pracownik dodany!"));
 		return null;
 	} 
