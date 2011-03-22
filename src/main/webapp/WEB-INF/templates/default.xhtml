@@ -12,7 +12,7 @@
    <p:layout fullPage="true">
 
       <p:layoutUnit id="top" position="top" resizable="true" height="100" minHeight="100" maxHeight="140">
-         <h:outputText value="Header test" style="font-size:36px;position:absolute;top:20px;left:100px;" />
+         <h:outputText value="Promcio" style="font-size:36px;position:absolute;top:20px;left:100px;" />
          <div id="auth">
          <h:form>
          <h:outputLink value="createAccount.jsf" rendered='#{!accountBean.logged}' style="color: gray;">Create Account</h:outputLink>
@@ -40,8 +40,8 @@
         </p:tab>  
         <p:tab title="Employee">  
             <h:panelGrid columns="1" cellpadding="10">
-               <h:outputLink value="listingEmployees.jsf" update="display">Podglad/Edycja/Usuwanie Pracownikow</h:outputLink>
-               <h:outputLink value="addEmployee.jsf" update="display">Dodawanie Pracownika</h:outputLink>
+               <h:outputLink value="listingEmployees.jsf" update="left">Podglad/Edycja/Usuwanie Pracownikow</h:outputLink>
+               <h:outputLink value="addEmployee.jsf" update="left">Dodawanie Pracownika</h:outputLink>
             </h:panelGrid>  
         </p:tab>   
     </p:accordionPanel>  

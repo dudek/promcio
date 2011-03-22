@@ -32,8 +32,12 @@
                </p:column>
 
                <p:column headerText="">
-                  <p:commandButton update="panel, display" value="usun" action="#{employeeBean.doRemoveEmployee}">
-                     <f:setPropertyActionListener target="#{employeeBean.rmId}" value="#{current.id}" />
+                  <p:commandButton update="panel, display" value="usun" actionListener="#{employeeBean.doRemoveEmployee(current.id)}">
+                  </p:commandButton>
+               </p:column>
+               
+               <p:column headerText="">
+                  <p:commandButton  value="edycja" update="center" actionListener="#{employeeBean.doRedirectUpdateEmployee(current.id)}">
                   </p:commandButton>
                </p:column>
 

@@ -4,10 +4,7 @@ import java.io.Serializable;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-
-import org.hibernate.validator.constraints.NotEmpty;
 
 @SessionScoped
 @Named
@@ -32,8 +29,7 @@ public class EmployeeDetailsBean implements Serializable {
 	}
 	
 
-	@NotNull
-	@NotEmpty
+	
 	@Pattern(regexp = "[A-Z][A-Za-z]+", message = "Miasto musi zaczynac sie z duzej litery")
 	public String getCity() {
 		return city;
@@ -42,8 +38,7 @@ public class EmployeeDetailsBean implements Serializable {
 		this.postCode = postCode;
 	}
 	
-	@NotNull
-	@NotEmpty
+	
 	@Pattern(regexp = "[0-9][0-9]-[0-9][0-9][0-9]", message = "Kod pocztowy nie pasuje do wzorca [0-9][0-9]-[0-9][0-9][0-9]")
 	public String getPostCode() {
 		return postCode;
@@ -52,8 +47,7 @@ public class EmployeeDetailsBean implements Serializable {
 		this.street = street;
 	}
 	
-	@NotNull
-	@NotEmpty
+	
 	@Pattern(regexp = "[A-Z][A-Za-z]+", message = "Ulica musi zaczynac sie z duzej litery")
 	public String getStreet() {
 		return street;
@@ -80,8 +74,7 @@ public class EmployeeDetailsBean implements Serializable {
 		this.phoneNumber = phoneNumber;
 	}
 	
-	@NotNull
-	@NotEmpty
+	
 	@Pattern(regexp = "[0-9]+-[0-9]+-[0-9]+", message = "Numer nie pasuje do wzorca [0-9]+-[0-9]+-[0-9]+")
 	public String getPhoneNumber() {
 		return phoneNumber;
@@ -90,8 +83,7 @@ public class EmployeeDetailsBean implements Serializable {
 		this.email = email;
 	}
 	
-	@NotNull
-	@NotEmpty
+	
 	@Pattern(regexp = "[a-z.]+@[a-z]+.[a-z]+", message = "Email nie pasuje do wzorca [a-z]+@[a-z]+.[a-z]+")
 	public String getEmail() {
 		return email;

@@ -27,6 +27,7 @@ public @Model class EmployeeBean implements java.io.Serializable {
 	EmployeeManager employeeManager;
 	
 	private long rmId;
+	private long updId;
 	
 	private String firstname;
 	private String surname;
@@ -110,17 +111,38 @@ public @Model class EmployeeBean implements java.io.Serializable {
 		return employeeManager.getAllEmployees();
 	}
 	
-	public String doRemoveEmployee(){
-		employeeManager.removeEmployee(rmId);
+	public String doRemoveEmployee(long id){
+		employeeManager.removeEmployee(id);
 		return null;
 	}
+	
+	public String doUpdateEmployee(long id)
+	{
+		employeeManager.updateEmployee(id, firstname, surname, pesel, nip, yob);
+		return null;
+	
+	}
 
+	public String doRedirectUpdateEmployee(long id)
+	{
+		updId = id;
+		return "redirect:editEmployee.jsf";
+	}
+	
 	public void setRmId(long rmId) {
 		this.rmId = rmId;
 	}
 
 	public long getRmId() {
 		return rmId;
+	}
+
+	public void setUpdId(long updId) {
+		this.updId = updId;
+	}
+
+	public long getUpdId() {
+		return updId;
 	}
 	 
 	

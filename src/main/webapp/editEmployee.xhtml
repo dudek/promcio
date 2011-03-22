@@ -3,7 +3,7 @@
    xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.prime.com.tr/ui" template="/WEB-INF/templates/default.xhtml">
    <ui:define name="content">
       <h:form prependId="false" id="bv">
-         <p:panel id="panel" header="Dodaj Pracownika" style="margin-bottom:10px;">
+         <p:panel id="panel" header="Edytuj Pracownika" style="margin-bottom:10px;">
             <p:messages id="msgs" showDetail="true" />
             <p:focus />
             <h:panelGrid columns="3">
@@ -28,7 +28,7 @@
                <p:inputText id="nip" required="true" label="NIP" value="#{employeeBean.nip}" />
                <p:message for="nip" errorClass="invalid" />
                
-<!--                <h2>Szczegoly pracownika : (nie wymagane)</h2><br/><br/>
+               <h2>Szczegoly pracownika : (nie wymagane)</h2><br/><br/>
                
                <h:outputLabel for="city" value="Miasto" style="float: right;" />
                <p:inputText id="city" required="false" label="Miasto" value="#{employeeDetailsBean.city}" />
@@ -56,10 +56,10 @@
                
                <h:outputLabel for="phoneNumber" value="Numer telefonu" style="float: right;" />
                <p:inputText id="phoneNumber" required="false" label="Numer telefonu" value="#{employeeDetailsBean.phoneNumber}" />
-               <p:message for="phoneNumber" errorClass="invalid" /> -->
+               <p:message for="phoneNumber" errorClass="invalid" />
 				
             </h:panelGrid>
-            <p><p:commandButton update="panel, display, msgs" id="check" actionListener="#{employeeBean.doAddEmployee(accountBean.company.id)}" value="Dodaj pracownika" /></p>
+            <p><p:commandButton update="panel, display, msgs" id="check" actionListener="#{employeeBean.doEditEmployee(accountBean.company.id)}" value="Edytuj pracownika" /></p>
          </p:panel>
 
       </h:form>
