@@ -37,6 +37,33 @@ public class CompanyManager {
 
 			em.remove(company);
 	 }
+	 
+	 public void addRank(String name, float hourSalary) {
+			Rank rank = new Rank();
+
+			rank.setName(name);
+			rank.setHourSalary(hourSalary);
+
+			em.persist(rank);
+	 }
+	 
+	 public void addRank(long companyId, String name, float hourSalary){
+		 	Company company = em.find(Company.class, companyId);
+		 	Rank rank = new Rank();
+		 	
+			rank.setName(name);
+			rank.setHourSalary(hourSalary);
+			
+			company.getRanks().add(rank);
+			
+			em.persist(rank);
+	 }
+
+	 public void removeRank(long id) {
+			Rank rank = em.find(Rank.class, id);
+
+			em.remove(rank);
+	 }
 
 	 public void joinCompanyWithEmployee(long companyId, long employeeId) {
 			Company company = em.find(Company.class, companyId);
