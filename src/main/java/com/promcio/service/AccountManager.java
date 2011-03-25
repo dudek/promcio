@@ -44,7 +44,18 @@ public class AccountManager {
 				 return false;
 			}
 	 }
-	 
+
+	 public boolean changePassword(String login, String password, String newPassword) {
+			Account account = em.find(Account.class, login);
+
+			if (account != null && account.getPassword().equals(password)) {
+				 account.setPassword(newPassword);
+				 return true;
+			} else {
+				 return false;
+			}
+	 }
+
 	 public Account getAccount(String login) {
 			return em.find(Account.class, login);
 	 }

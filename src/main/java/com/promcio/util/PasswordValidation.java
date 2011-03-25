@@ -27,6 +27,7 @@ public class PasswordValidation implements Serializable {
 						((EditableValueHolder) component).setValid(false);
 						context.addMessage(component.getClientId(context), new FacesMessage(FacesMessage.SEVERITY_WARN, "WARN:", "Password must have both fields identical"));
 				 }
+				 pass1Set = false;
 			} else {
 				 pass1Set = true;
 				 pass1 = (String) value;

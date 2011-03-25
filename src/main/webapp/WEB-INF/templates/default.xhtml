@@ -18,7 +18,7 @@
          <h:outputLink value="createAccount.jsf" rendered='#{!accountBean.logged}' style="color: gray;">Create Account</h:outputLink>
          <h:outputText value="Welcome #{accountBean.login}" rendered='#{accountBean.logged}'/> | 
          <h:outputLink value="signIn.jsf" rendered='#{!accountBean.logged}' style="color: gray;">Sign In</h:outputLink>
-         <p:commandLink actionListener="#{accountBean.signOut}" ajax="false" rendered='#{accountBean.logged}' style="color: gray;">Sign Out</p:commandLink>
+         <p:commandLink action="#{accountBean.signOut}" ajax="false" rendered='#{accountBean.logged}' style="color: gray;">Sign Out</p:commandLink>
          </h:form>
          </div>
       </p:layoutUnit>

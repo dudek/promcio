@@ -31,6 +31,7 @@ public class AccountBean implements Serializable {
 	 @NotNull
 	 @NotEmpty
 	 private String password;
+	 private String newPassword;
 
 	 private Role role;
 
@@ -55,6 +56,14 @@ public class AccountBean implements Serializable {
 
 	 public String getPassword() {
 			return password;
+	 }
+
+	 public String getNewPassword() {
+	 	 return newPassword;
+	 }
+
+	 public void setNewPassword(String newPassword) {
+	 	 this.newPassword = newPassword;
 	 }
 
 	 public Role getRole() {
@@ -94,6 +103,7 @@ public class AccountBean implements Serializable {
 				 this.employee = accountManager.getAccount(login).getEmployee();
 				 this.company = accountManager.getAccount(login).getCompany();
 				 this.isLogged = true;
+				 this.password = null; // wyrzucamy haslo z pamieci
 			}
 			return "home?faces-redirect=true";
 	 }
@@ -112,6 +122,17 @@ public class AccountBean implements Serializable {
 	 public String doAddAccount() {
 			accountManager.addAccount(login, password);
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO:", "Konto utworzone!"));
+			return null;
+	 }
+	 
+	 public String doChangePassword() {
+			if (accountManager.changePassword(login, password, newPassword)) {
+				 this.password = null;
+				 this.newPassword = null;
+				 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO:", "Hasło zmienione!"));
+			} else {
+				 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR:", "Błędne hasło!"));
+			}
 			return null;
 	 }
 }
