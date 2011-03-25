@@ -8,6 +8,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.NotEmpty;
 import com.promcio.domain.Company;
 import com.promcio.domain.Employee;
@@ -26,6 +27,7 @@ public class AccountBean implements Serializable {
 
 	 @NotNull
 	 @NotEmpty
+	 @Pattern(regexp = "^[a-zA-Z][!-~]*$", message = "Invalid login")
 	 private String login;
 
 	 @NotNull

@@ -6,6 +6,8 @@ import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotEmpty;
 import com.promcio.domain.Employee;
 import com.promcio.domain.Rank;
 import com.promcio.service.CompanyManager;
@@ -22,8 +24,16 @@ public class CompanyBean implements Serializable {
 
 	 private long id;
 
+	 @NotNull
+	 @NotEmpty
 	 private String name;
+	 
+	 @NotNull
+	 @NotEmpty
 	 private String nip;
+	 
+	 @NotNull
+	 @NotEmpty
 	 private String regon;
 
 	 private List<Employee> employees;

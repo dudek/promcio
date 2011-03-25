@@ -4,6 +4,9 @@ import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Model;
 import javax.inject.Named;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Model
 @Named
@@ -12,7 +15,13 @@ public class RankBean implements Serializable {
 
 	 private static final long serialVersionUID = 1L;
 
+	 @NotNull
+	 @NotEmpty
+	 @Pattern(regexp = "^[A-Z][A-Za-z]+$")
 	 private String name;
+	 
+	 @NotNull
+	 @NotEmpty
 	 private float hourSalary;
 	 
 	 /* --------------------------------------- */

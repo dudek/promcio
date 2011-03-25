@@ -29,13 +29,14 @@ public class EmployeeBean implements Serializable {
 
 	 @NotNull
 	 @NotEmpty
-	 @Pattern(regexp = "[A-Z][A-Za-z]+", message = "Imię powinno zaczynać się z wielkiej litery.")
+	 @Pattern(regexp = "^[A-Z][A-Za-z]+$")
 	 private String firstname;
 
 	 @NotNull
 	 @NotEmpty
-	 @Pattern(regexp = "[A-Z][A-Za-z]+", message = "Nazwisko powinno zaczynać się z wielkiej litery.")
+	 @Pattern(regexp = "^[A-Z][A-Za-z]+$")
 	 private String surname;
+	 
 	 private String pesel;
 	 private String nip;
 	 private int yob;

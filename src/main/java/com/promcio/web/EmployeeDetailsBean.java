@@ -14,22 +14,23 @@ public class EmployeeDetailsBean implements Serializable {
 
 	 private static final long serialVersionUID = 1L;
 
-	 @Pattern(regexp = "[A-Z][A-Za-z]+", message = "Miasto musi zaczynac sie z duzej litery")
+	 @Pattern(regexp = "^[A-Z][A-Za-z]+$")
 	 private String city;
 
-	 @Pattern(regexp = "[0-9][0-9]-[0-9][0-9][0-9]", message = "Kod pocztowy nie pasuje do wzorca [0-9][0-9]-[0-9][0-9][0-9]")
+	 @Pattern(regexp = "^[0-9]{2}-[0-9]{3}$")
 	 private String postCode;
 
-	 @Pattern(regexp = "[A-Z][A-Za-z]+", message = "Ulica musi zaczynac sie z duzej litery")
+	 @Pattern(regexp = "^[A-Z][A-Za-z]+$")
 	 private String street;
+	 
 	 private String buildingNumber;
 	 private String apartmentNumber;
 	 private String staircaseNumber;
 
-	 @Pattern(regexp = "[0-9]+-[0-9]+-[0-9]+", message = "Numer nie pasuje do wzorca [0-9]+-[0-9]+-[0-9]+")
+	 @Pattern(regexp = "^[0-9]{3}-[0-9]{3}-[0-9]{3}$")
 	 private String phoneNumber;
 
-	 @Pattern(regexp = "[a-z.]+@[a-z]+.[a-z]+", message = "Email nie pasuje do wzorca [a-z]+@[a-z]+.[a-z]+")
+	 @Pattern(regexp = "^[a-z]+@[a-z]+.[a-z]+$")
 	 private String email;
 
 	 private Employee employee;

@@ -5,6 +5,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Model;
 import javax.inject.Named;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Model
@@ -20,6 +21,7 @@ public class RoleBean implements Serializable {
 
 	 @NotNull
 	 @NotEmpty
+	 @Pattern(regexp = "^[a-z][!-~]*$")
 	 private String name;
 
 	 /* --------------------------------------- */

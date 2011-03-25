@@ -27,39 +27,44 @@
                <h:outputLabel for="nip" value="NIP:" style="float: right;" />
                <p:inputText id="nip" required="true" label="NIP" value="#{employeeBean.nip}" />
                <p:message for="nip" errorClass="invalid" />
-               
-               <h2>Szczegoly pracownika : (nie wymagane)</h2><br/><br/>
-               
+
+            </h:panelGrid>
+
+            <h2>Szczegóły pracownika : (nie wymagane)</h2>
+
+            <h:panelGrid columns="3">
+
                <h:outputLabel for="city" value="Miasto" style="float: right;" />
                <p:inputText id="city" required="false" label="Miasto" value="#{employeeDetailsBean.city}" />
                <p:message for="city" errorClass="invalid" />
-               
+
                <h:outputLabel for="postCode" value="Kod Pocztowy" style="float: right;" />
                <p:inputText id="postCode" required="false" label="Kod Pocztowy" value="#{employeeDetailsBean.postCode}" />
                <p:message for="postCode" errorClass="invalid" />
-               
+
                <h:outputLabel for="street" value="Ulica:" style="float: right;" />
                <p:inputText id="street" required="false" label="Ulica:" value="#{employeeDetailsBean.street}" />
                <p:message for="street" errorClass="invalid" />
-               
+
                <h:outputLabel for="buildingNumber" value="Numer domu:" style="float: right;" />
                <p:inputText id="buildingNumber" required="false" label="Numer domu:" value="#{employeeDetailsBean.buildingNumber}" />
                <p:message for="buildingNumber" errorClass="invalid" />
-				
-				<h:outputLabel for="apartmentNumber" value="Numer mieszkania:" style="float: right;" />
+
+               <h:outputLabel for="apartmentNumber" value="Numer mieszkania:" style="float: right;" />
                <p:inputText id="apartmentNumber" required="false" label="Numer mieszkania" value="#{employeeDetailsBean.apartmentNumber}" />
                <p:message for="apartmentNumber" errorClass="invalid" />
-               
+
                <h:outputLabel for="staircaseNumber" value="Klatka" style="float: right;" />
                <p:inputText id="staircaseNumber" required="false" label="Klatka" value="#{employeeDetailsBean.staircaseNumber}" />
                <p:message for="staircaseNumber" errorClass="invalid" />
-               
+
                <h:outputLabel for="phoneNumber" value="Numer telefonu" style="float: right;" />
                <p:inputText id="phoneNumber" required="false" label="Numer telefonu" value="#{employeeDetailsBean.phoneNumber}" />
                <p:message for="phoneNumber" errorClass="invalid" />
-				
+
             </h:panelGrid>
-            <p><p:commandButton update="panel, display, msgs" id="check" actionListener="#{employeeBean.doEditEmployee(accountBean.company.id)}" value="Edytuj pracownika" /></p>
+            <p><p:commandButton update="panel, display, msgs" id="check" actionListener="#{employeeBean.doEditEmployee(accountBean.company.id)}"
+               value="Edytuj pracownika" /></p>
          </p:panel>
 
       </h:form>
