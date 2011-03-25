@@ -29,6 +29,8 @@ public class CompanyBean implements Serializable {
 	 private List<Employee> employees;
 	 private List<Rank> ranks;
 
+	 /* --------------------------------------- */
+
 	 public long getId() {
 			return id;
 	 }
@@ -76,6 +78,9 @@ public class CompanyBean implements Serializable {
 	 public List<Rank> getRanks() {
 			return ranks;
 	 }
+
+	 /* --------------------------------------- */
+	 // actions
 
 	 public List<Employee> getCompanyEmployees(long companyId) {
 			return companyManager.getAllCompanyEmployees(companyId);

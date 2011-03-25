@@ -1,42 +1,47 @@
 package com.promcio.web;
 
 import java.io.Serializable;
-
 import javax.enterprise.context.SessionScoped;
+import javax.enterprise.inject.Model;
 import javax.inject.Named;
 
-@SessionScoped
+@Model
 @Named
-public class EmploymentBean   implements Serializable{
+@SessionScoped
+public class EmploymentBean implements Serializable {
 
 	 private static final long serialVersionUID = 1L;
-	
-	private String contractType;
-	private float salary;
-	private int hours;
 
-	public void setContractType(String contractType) {
-		this.contractType = contractType;
-	}
+	 // private Calendar contractStart;
+	 // private Calendar contractEnd;
+	 private String contractType;
 
-	public String getContractType() {
-		return contractType;
-	}
+	 private float salary;
+	 private int hours;
 
-	public void setSalary(float salary) {
-		this.salary = salary;
-	}
+	 /* --------------------------------------- */
 
-	public float getSalary() {
-		return salary;
-	}
+	 public void setContractType(String contractType) {
+			this.contractType = contractType;
+	 }
 
-	public void setHours(int hours) {
-		this.hours = hours;
-	}
+	 public String getContractType() {
+			return contractType;
+	 }
 
-	public int getHours() {
-		return hours;
-	}
+	 public void setSalary(float salary) {
+			this.salary = salary;
+	 }
 
+	 public float getSalary() {
+			return salary;
+	 }
+
+	 public void setHours(int hours) {
+			this.hours = hours;
+	 }
+
+	 public int getHours() {
+			return hours;
+	 }
 }

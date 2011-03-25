@@ -8,6 +8,7 @@ import javax.persistence.Id;
 public class Employment {
 
 	 private long id;
+
 	 // private Calendar contractStart;
 	 // private Calendar contractEnd;
 	 private String contractType;
