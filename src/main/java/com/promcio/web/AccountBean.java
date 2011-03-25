@@ -92,7 +92,7 @@ public class AccountBean implements Serializable {
 				 this.employee = accountManager.getAccount(login).getEmployee();
 				 this.isLogged = true;
 			}
-			return "home.jsf";
+			return "home?faces-redirect=true";
 	 }
 
 	 public String signOut() {
@@ -102,7 +102,7 @@ public class AccountBean implements Serializable {
 			this.company = null;
 			this.employee = null;
 
-			return "home.jsf";
+			return "home?faces-redirect=true";
 	 }
 
 	 public String doAddAccount() {

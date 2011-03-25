@@ -37,7 +37,7 @@
                </p:column>
                
                <p:column headerText="">
-                  <p:commandButton  value="edycja" update="center" actionListener="#{employeeBean.doRedirectUpdateEmployee(current.id)}">
+                  <p:commandButton  value="edycja" action="#{employeeBean.doRedirectUpdateEmployee(current.id)}" ajax="false">
                   </p:commandButton>
                </p:column>
 

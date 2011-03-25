@@ -126,7 +126,7 @@ public @Model class EmployeeBean implements java.io.Serializable {
 	public String doRedirectUpdateEmployee(long id)
 	{
 		updId = id;
-		return "redirect:editEmployee.jsf";
+		return "editEmployee?faces-redirect=true";
 	}
 	
 	public void setRmId(long rmId) {
