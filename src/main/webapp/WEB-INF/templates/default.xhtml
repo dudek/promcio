@@ -41,7 +41,7 @@
         <p:tab title="Employee">  
             <h:panelGrid columns="1" cellpadding="10">
                <h:outputLink value="listingEmployees.jsf" update="left">Podglad/Edycja/Usuwanie Pracownikow</h:outputLink>
-               <h:outputLink value="addEmployee.jsf" update="left">Dodawanie Pracownika</h:outputLink>
+               <h:outputLink value="addEmployee.jsf" update="left" rendered='#{accountBean.role.name eq "admin"}'>Dodawanie Pracownika</h:outputLink>
             </h:panelGrid>  
         </p:tab>   
     </p:accordionPanel>  

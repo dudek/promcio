@@ -2,6 +2,7 @@ package com.promcio.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -9,7 +10,8 @@ public class Account {
 
 	 private String login;
 	 private String password;
-	 private int privileges;
+
+	 private Role role;
 
 	 private Employee employee;
 	 private Company company;
@@ -33,12 +35,13 @@ public class Account {
 			this.password = password;
 	 }
 
-	 public int getPrivileges() {
-			return privileges;
+	 @ManyToOne
+	 public Role getRole() {
+			return role;
 	 }
 
-	 public void setPrivileges(int privileges) {
-			this.privileges = privileges;
+	 public void setRole(Role role) {
+			this.role = role;
 	 }
 
 	 @OneToOne

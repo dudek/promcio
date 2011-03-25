@@ -11,6 +11,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 import com.promcio.domain.Company;
 import com.promcio.domain.Employee;
+import com.promcio.domain.Role;
 import com.promcio.service.AccountManager;
 
 @Model
@@ -30,7 +31,8 @@ public class AccountBean implements Serializable {
 	 @NotNull
 	 @NotEmpty
 	 private String password;
-	 private int privileges;
+
+	 private Role role;
 
 	 private Employee employee;
 	 private Company company;
@@ -55,12 +57,12 @@ public class AccountBean implements Serializable {
 			return password;
 	 }
 
-	 public void setPrivileges(int privileges) {
-			this.privileges = privileges;
+	 public Role getRole() {
+			return role;
 	 }
 
-	 public int getPrivileges() {
-			return privileges;
+	 public void setRole(Role role) {
+			this.role = role;
 	 }
 
 	 public void setEmployee(Employee employee) {
@@ -88,19 +90,21 @@ public class AccountBean implements Serializable {
 
 	 public String signIn() {
 			if (accountManager.signIn(login, password)) {
-				 this.company = accountManager.getAccount(login).getCompany();
+				 this.role = accountManager.getAccount(login).getRole();
 				 this.employee = accountManager.getAccount(login).getEmployee();
+				 this.company = accountManager.getAccount(login).getCompany();
 				 this.isLogged = true;
 			}
 			return "home?faces-redirect=true";
 	 }
 
 	 public String signOut() {
-			this.isLogged = false;
 			this.login = null;
 			this.password = null;
-			this.company = null;
+			this.role = null;
 			this.employee = null;
+			this.company = null;
+			this.isLogged = false;
 
 			return "home?faces-redirect=true";
 	 }
