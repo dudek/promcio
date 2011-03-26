@@ -7,6 +7,7 @@ import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.NotEmpty;
 import com.promcio.domain.Employee;
 import com.promcio.domain.Rank;
@@ -26,10 +27,12 @@ public class CompanyBean implements Serializable {
 
 	 @NotNull
 	 @NotEmpty
+	 @Pattern(regexp = "^[a-zA-Z]+([ ]?[.a-zA-Z0-9]+)*$")
 	 private String name;
 	 
 	 @NotNull
 	 @NotEmpty
+	 @Pattern(regexp = "^([0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}|[0-9]{3}-[0-9]{2}-[0-9]{2}-[0-9]{3})$")
 	 private String nip;
 	 
 	 @NotNull

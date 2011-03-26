@@ -11,6 +11,7 @@ import javax.inject.Named;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.NotEmpty;
+import com.promcio.domain.Company;
 import com.promcio.domain.Employee;
 import com.promcio.domain.EmployeeDetails;
 import com.promcio.domain.Employment;
@@ -29,22 +30,27 @@ public class EmployeeBean implements Serializable {
 
 	 @NotNull
 	 @NotEmpty
-	 @Pattern(regexp = "^[A-Z][A-Za-z]+$")
+	 @Pattern(regexp = "^[A-Z][a-zA-Z]+$")
 	 private String firstname;
 
 	 @NotNull
 	 @NotEmpty
-	 @Pattern(regexp = "^[A-Z][A-Za-z]+$")
+	 @Pattern(regexp = "^[A-Z][a-zA-Z]+$")
 	 private String surname;
-	 
+
 	 private String pesel;
+	 
+	 @NotNull
+	 @NotEmpty
+	 @Pattern(regexp = "^([0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}|[0-9]{3}-[0-9]{2}-[0-9]{2}-[0-9]{3})$")
 	 private String nip;
 	 private int yob;
 
 	 private EmployeeDetails details;
 	 private Rank rank;
 	 private List<Employment> employments;
-	 
+	 private Company company;
+
 	 private long updId;
 
 	 /* --------------------------------------- */
@@ -113,15 +119,22 @@ public class EmployeeBean implements Serializable {
 			this.employments = employments;
 	 }
 
+	 public void setCompany(Company company) {
+			this.company = company;
+	 }
+
+	 public Company getCompany() {
+			return company;
+	 }
 
 	 public void setUpdId(long updId) {
 			this.updId = updId;
-		}
+	 }
 
-	  public long getUpdId() {
+	 public long getUpdId() {
 			return updId;
-		}
-	 
+	 }
+
 	 /* --------------------------------------- */
 	 // actions
 
@@ -155,5 +168,4 @@ public class EmployeeBean implements Serializable {
 	 public String doRedirectUpdateEmployee(long id) {
 			return "editEmployee?faces-redirect=true";
 	 }
-
 }

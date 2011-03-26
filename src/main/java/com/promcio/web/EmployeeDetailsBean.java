@@ -14,13 +14,13 @@ public class EmployeeDetailsBean implements Serializable {
 
 	 private static final long serialVersionUID = 1L;
 
-	 @Pattern(regexp = "^[A-Z][A-Za-z]+$")
+	 @Pattern(regexp = "^[A-Z][a-zA-Z]*([ ]?[a-zA-Z]+)*$")
 	 private String city;
 
 	 @Pattern(regexp = "^[0-9]{2}-[0-9]{3}$")
 	 private String postCode;
 
-	 @Pattern(regexp = "^[A-Z][A-Za-z]+$")
+	 @Pattern(regexp = "^[A-Z][a-zA-Z]*([ ]?[.a-zA-Z]+)*$")
 	 private String street;
 	 
 	 private String buildingNumber;
@@ -30,7 +30,7 @@ public class EmployeeDetailsBean implements Serializable {
 	 @Pattern(regexp = "^[0-9]{3}-[0-9]{3}-[0-9]{3}$")
 	 private String phoneNumber;
 
-	 @Pattern(regexp = "^[a-z]+@[a-z]+.[a-z]+$")
+	 @Pattern(regexp = "^[_a-zA-Z0-9-]+([.][_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+([.][a-zA-Z0-9-]{1,})*[.]([a-zA-Z]{2,})$")
 	 private String email;
 
 	 private Employee employee;

@@ -18,6 +18,7 @@ public class Employment {
 	 private int hours;
 
 	 private Employee employee;
+	 
 	 /* --------------------------------------- */
 
 	 @Id
@@ -62,5 +63,4 @@ public class Employment {
 	 public void setEmployee(Employee employee) {
 		 	this.employee = employee;
 	 }
-	 
 }

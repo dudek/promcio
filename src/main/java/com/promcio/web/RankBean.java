@@ -17,7 +17,7 @@ public class RankBean implements Serializable {
 
 	 @NotNull
 	 @NotEmpty
-	 @Pattern(regexp = "^[A-Z][A-Za-z]+$")
+	 @Pattern(regexp = "^[A-Z][a-zA-Z]+$")
 	 private String name;
 	 
 	 @NotNull

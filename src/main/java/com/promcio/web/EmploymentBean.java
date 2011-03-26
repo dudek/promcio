@@ -7,7 +7,9 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotEmpty;
+import com.promcio.domain.Employee;
 import com.promcio.service.EmployeeManager;
 
 @Model
@@ -22,10 +24,20 @@ public class EmploymentBean implements Serializable {
 	 
 	 // private Calendar contractStart;
 	 // private Calendar contractEnd;
+	 
+	 @NotNull
+	 @NotEmpty
 	 private String contractType;
 
+	 @NotNull
+	 @NotEmpty
 	 private float salary;
+	 
+	 @NotNull
+	 @NotEmpty
 	 private int hours;
+	 
+	 private Employee employee;
 
 	 /* --------------------------------------- */
 
@@ -51,6 +63,14 @@ public class EmploymentBean implements Serializable {
 
 	 public int getHours() {
 			return hours;
+	 }
+	 
+	 public void setEmployee(Employee employee) {
+			this.employee = employee;
+	 }
+
+	 public Employee getEmployee() {
+			return employee;
 	 }
 	 
 	 /* --------------------------------------- */
