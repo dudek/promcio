@@ -38,12 +38,33 @@
             <h:outputLink value="home.jsf" update="display">Home</h:outputLink>
             </h:panelGrid>  
         </p:tab>  
-        <p:tab title="Employee">  
+        <p:tab title="Pracownicy" rendered="#{accountBean.logged}" >  
             <h:panelGrid columns="1" cellpadding="10">
-               <h:outputLink value="listingEmployees.jsf" update="left">Podglad/Edycja/Usuwanie Pracownikow</h:outputLink>
-               <h:outputLink value="addEmployee.jsf" update="left" rendered='#{accountBean.role.name eq "admin"}'>Dodawanie Pracownika</h:outputLink>
+               <h:outputLink value="listingEmployees.jsf" ajax="true" update="center">Zarządanie pracownikami</h:outputLink>
+               <h:outputLink value="addEmployee.jsf" >Dodawanie pracownika</h:outputLink>
             </h:panelGrid>  
         </p:tab>   
+        <p:tab title="Firma" rendered="#{accountBean.logged}" >  
+            <h:panelGrid columns="1" cellpadding="10">
+               <h:outputLink value="home.jsf" >Info o firmie</h:outputLink>
+            </h:panelGrid>  
+        </p:tab>   
+    </p:accordionPanel>  
+  
+</h:form> 
+      </p:layoutUnit> 
+      
+      <p:layoutUnit id="right" position="right" width="170" resizable="null" closable="null" collapsible="true">
+         
+      <h:form>  
+    <p:accordionPanel autoHeight="false" dynamic="true" cache="true">  
+        <p:tab title="Ustawienia" rendered="#{accountBean.logged}">  
+            <h:panelGrid columns="2" cellpadding="10">  
+            <h:outputLink value="changePassword.jsf" update="display">Zmiana Hasła</h:outputLink>
+            </h:panelGrid>  
+        </p:tab> 
+        <p:tab title="Wyszukiwanie"> 
+        </p:tab>      
     </p:accordionPanel>  
   
 </h:form> 

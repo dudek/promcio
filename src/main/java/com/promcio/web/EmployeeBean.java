@@ -44,6 +44,8 @@ public class EmployeeBean implements Serializable {
 	 private EmployeeDetails details;
 	 private Rank rank;
 	 private List<Employment> employments;
+	 
+	 private long updId;
 
 	 /* --------------------------------------- */
 
@@ -111,6 +113,15 @@ public class EmployeeBean implements Serializable {
 			this.employments = employments;
 	 }
 
+
+	 public void setUpdId(long updId) {
+			this.updId = updId;
+		}
+
+	  public long getUpdId() {
+			return updId;
+		}
+	 
 	 /* --------------------------------------- */
 	 // actions
 
@@ -137,10 +148,12 @@ public class EmployeeBean implements Serializable {
 
 	 public String doUpdateEmployee(long id) {
 			employeeManager.updateEmployee(id, firstname, surname, pesel, nip, yob);
+			updId = id;
 			return null;
 	 }
 
 	 public String doRedirectUpdateEmployee(long id) {
 			return "editEmployee?faces-redirect=true";
 	 }
+
 }
