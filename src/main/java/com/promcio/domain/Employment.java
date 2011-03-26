@@ -3,6 +3,7 @@ package com.promcio.domain;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Employment {
@@ -16,6 +17,7 @@ public class Employment {
 	 private float salary;
 	 private int hours;
 
+	 private Employee employee;
 	 /* --------------------------------------- */
 
 	 @Id
@@ -51,4 +53,14 @@ public class Employment {
 	 public void setHours(int hours) {
 			this.hours = hours;
 	 }
+
+	 @ManyToOne
+	 public Employee getEmployee() {
+		 	return employee;
+	 }
+
+	 public void setEmployee(Employee employee) {
+		 	this.employee = employee;
+	 }
+	 
 }

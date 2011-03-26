@@ -74,7 +74,8 @@ public class EmployeeManager {
 			if ( employments != null )
 				for(Employment employment : employments)
 					em.remove(employment);
-			if ( employee.getCompany() != null )
+			Company company = employee.getCompany();
+			if ( company != null )
 				employee.getCompany().getEmployees().remove(employee);
 			em.remove(employee);
 	 }
@@ -166,7 +167,10 @@ public class EmployeeManager {
 
 	 public void removeEmployment(long id) {
 			Employment employment = em.find(Employment.class, id);
-
+			
+			Employee employee = employment.getEmployee();
+			if ( employee != null )
+				employee.getEmployments().remove(employment);	
 			em.remove(employment);
 	 }
 
