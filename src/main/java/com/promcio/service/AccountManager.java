@@ -5,6 +5,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import com.promcio.domain.Account;
 import com.promcio.domain.Company;
+import com.promcio.util.MD5;
 
 @Stateless
 public class AccountManager {
@@ -15,7 +16,7 @@ public class AccountManager {
 	 public void addAccount(String login, String password) {
 			Account account = new Account();
 			account.setLogin(login);
-			account.setPassword(password);
+			account.setPassword(MD5.encodeString(login + password));
 
 			em.persist(account);
 	 }
@@ -38,7 +39,7 @@ public class AccountManager {
 	 public boolean signIn(String login, String password) {
 			Account account = em.find(Account.class, login);
 
-			if (account != null && account.getPassword().equals(password)) {
+			if (account != null && account.getPassword().equals(MD5.encodeString(login + password))) {
 				 return true;
 			} else {
 				 return false;
@@ -48,8 +49,8 @@ public class AccountManager {
 	 public boolean changePassword(String login, String password, String newPassword) {
 			Account account = em.find(Account.class, login);
 
-			if (account != null && account.getPassword().equals(password)) {
-				 account.setPassword(newPassword);
+			if (account != null && account.getPassword().equals(MD5.encodeString(login + password))) {
+				 account.setPassword(MD5.encodeString(login + newPassword));
 				 return true;
 			} else {
 				 return false;
