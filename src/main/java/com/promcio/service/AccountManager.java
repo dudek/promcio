@@ -5,6 +5,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import com.promcio.domain.Account;
 import com.promcio.domain.Company;
+import com.promcio.domain.Role;
 import com.promcio.util.MD5;
 
 @Stateless
@@ -13,12 +14,20 @@ public class AccountManager {
 	 @PersistenceContext
 	 EntityManager em;
 
-	 public void addAccount(String login, String password) {
-			Account account = new Account();
-			account.setLogin(login);
-			account.setPassword(MD5.encodeString(login + password));
+	 public boolean addAccount(String login, String password) {
+			Account account = em.find(Account.class, login);
 
-			em.persist(account);
+			if (account == null) {
+				 account = new Account();
+				 account.setLogin(login);
+				 account.setPassword(MD5.encodeString(login + password));
+				 account.setRole(em.find(Role.class, (long) 2));
+
+				 em.persist(account);
+				 return true;
+			} else {
+				 return false;
+			}
 	 }
 
 	 public void removeAccount(String login) {

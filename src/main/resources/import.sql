@@ -13,7 +13,6 @@ insert into employee (id, firstname, surname, pesel, nip, yob, company_id) value
 
 insert into role (id, name) values (1, 'admin')
 insert into role (id, name) values (2, 'user')
-insert into role (id, name) values (3, 'guest')
 
 insert into account (login, password, company_id, role_id) values ('admin', '25e4ee4e9229397b6b17776bfceaf8e7', 2, 1)
 insert into account (login, password, company_id, role_id) values ('user', '63e780c3f321d13109c71bf81805476e', 1, 2)
