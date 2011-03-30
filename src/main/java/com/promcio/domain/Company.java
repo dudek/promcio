@@ -19,7 +19,8 @@ public class Company {
 
 	 private List<Employee> employees;
 	 private List<Rank> ranks;
-
+	 private List<Shift> shifts;
+	 
 	 /* --------------------------------------- */
 
 	 @Id
@@ -72,5 +73,14 @@ public class Company {
 
 	 public void setRanks(List<Rank> ranks) {
 			this.ranks = ranks;
+	 }
+
+	 @OneToMany
+	 public List<Shift> getShifts() {
+		 	return shifts;
+	 }
+
+	 public void setShifts(List<Shift> shifts) {
+		 	this.shifts = shifts;
 	 }
 }
