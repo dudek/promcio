@@ -3,9 +3,13 @@ package com.promcio.web;
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Model;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.Pattern;
 import com.promcio.domain.Employee;
+import com.promcio.service.EmployeeManager;
 
 @Model
 @Named
@@ -14,6 +18,9 @@ public class EmployeeDetailsBean implements Serializable {
 
 	 private static final long serialVersionUID = 1L;
 
+	 @Inject
+	 EmployeeManager employeeManager;
+	 
 	 @Pattern(regexp = "^[A-Z][a-zA-Z]*([ ]?[a-zA-Z]+)*$")
 	 private String city;
 
@@ -108,4 +115,17 @@ public class EmployeeDetailsBean implements Serializable {
 	 public void setEmployee(Employee employee) {
 			this.employee = employee;
 	 }
+	 
+	 //actions
+	 
+	 public String doAddEmployeeDetails(long employeeId) {
+			employeeManager.addEmployeeDetails(employeeId, city, postCode, street, buildingNumber, apartmentNumber, staircaseNumber, phoneNumber, email);
+			return null;
+	 }
+	 
+	 public String doUpdateEmployeeDetails(long employeeId) {
+			employeeManager.updateEmployeeDetails(employeeId, city, postCode, street, buildingNumber, apartmentNumber, staircaseNumber, phoneNumber, email);
+			return null;
+	 }
+	 
 }

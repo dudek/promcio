@@ -27,6 +27,8 @@ public class EmployeeBean implements Serializable {
 
 	 @Inject
 	 EmployeeManager employeeManager;
+	 @Inject
+	 EmployeeDetailsBean employeeDetailsBean;
 
 	 @NotNull
 	 @NotEmpty
@@ -44,14 +46,14 @@ public class EmployeeBean implements Serializable {
 	 @NotEmpty
 	 @Pattern(regexp = "^([0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}|[0-9]{3}-[0-9]{2}-[0-9]{2}-[0-9]{3})$")
 	 private String nip;
-	 private int yob;
+	 private Integer yob;
 
 	 private EmployeeDetails details;
 	 private Rank rank;
 	 private List<Employment> employments;
 	 private Company company;
 
-	 private long updId;
+	 private Long updId;
 
 	 /* --------------------------------------- */
 
@@ -159,13 +161,48 @@ public class EmployeeBean implements Serializable {
 			return null;
 	 }
 
-	 public String doUpdateEmployee(long id) {
-			employeeManager.updateEmployee(id, firstname, surname, pesel, nip, yob);
-			updId = id;
+	 public String doUpdateEmployee() {
+			employeeManager.updateEmployee(updId, firstname, surname, pesel, nip, yob);
+			employeeDetailsBean.doUpdateEmployeeDetails(updId);
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO:", "Pracownik wyedytowany ;D"));
+			doClearFields();
 			return null;
 	 }
 
 	 public String doRedirectUpdateEmployee(long id) {
+		 	Employee employee = employeeManager.getFullEmployee(id);
+		 	this.updId = employee.getId();
+		 	this.firstname = employee.getFirstname();
+		 	this.surname = employee.getSurname();
+		 	this.pesel = employee.getPesel();
+		 	this.nip = employee.getNip();
+		 	this.yob = employee.getYob();
+		 	this.details = employee.getDetails();
+		 	
+		 	if (employee.getDetails() == null) {
+		 		employeeDetailsBean.doAddEmployeeDetails(updId);
+		 	}
+		 	else {
+		 	employeeDetailsBean.setApartmentNumber(employee.getDetails().getApartmentNumber());
+		 	employeeDetailsBean.setBuildingNumber(employee.getDetails().getBuildingNumber());
+		 	employeeDetailsBean.setCity(employee.getDetails().getCity());
+		 	employeeDetailsBean.setEmail(employee.getDetails().getEmail());
+		 	employeeDetailsBean.setPhoneNumber(employee.getDetails().getPhoneNumber());
+		 	employeeDetailsBean.setPostCode(employee.getDetails().getPostCode());
+		 	employeeDetailsBean.setStaircaseNumber(employee.getDetails().getStaircaseNumber());
+		 	employeeDetailsBean.setStreet(employee.getDetails().getStreet());
+		 	}
 			return "editEmployee?faces-redirect=true";
+	 }
+	 
+	 public void doClearFields()	{
+		 this.updId = null;
+		 this.firstname = null;
+		 this.surname = null;
+		 this.pesel = null;
+		 this.nip = null;
+		 this.yob = null;
+		 this.details = null;
+		 
 	 }
 }

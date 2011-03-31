@@ -62,7 +62,7 @@
                <p:message for="phoneNumber" errorClass="invalid" />
 
             </h:panelGrid>
-            <p><p:commandButton update="panel, display, msgs" id="check" actionListener="#{employeeBean.doEditEmployee(accountBean.company.id)}"
+            <p><p:commandButton update="panel, display, msgs" id="check" actionListener="#{employeeBean.doUpdateEmployee()}"
                value="Edytuj pracownika" /></p>
          </p:panel>
 

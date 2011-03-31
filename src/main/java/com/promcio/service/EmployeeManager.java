@@ -108,6 +108,7 @@ public class EmployeeManager {
 			employeeDetails.setPhoneNumber(phoneNumber);
 			employeeDetails.setEmail(email);
 
+			employeeDetails.setEmployee(employee);
 			employee.setDetails(employeeDetails);
 			em.persist(employeeDetails);
 	 }	 
@@ -208,4 +209,11 @@ public class EmployeeManager {
 	 public List<Employee> getAllEmployees() {
 			return castList(Employee.class, em.createQuery("SELECT NEW Employee(e.id, e.firstname, e.surname, e.pesel, e.nip, e.yob) FROM Employee e").getResultList());
 	 }
+	 
+	 
+	 public Employee getFullEmployee(long id){
+		 	return em.find(Employee.class, id);
+	 }
+	 
+	 
 }
