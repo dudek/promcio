@@ -6,6 +6,8 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
+import com.promcio.domain.Account;
 import com.promcio.domain.Company;
 import com.promcio.domain.Employee;
 import com.promcio.domain.Rank;
@@ -32,6 +34,17 @@ public class CompanyManager {
 			em.persist(company);
 	 }
 
+	 public void addCompany(String accountId, String name, String nip, String regon) {
+			Account account = em.find(Account.class, accountId);
+		 	Company company = new Company();
+			company.setName(name);
+			company.setNip(nip);
+			company.setRegon(regon);
+
+			account.setCompany(company);
+			em.persist(company);
+	 }
+	 
 	 public void removeCompany(long id) {
 			Company company = em.find(Company.class, id);
 

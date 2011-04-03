@@ -24,7 +24,9 @@ public class AccountBean implements Serializable {
 
 	 @Inject
 	 AccountManager accountManager;
-
+	 @Inject
+	 CompanyBean companyBean;
+	 
 	 @NotNull
 	 @NotEmpty
 	 @Pattern(regexp = "^[a-zA-Z][!-~]*$", message = "Invalid login")
@@ -40,6 +42,7 @@ public class AccountBean implements Serializable {
 	 private Employee employee;
 	 private Company company;
 
+	 private long type;
 	 private boolean isLogged = false;
 
 	 /* --------------------------------------- */
@@ -95,11 +98,19 @@ public class AccountBean implements Serializable {
 	 public boolean isLogged() {
 			return isLogged;
 	 }
+	 
+	 public long getType() {
+			return type;
+	 }
+
+	 public void setType(long type) {
+			this.type = type;
+	 }
 
 	 /* --------------------------------------- */
 	 // actions
 
-	 public String signIn() {
+	public String signIn() {
 			if (accountManager.signIn(login, password)) {
 				 this.role = accountManager.getAccount(login).getRole();
 				 this.employee = accountManager.getAccount(login).getEmployee();
@@ -129,7 +140,9 @@ public class AccountBean implements Serializable {
 	 }
 
 	 public String doAddAccount() {
-			if (accountManager.addAccount(login, password)) {
+			if (accountManager.addAccount(login, password, type)) {
+				 if (type == 2)
+					 companyBean.doAddCompany(login);
 				 this.login = null;
 				 this.password = null; // wyrzucamy haslo z pamieci
 				 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO:", "Konto utworzone!"));

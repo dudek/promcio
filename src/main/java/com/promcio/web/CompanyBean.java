@@ -95,6 +95,11 @@ public class CompanyBean implements Serializable {
 	 /* --------------------------------------- */
 	 // actions
 
+	 public String doAddCompany(String accountId){
+		 	companyManager.addCompany(accountId, accountId, accountId, accountId);
+		 	return null;
+	 }
+	 
 	 public List<Employee> getCompanyEmployees(long companyId) {
 			return companyManager.getAllCompanyEmployees(companyId);
 	 }

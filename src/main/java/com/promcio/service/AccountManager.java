@@ -14,14 +14,14 @@ public class AccountManager {
 	 @PersistenceContext
 	 EntityManager em;
 
-	 public boolean addAccount(String login, String password) {
+	 public boolean addAccount(String login, String password, long type) {
 			Account account = em.find(Account.class, login);
 
 			if (account == null) {
 				 account = new Account();
 				 account.setLogin(login);
 				 account.setPassword(MD5.encodeString(login + password));
-				 account.setRole(em.find(Role.class, (long) 2));
+				 account.setRole(em.find(Role.class, (long) type));
 
 				 em.persist(account);
 				 return true;

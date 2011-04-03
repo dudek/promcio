@@ -11,16 +11,22 @@
                <p:inputText id="login" required="true" label="Login" value="#{accountBean.login}" />
                <p:message for="login" errorClass="invalid" />
 
-               <h:outputLabel for="password" value="Password:" style="float: right;" />
+               <h:outputLabel for="password" value="Hasło:" style="float: right;" />
                <p:password id="password" validator="#{passwordValidation.validateField}" required="true" label="Password"
                   value="#{accountBean.password}" />
                <p:message for="password" errorClass="invalid" />
 
-               <h:outputLabel for="confirm_password" value="Confirm Password:" style="float: right;" />
+               <h:outputLabel for="confirm_password" value="Powtórz hasło:" style="float: right;" />
                <p:password id="confirm_password" validator="#{passwordValidation.validateField}" required="true" label="Confirm Password"
                   value="#{accountBean.password}" feedback="false" />
                <p:message for="confirm_password" errorClass="invalid" />
 
+			   <h:outputLabel for="account_type" value="Typ konta:" style="float: right;" />
+	  	       <h:selectOneRadio value="#{accountBean.type}">  
+               		<f:selectItem itemLabel="firma" itemValue="2" />  
+            		<f:selectItem itemLabel="pracownik" itemValue="3" itemDisabled="true" />   
+	           </h:selectOneRadio>  
+				
             </h:panelGrid>
             <p:messages id="msgs" showDetail="true" />
             <p><p:commandButton value="Create" actionListener="#{accountBean.doAddAccount}" ajax="false" /></p>
