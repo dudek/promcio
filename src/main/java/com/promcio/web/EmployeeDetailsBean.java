@@ -114,6 +114,7 @@ public class EmployeeDetailsBean implements Serializable {
 			this.employee = employee;
 	 }
 	 
+	 /* --------------------------------------- */
 	 //actions
 	 
 	 public String doAddEmployeeDetails(long employeeId) {

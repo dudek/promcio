@@ -41,9 +41,8 @@
                   </p:commandButton>
                </p:column>
 
-               <!-- TODO: zmienic, zeby nie powielalo zapytania do bazy -->
                <f:facet name="footer">
-                  Liczba pracowników: #{fn:length(companyBean.getCompanyEmployees(accountBean.company.id))}
+                  Liczba pracowników: #{(companyBean.numberOfEmployees)}
                </f:facet>
 
             </p:dataTable>

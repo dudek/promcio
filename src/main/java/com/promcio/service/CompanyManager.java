@@ -79,6 +79,13 @@ public class CompanyManager {
 			em.persist(rank);
 	 }
 
+	 public void updateRank(long id, String name, float hourSalary){
+		 	Rank rank = em.find(Rank.class, id);
+		 	
+		 	rank.setName(name);
+		 	rank.setHourSalary(hourSalary);
+	 }
+	 
 	 public void removeRank(long id) {
 			Rank rank = em.find(Rank.class, id);
 
@@ -115,5 +122,9 @@ public class CompanyManager {
 
 	 public List<Employee> getAllCompanyEmployees(long companyId) {
 			return castList(Employee.class, em.createQuery("SELECT NEW Employee(e.id, e.firstname, e.surname, e.pesel, e.nip, e.yob) FROM Employee e WHERE e.company.id ='" + companyId + "'").getResultList());
+	 }
+	 
+	 public Company getFullCompany(long id){
+		 	return em.find(Company.class, id);
 	 }
 }

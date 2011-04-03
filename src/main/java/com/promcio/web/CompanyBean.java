@@ -41,6 +41,8 @@ public class CompanyBean implements Serializable {
 
 	 private List<Employee> employees;
 	 private List<Rank> ranks;
+	 
+	 private int numberOfEmployees;
 
 	 /* --------------------------------------- */
 
@@ -92,15 +94,24 @@ public class CompanyBean implements Serializable {
 			return ranks;
 	 }
 
+	 public int getNumberOfEmployees() {
+			return numberOfEmployees;
+	 }
+
+	 public void setNumberOfEmployees(int numberOfEmployees) {
+			this.numberOfEmployees = numberOfEmployees;
+     }
 	 /* --------------------------------------- */
 	 // actions
 
-	 public String doAddCompany(String accountId){
-		 	companyManager.addCompany(accountId, accountId, accountId, accountId);
+	public String doAddCompany(String accountId){
+		 	companyManager.addCompany(accountId, name, nip, regon);
 		 	return null;
 	 }
 	 
 	 public List<Employee> getCompanyEmployees(long companyId) {
-			return companyManager.getAllCompanyEmployees(companyId);
+		 	List<Employee> companyEmployees = companyManager.getAllCompanyEmployees(companyId);
+		 	numberOfEmployees = companyEmployees.size();
+			return companyEmployees;
 	 }
 }
