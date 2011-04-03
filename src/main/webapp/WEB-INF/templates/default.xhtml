@@ -41,7 +41,7 @@
         <p:tab title="Pracownicy" rendered="#{accountBean.logged}" >  
             <h:panelGrid columns="1" cellpadding="10">
                <h:outputLink value="listingEmployees.jsf" ajax="true" update="center">Zarządanie pracownikami</h:outputLink>
-               <h:outputLink value="addEmployee.jsf" >Dodawanie pracownika</h:outputLink>
+               <p:commandLink value="Dodawanie pracownika" action="#{employeeBean.doRedirectAddEmployee()}" ajax="false" />
             </h:panelGrid>  
         </p:tab>   
         <p:tab title="Firma" rendered="#{accountBean.logged}" >  

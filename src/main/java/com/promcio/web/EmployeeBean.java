@@ -169,6 +169,12 @@ public class EmployeeBean implements Serializable {
 			return null;
 	 }
 
+	 public String doRedirectAddEmployee() {
+		 doClearFields();
+		return "addEmployee?faces-redirect=true";
+		 
+	 }
+	 
 	 public String doRedirectUpdateEmployee(long id) {
 		 	Employee employee = employeeManager.getFullEmployee(id);
 		 	this.updId = employee.getId();
