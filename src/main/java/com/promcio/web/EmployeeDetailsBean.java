@@ -21,20 +21,20 @@ public class EmployeeDetailsBean implements Serializable {
 	 @Inject
 	 EmployeeManager employeeManager;
 	 
-	 @Pattern(regexp = "^[A-Z][a-zA-Z]*([ ]?[a-zA-Z]+)*$")
+	 @Pattern(regexp = "(^[A-Z][a-zA-Z]*([ ]?[a-zA-Z]+)*$)?+")
 	 private String city;
 
-	 @Pattern(regexp = "^[0-9]{2}-[0-9]{3}$")
+	 @Pattern(regexp = "(^[0-9]{2}-[0-9]{3}$)?+")
 	 private String postCode;
 
-	 @Pattern(regexp = "^[A-Z][a-zA-Z]*([ ]?[.a-zA-Z]+)*$")
+	 @Pattern(regexp = "(^[A-Z][a-zA-Z]*([ ]?[.a-zA-Z]+)*$)?+")
 	 private String street;
 	 
 	 private String buildingNumber;
 	 private String apartmentNumber;
 	 private String staircaseNumber;
 
-	 @Pattern(regexp = "^[0-9]{3}-[0-9]{3}-[0-9]{3}$")
+	 @Pattern(regexp = "(^[0-9]{3}-[0-9]{3}-[0-9]{3}$)?+")
 	 private String phoneNumber;
 
 	 @Pattern(regexp = "^[_a-zA-Z0-9-]+([.][_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+([.][a-zA-Z0-9-]{1,})*[.]([a-zA-Z]{2,})$")

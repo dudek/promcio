@@ -165,7 +165,6 @@ public class EmployeeBean implements Serializable {
 			employeeManager.updateEmployee(updId, firstname, surname, pesel, nip, yob);
 			employeeDetailsBean.doUpdateEmployeeDetails(updId);
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO:", "Pracownik wyedytowany ;D"));
-			doClearFields();
 			return null;
 	 }
 
