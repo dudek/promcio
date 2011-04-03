@@ -89,11 +89,11 @@ public class EmployeeBean implements Serializable {
 			this.nip = nip;
 	 }
 
-	 public int getYob() {
+	 public Integer getYob() {
 			return yob;
 	 }
 
-	 public void setYob(int yob) {
+	 public void setYob(Integer yob) {
 			this.yob = yob;
 	 }
 
@@ -165,6 +165,7 @@ public class EmployeeBean implements Serializable {
 			employeeManager.updateEmployee(updId, firstname, surname, pesel, nip, yob);
 			employeeDetailsBean.doUpdateEmployeeDetails(updId);
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO:", "Pracownik wyedytowany ;D"));
+			//doClearFields();
 			return null;
 	 }
 
@@ -195,13 +196,12 @@ public class EmployeeBean implements Serializable {
 	 }
 	 
 	 public void doClearFields()	{
-		 this.updId = null;
-		 this.firstname = null;
-		 this.surname = null;
-		 this.pesel = null;
-		 this.nip = null;
-		 this.yob = null;
-		 this.details = null;
-		 
+		 	this.updId = null;
+		 	this.firstname = null;
+		 	this.surname = null;
+		 	this.pesel = null;
+		 	this.nip = null;
+		 	this.yob = null;
+		 	this.details = null;
 	 }
 }
