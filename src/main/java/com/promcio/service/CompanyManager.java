@@ -45,6 +45,13 @@ public class CompanyManager {
 			em.persist(company);
 	 }
 	 
+	 public void updateCompany(long id, String name, String nip, String regon){
+		 	Company company = em.find(Company.class, id);
+		 	company.setName(name);
+		 	company.setNip(nip);
+		 	company.setRegon(regon);
+	 }
+	 
 	 public void removeCompany(long id) {
 			Company company = em.find(Company.class, id);
 

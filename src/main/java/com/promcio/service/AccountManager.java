@@ -22,7 +22,7 @@ public class AccountManager {
 				 account.setLogin(login);
 				 account.setPassword(MD5.encodeString(login + password));
 				 account.setRole(em.find(Role.class, (long) type));
-
+				 
 				 em.persist(account);
 				 return true;
 			} else {
