@@ -109,6 +109,11 @@ public class CompanyBean implements Serializable {
 	 /* --------------------------------------- */
 	 // actions
 	 	 
+	 public List<Rank> getCompanyRanks(long companyId){
+		 List<Rank> companyRanks = companyManager.getAllCompanyRanks(companyId);
+		 return companyRanks;
+		 
+	 }
 
 	 public String doAddCompany(String accountId){
 		 	companyManager.addCompany(accountId, name, nip, regon);
