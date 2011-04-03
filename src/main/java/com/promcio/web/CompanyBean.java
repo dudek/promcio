@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Model;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.NotNull;
@@ -22,6 +24,9 @@ public class CompanyBean implements Serializable {
 
 	 @Inject
 	 CompanyManager companyManager;
+	 
+	 @Inject
+	 AccountBean accountBean;
 
 	 private long id;
 
@@ -103,10 +108,17 @@ public class CompanyBean implements Serializable {
      }
 	 /* --------------------------------------- */
 	 // actions
+	 	 
 
-	public String doAddCompany(String accountId){
-		 	companyManager.addCompany(accountId, name, nip, regon);
+	 public String doAddCompany(String accountId){
+		 	companyManager.addCompany(accountId, accountId, accountId, accountId);
 		 	return null;
+	 }
+	 
+	 public String doUpdateCompany() {
+		companyManager.updateCompany(accountBean.getCompany().getId(), name, nip, regon);
+		 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO:", "Dane wyedytowane"));
+		 return null;
 	 }
 	 
 	 public List<Employee> getCompanyEmployees(long companyId) {

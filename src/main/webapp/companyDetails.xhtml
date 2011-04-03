@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.prime.com.tr/ui" template="/WEB-INF/templates/default.xhtml">
+   <ui:define name="content">
+      <h:form prependId="false" id="bv">
+         <p:panel id="panel" header="Edytuj Dane o firmie" style="margin-bottom:10px;">
+            <p:messages id="msgs" showDetail="true" />
+            <p:focus />
+            <h:panelGrid columns="3">
+               <h:outputLabel for="nip" value="NIp:" style="float: right;" />
+               <p:inputText id="nip" required="true" label="nip" value="#{accountBean.company.nip}" />
+               <p:message for="nip" errorClass="invalid" />
+
+               <h:outputLabel for="name" value="Nazwa firmy:" style="float: right;" />
+               <p:inputText id="name" required="true" label="name" value="#{accountBean.company.name}" />
+               <p:message for="name" errorClass="invalid" />
+               
+               <h:outputLabel for="regon" value="Regon:" style="float: right;" />
+               <p:inputText id="regon" required="true" label="regon" value="#{accountBean.company.regon}" />
+               <p:message for="regon" errorClass="invalid" />
+               
+               
+
+             
+
+               
+
+            </h:panelGrid>
+            <p><p:commandButton update="panel, display, msgs" id="check" actionListener="#{companyBean.doUpdateCompany()}"
+               value="Edytuj informacje" /></p>
+         </p:panel>
+
+      </h:form>
+   </ui:define>
+</ui:composition>
