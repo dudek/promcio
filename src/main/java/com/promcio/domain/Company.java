@@ -66,7 +66,7 @@ public class Company {
 			this.employees = employees;
 	 }
 
-	 @OneToMany
+	 @OneToMany(mappedBy = "company", fetch = FetchType.EAGER)
 	 public List<Rank> getRanks() {
 			return ranks;
 	 }

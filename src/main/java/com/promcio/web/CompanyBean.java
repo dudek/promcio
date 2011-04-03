@@ -111,14 +111,14 @@ public class CompanyBean implements Serializable {
 	 	 
 
 	 public String doAddCompany(String accountId){
-		 	companyManager.addCompany(accountId, accountId, accountId, accountId);
+		 	companyManager.addCompany(accountId, name, nip, regon);
 		 	return null;
 	 }
 	 
 	 public String doUpdateCompany() {
-		companyManager.updateCompany(accountBean.getCompany().getId(), name, nip, regon);
-		 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO:", "Dane wyedytowane"));
-		 return null;
+		 	companyManager.updateCompany(accountBean.getCompany().getId(), name, nip, regon);
+		 	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO:", "Dane wyedytowane"));
+		 	return null;
 	 }
 	 
 	 public List<Employee> getCompanyEmployees(long companyId) {

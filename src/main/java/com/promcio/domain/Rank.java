@@ -3,6 +3,7 @@ package com.promcio.domain;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Rank {
@@ -12,6 +13,8 @@ public class Rank {
 	 private String name;
 	 private float hourSalary;
 
+	 private Company company;
+	 
 	 /* --------------------------------------- */
 
 	 @Id
@@ -39,4 +42,14 @@ public class Rank {
 	 public void setHourSalary(float hourSalary) {
 			this.hourSalary = hourSalary;
 	 }
+
+	 @ManyToOne
+	 public Company getCompany() {
+		 	return company;
+	 }
+
+	 public void setCompany(Company company) {
+		 	this.company = company;
+	 }
+	 
 }

@@ -124,6 +124,11 @@ public class CompanyManager {
 			return castList(Employee.class, em.createQuery("SELECT NEW Employee(e.id, e.firstname, e.surname, e.pesel, e.nip, e.yob) FROM Employee e WHERE e.company.id ='" + companyId + "'").getResultList());
 	 }
 	 
+	 public List<Rank> getAllCompanyRanks(long companyId){
+		 	//return castList(Rank.class, em.find(Company.class, companyId).getRanks());
+		 	return castList(Rank.class, em.createQuery("SELECT DISTINCT r FROM Rank r WHERE r.company.id='" + companyId + "'").getResultList());
+	 }
+	 
 	 public Company getFullCompany(long id){
 		 	return em.find(Company.class, id);
 	 }
