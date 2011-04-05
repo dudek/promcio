@@ -28,14 +28,14 @@ public class EmploymentBean implements Serializable {
 	 @NotNull
 	 @NotEmpty
 	 private String contractType;
-
-	 @NotNull
-	 @NotEmpty
-	 private float salary;
 	 
 	 @NotNull
 	 @NotEmpty
-	 private int hours;
+	 private int period;
+	 private int hoursNorm;
+	 private float contractValue;
+	 
+	 private float hourSalary;
 	 
 	 private Employee employee;
 
@@ -49,24 +49,32 @@ public class EmploymentBean implements Serializable {
 			return contractType;
 	 }
 
-	 public void setSalary(float salary) {
-			this.salary = salary;
+	 public int getPeriod() {
+		 	return period;
 	 }
 
-	 public float getSalary() {
-			return salary;
+	 public void setPeriod(int period) {
+		 	this.period = period;
 	 }
 
-	 public void setHours(int hours) {
-			this.hours = hours;
+	 public int getHoursNorm() {
+		 	return hoursNorm;
 	 }
 
-	 public int getHours() {
-			return hours;
+	 public void setHoursNorm(int hoursNorm) {
+		 	this.hoursNorm = hoursNorm;
 	 }
-	 
+
+	 public float getHourSalary() {
+		 	return hourSalary;
+	 }
+
+	 public void setHourSalary(float hourSalary) {
+		 	this.hourSalary = hourSalary;
+	 }
+
 	 public void setEmployee(Employee employee) {
-			this.employee = employee;
+		 	this.employee = employee;
 	 }
 
 	 public Employee getEmployee() {
@@ -77,7 +85,7 @@ public class EmploymentBean implements Serializable {
 	 // actions
 	 
 	 public String doAddEmploymentEmployee(long employeeId){
-		 	employeeManager.addEmployment(employeeId, contractType, salary, hours);
+		 	employeeManager.addEmployment(employeeId, contractType, contractValue, period, hoursNorm, hourSalary);
 		 	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO:", "Umowa dodana!"));
 		 	return null;
 	 }
@@ -89,7 +97,7 @@ public class EmploymentBean implements Serializable {
 	 }
 	 
 	 public String doUpdateEmploymentEmployee(long id){
-		 	employeeManager.updateEmployment(id, contractType, salary, hours);
+		 	employeeManager.updateEmployment(id, contractType,  contractValue, period, hoursNorm, hourSalary);
 		 	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO:", "Umowa poprawiona !"));
 		 	return null;
 	 }
