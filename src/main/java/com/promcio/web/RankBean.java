@@ -21,13 +21,10 @@ public class RankBean implements Serializable {
 	 @Inject
 	 CompanyManager companyManager;
 	 
-	 @NotNull
-	 @NotEmpty
-	 @Pattern(regexp = "^[A-Z][a-zA-Z]+$")
+	 
 	 private String name;
 	 
-	 @NotNull
-	 @NotEmpty
+	 
 	 private float hourSalary;
 	 
 	 /* --------------------------------------- */
@@ -52,7 +49,7 @@ public class RankBean implements Serializable {
 	 //actions
 	 
 	 public String doAddRankCompany(long companyId){
-		 	companyManager.addRank(companyId, name, companyId);
+		 	companyManager.addRank(companyId, name, hourSalary);
 		 	return null;
 	 }
 	 

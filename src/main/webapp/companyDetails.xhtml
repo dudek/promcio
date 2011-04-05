@@ -22,29 +22,7 @@
                <p><p:commandButton update="panel, display, msgs" id="check" actionListener="#{companyBean.doUpdateCompany()}"
                value="Edytuj informacje" /></p>
                
-                <p:dataTable value="#{companyBean.getCompanyRanks(accountBean.company.id)}" var="current" style="text-align: center;">
-
-               <f:facet name="header">
-                 Lista stanowisk
-               </f:facet>
-
-               <p:column headerText="Imie">
-                  <h:outputText value="#{current.name}" />
-               </p:column>
-
-               <p:column headerText="Nazwisko">
-                  <h:outputText value="#{current.hourSalary}" />
-               </p:column>
-
-               <p:column headerText="">
-                  <p:commandButton update="panel, display" value="usun" actionListener="#{rankBean.doRemoveRankCompany(current.id)}">
-                  </p:commandButton>
-               </p:column>
                
-               
-              
-
-            </p:dataTable>
 
             </h:panelGrid>
             

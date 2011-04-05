@@ -75,6 +75,7 @@ public class CompanyManager {
 			rank.setHourSalary(hourSalary);
 			
 			company.getRanks().add(rank);
+			rank.setCompany(company);
 			
 			em.persist(rank);
 	 }

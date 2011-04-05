@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.prime.com.tr/ui" template="/WEB-INF/templates/default.xhtml">
+   <ui:define name="content">
+      <h:form prependId="false" id="bv">
+         <p:panel id="panel" header="Edytuj Dane o firmie" style="margin-bottom:10px;">
+            <p:messages id="msgs" showDetail="true" />
+            <p:focus />
+           <center><h:panelGrid columns="3">
+               
+                <p:dataTable value="#{companyBean.getCompanyRanks(accountBean.company.id)}" var="current" style="text-align: center;">
+
+               <f:facet name="header">
+                 Lista stanowisk
+               </f:facet>
+
+               <p:column headerText="Stanowisko">
+                  <h:outputText value="#{current.name}" />
+               </p:column>
+
+               <p:column headerText="Stawka godzinowa">
+                  <h:outputText value="#{current.hourSalary}" />
+               </p:column>
+
+               <p:column headerText="">
+                  <p:commandButton update="panel, display" value="usun" actionListener="#{rankBean.doRemoveRankCompany(current.id)}">
+                  </p:commandButton>
+               </p:column>
+               
+
+            </p:dataTable>
+            </h:panelGrid></center> 
+            
+            <h:panelGrid>
+            <h:outputLabel for="name" value="Stanowisko:" style="float: left;" />
+               <p:inputText id="name" required="true" label="name" value="#{rankBean.name}" />
+               <p:message for="name" errorClass="invalid" />
+
+               <h:outputLabel for="hourSalary" value="Stawka godzinowa:" style="float: left;" />
+               <p:inputText id="hourSalary" required="true" label="hourSalary" value="#{rankBean.hourSalary}" />
+               <p:message for="hourSalary" errorClass="invalid" />
+              
+				<p><p:commandButton update="panel, display, msgs" id="check" actionListener="#{rankBean.doAddRankCompany(accountBean.company.id)}" value="Dodaj stanowisko" /></p>
+           </h:panelGrid>
+            
+         </p:panel>
+
+      </h:form>
+   </ui:define>
+</ui:composition>
