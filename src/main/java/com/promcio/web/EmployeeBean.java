@@ -29,6 +29,8 @@ public class EmployeeBean implements Serializable {
 	 EmployeeManager employeeManager;
 	 @Inject
 	 EmployeeDetailsBean employeeDetailsBean;
+	 @Inject
+	 EmploymentBean employmentBean;
 
 	 @NotNull
 	 @NotEmpty
@@ -47,7 +49,8 @@ public class EmployeeBean implements Serializable {
 	 @Pattern(regexp = "^([0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}|[0-9]{3}-[0-9]{2}-[0-9]{2}-[0-9]{3})$")
 	 private String nip;
 	 private Integer yob;
-
+	 
+	 private Employment employment;
 	 private EmployeeDetails details;
 	 private Rank rank;
 	 private List<Employment> employments;
@@ -164,6 +167,7 @@ public class EmployeeBean implements Serializable {
 	 public String doUpdateEmployee() {
 			employeeManager.updateEmployee(updId, firstname, surname, pesel, nip, yob);
 			employeeDetailsBean.doUpdateEmployeeDetails(updId);
+			employmentBean.doUpdateEmploymentEmployee();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO:", "Pracownik wyedytowany ;D"));
 			//doClearFields();
 			return null;
@@ -183,21 +187,36 @@ public class EmployeeBean implements Serializable {
 		 	this.pesel = employee.getPesel();
 		 	this.nip = employee.getNip();
 		 	this.yob = employee.getYob();
-		 	this.details = employee.getDetails();
+//		 	this.employment = 
+//		 	this.details = employee.getDetails();
 		 	
 		 	if (employee.getDetails() == null) {
 		 		employeeDetailsBean.doAddEmployeeDetails(updId);
 		 	}
 		 	else {
-		 	employeeDetailsBean.setApartmentNumber(employee.getDetails().getApartmentNumber());
-		 	employeeDetailsBean.setBuildingNumber(employee.getDetails().getBuildingNumber());
-		 	employeeDetailsBean.setCity(employee.getDetails().getCity());
-		 	employeeDetailsBean.setEmail(employee.getDetails().getEmail());
-		 	employeeDetailsBean.setPhoneNumber(employee.getDetails().getPhoneNumber());
-		 	employeeDetailsBean.setPostCode(employee.getDetails().getPostCode());
-		 	employeeDetailsBean.setStaircaseNumber(employee.getDetails().getStaircaseNumber());
-		 	employeeDetailsBean.setStreet(employee.getDetails().getStreet());
+		 		employeeDetailsBean.setApartmentNumber(employee.getDetails().getApartmentNumber());
+		 		employeeDetailsBean.setBuildingNumber(employee.getDetails().getBuildingNumber());
+		 		employeeDetailsBean.setCity(employee.getDetails().getCity());
+		 		employeeDetailsBean.setEmail(employee.getDetails().getEmail());
+		 		employeeDetailsBean.setPhoneNumber(employee.getDetails().getPhoneNumber());
+		 		employeeDetailsBean.setPostCode(employee.getDetails().getPostCode());
+		 		employeeDetailsBean.setStaircaseNumber(employee.getDetails().getStaircaseNumber());
+		 		employeeDetailsBean.setStreet(employee.getDetails().getStreet());
 		 	}
+		 	
+		 	if (employeeManager.getEmployments(employee.getId()).size() <= 0 ) {
+		 		employmentBean.doAddEmploymentEmployee(updId);
+		 		employmentBean.setId(employeeManager.getEmployments(employee.getId()).get(0).getId());
+		 	}
+		 	
+		 	else {
+		 		Employment employment = employeeManager.getEmployments(employee.getId()).get(0);
+		 		employmentBean.setContractType(employment.getContractType());
+		 		employmentBean.setHours(employment.getHours());
+		 		employmentBean.setSalary(employment.getSalary());
+		 		employmentBean.setId(employment.getId());
+		 	}
+		 	
 			return "editEmployee?faces-redirect=true";
 	 }
 	 

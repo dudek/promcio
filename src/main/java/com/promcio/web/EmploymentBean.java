@@ -29,13 +29,12 @@ public class EmploymentBean implements Serializable {
 	 @NotEmpty
 	 private String contractType;
 
-	 @NotNull
-	 @NotEmpty
+	 
 	 private float salary;
 	 
-	 @NotNull
-	 @NotEmpty
 	 private int hours;
+	 
+	 private long id;
 	 
 	 private Employee employee;
 
@@ -73,6 +72,14 @@ public class EmploymentBean implements Serializable {
 			return employee;
 	 }
 	 
+	 public void setId(long id) {
+			this.id = id;
+		}
+
+		public long getId() {
+			return id;
+		}
+	 
 	 /* --------------------------------------- */
 	 // actions
 	 
@@ -88,9 +95,11 @@ public class EmploymentBean implements Serializable {
 		 	return null;
 	 }
 	 
-	 public String doUpdateEmploymentEmployee(long id){
+	 public String doUpdateEmploymentEmployee(){
 		 	employeeManager.updateEmployment(id, contractType, salary, hours);
 		 	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO:", "Umowa poprawiona !"));
 		 	return null;
 	 }
+
+	
 }

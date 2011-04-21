@@ -6,7 +6,11 @@
          <p:panel id="panel" header="Edytuj Pracownika" style="margin-bottom:10px;">
             <p:messages id="msgs" showDetail="true" />
             <p:focus />
+            <h:panelGrid columns="3" style="margin-left:20%;margin-right:20%;">
             <h:panelGrid columns="3">
+            <f:facet name="header">
+    		<h:outputText value="Podstawowe info o pracowniku"/>
+  			</f:facet>
                <h:outputLabel for="firstname" value="Imię:" style="float: right;" />
                <p:inputText id="firstname" required="true" label="Firstname" value="#{employeeBean.firstname}" />
                <p:message for="firstname" errorClass="invalid" />
@@ -29,9 +33,12 @@
 
             </h:panelGrid>
 
-            <h2>Szczegóły pracownika : (nie wymagane)</h2>
+           
 
             <h:panelGrid columns="3">
+            <f:facet name="header">
+    		<h:outputText value="Szczegoly pracownika (nie wymagane)"/>
+  			</f:facet>
 
                <h:outputLabel for="city" value="Miasto" style="float: right;" />
                <p:inputText id="city" required="false" label="Miasto" value="#{employeeDetailsBean.city}" />
@@ -62,6 +69,28 @@
                <p:message for="phoneNumber" errorClass="invalid" />
 
             </h:panelGrid>
+            
+            <h:panelGrid columns="3">
+            <f:facet name="header">
+    		<h:outputText value="Informacje o umowie"/>
+  			</f:facet>
+  			<h:outputLabel for="contractType" value="Typ umowy" style="float: right;" />
+            <p:inputText id="contractType" required="false" label="Typ umowy" value="#{employmentBean.contractType}" />
+            <p:message for="contractType" errorClass="invalid" />
+            
+            <h:outputLabel for="salary" value="Wynagrodzenie" style="float: right;" />
+            <p:inputText id="salary" required="false" label="Wynagrodzenie" value="#{employmentBean.salary}" />
+            <p:message for="salary" errorClass="invalid" />
+            
+            <h:outputLabel for="hours" value="Liczba godzin" style="float: right;" />
+            <p:inputText id="hours" required="false" label="Liczba godzin" value="#{employmentBean.hours}" />
+            <p:message for="hours" errorClass="invalid" />
+            
+            
+            
+            </h:panelGrid>
+            </h:panelGrid>
+            
             <p><p:commandButton update="panel, display, msgs" id="check" actionListener="#{employeeBean.doUpdateEmployee()}"
                value="Edytuj pracownika" /></p>
          </p:panel>

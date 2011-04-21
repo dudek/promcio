@@ -153,6 +153,7 @@ public class EmployeeManager {
 			employment.setHours(hours);
 
 			employee.getEmployments().add(employment);
+			employment.setEmployee(employee);
 			em.persist(employment);
 	 }
 
@@ -215,5 +216,10 @@ public class EmployeeManager {
 		 	return em.find(Employee.class, id);
 	 }
 	 
+	 //Tymczasowa metoda poniewaz nie dziala wartosciowanie zachlanne
+	 public List<Employment> getEmployments (long employeeId) {
+		 	return em.createQuery("SELECT e FROM Employment e WHERE e.employee.id = '"+ employeeId +"'").getResultList();
+		 	
+	 }
 	 
 }
