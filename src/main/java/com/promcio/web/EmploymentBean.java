@@ -30,9 +30,12 @@ public class EmploymentBean implements Serializable {
 	 private String contractType;
 
 	 
-	 private float salary;
 	 
-	 private int hours;
+	 private int period;
+	 private int hoursNorm;
+	 private float contractValue;
+	 
+	 private float hourSalary;
 	 
 	 private long id;
 	 
@@ -47,25 +50,41 @@ public class EmploymentBean implements Serializable {
 	 public String getContractType() {
 			return contractType;
 	 }
-
-	 public void setSalary(float salary) {
-			this.salary = salary;
-	 }
-
-	 public float getSalary() {
-			return salary;
-	 }
-
-	 public void setHours(int hours) {
-			this.hours = hours;
-	 }
-
-	 public int getHours() {
-			return hours;
-	 }
 	 
+	 public void setContractValue(float contractValue) {
+			this.contractValue = contractValue;
+	 }
+
+	 public float getContractValue() {
+			return contractValue;
+	 }
+
+	 public int getPeriod() {
+		 	return period;
+	 }
+
+	 public void setPeriod(int period) {
+		 	this.period = period;
+	 }
+
+	 public int getHoursNorm() {
+		 	return hoursNorm;
+	 }
+
+	 public void setHoursNorm(int hoursNorm) {
+		 	this.hoursNorm = hoursNorm;
+	 }
+
+	 public float getHourSalary() {
+		 	return hourSalary;
+	 }
+
+	 public void setHourSalary(float hourSalary) {
+		 	this.hourSalary = hourSalary;
+	 }
+
 	 public void setEmployee(Employee employee) {
-			this.employee = employee;
+		 	this.employee = employee;
 	 }
 
 	 public Employee getEmployee() {
@@ -84,7 +103,7 @@ public class EmploymentBean implements Serializable {
 	 // actions
 	 
 	 public String doAddEmploymentEmployee(long employeeId){
-		 	employeeManager.addEmployment(employeeId, contractType, salary, hours);
+		 	employeeManager.addEmployment(employeeId, contractType, contractValue, period, hoursNorm, hourSalary);
 		 	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO:", "Umowa dodana!"));
 		 	return null;
 	 }
@@ -95,8 +114,9 @@ public class EmploymentBean implements Serializable {
 		 	return null;
 	 }
 	 
+
 	 public String doUpdateEmploymentEmployee(){
-		 	employeeManager.updateEmployment(id, contractType, salary, hours);
+		 	employeeManager.updateEmployment(id, contractType,  contractValue, period, hoursNorm, hourSalary);
 		 	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO:", "Umowa poprawiona !"));
 		 	return null;
 	 }

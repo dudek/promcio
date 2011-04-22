@@ -134,35 +134,41 @@ public class EmployeeManager {
 			em.remove(employeDetails);
 	 }
 
-	 public void addEmployment(String contractType, float salary, int hours) {
+	 public void addEmployment(String contractType, float contractValue, int period, int hoursNorm, float hourSalary) {
 			Employment employment = new Employment();
 
 			employment.setContractType(contractType);
-			employment.setSalary(salary);
-			employment.setHours(hours);
+			employment.setContractValue(contractValue);
+			employment.setPeriod(period);
+			employment.setHoursNorm(hoursNorm);
+			employment.setHourSalary(hourSalary);
 
 			em.persist(employment);
 	 }
 	 
-	 public void addEmployment(long employeeId, String contractType, float salary, int hours) {
+	 public void addEmployment(long employeeId, String contractType, float contractValue, int period, int hoursNorm, float hourSalary) {
 			Employee employee = em.find(Employee.class, employeeId);
 		 	Employment employment = new Employment();
 
 			employment.setContractType(contractType);
-			employment.setSalary(salary);
-			employment.setHours(hours);
+			employment.setContractValue(contractValue);
+			employment.setPeriod(period);
+			employment.setHoursNorm(hoursNorm);
+			employment.setHourSalary(hourSalary);
 
 			employee.getEmployments().add(employment);
 			employment.setEmployee(employee);
 			em.persist(employment);
 	 }
 
-	 public void updateEmployment(long id, String contractType, Float salary, Integer hours) {
+	 public void updateEmployment(long id, String contractType, float contractValue, int period, int hoursNorm, float hourSalary) {
 			Employment employment = em.find(Employment.class, id);
 
-			if (contractType != null) employment.setContractType(contractType);
-			if (salary != null) employment.setSalary(salary);
-			if (hours != null) employment.setHours(hours);
+			employment.setContractType(contractType);
+			employment.setContractValue(contractValue);
+			employment.setPeriod(period);
+			employment.setHoursNorm(hoursNorm);
+			employment.setHourSalary(hourSalary);
 
 			// em.persist(employment);
 	 }

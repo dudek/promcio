@@ -78,16 +78,23 @@
             <p:inputText id="contractType" required="false" label="Typ umowy" value="#{employmentBean.contractType}" />
             <p:message for="contractType" errorClass="invalid" />
             
-            <h:outputLabel for="salary" value="Wynagrodzenie" style="float: right;" />
-            <p:inputText id="salary" required="false" label="Wynagrodzenie" value="#{employmentBean.salary}" />
-            <p:message for="salary" errorClass="invalid" />
+            <h:outputLabel for="hourSalary" value="Wynagrodzenie za godzine" style="float: right;" />
+            <p:inputText id="hourSalary" required="false" label="Wynagrodzenie za godzine" value="#{employmentBean.hourSalary}" />
+            <p:message for="hourSalary" errorClass="invalid" />
             
-            <h:outputLabel for="hours" value="Liczba godzin" style="float: right;" />
-            <p:inputText id="hours" required="false" label="Liczba godzin" value="#{employmentBean.hours}" />
-            <p:message for="hours" errorClass="invalid" />
+            <h:outputLabel for="hoursNorm" value="Norma godzinowa" style="float: right;" />
+            <p:inputText id="hoursNorm" required="false" label="Norma godzinowa" value="#{employmentBean.hoursNorm}" />
+            <p:message for="hoursNorm" errorClass="invalid" />
             
+            <h:outputLabel for="period" value="Okres rozliczeniowy" style="float: right;" />
+            <p:inputText id="period" required="false" label="Okres rozliczeniowy" value="#{employmentBean.period}" />
+            <p:message for="period" errorClass="invalid" />
             
+            <h:outputLabel for="contractValue" value="Wartosc umowy" style="float: right;" />
+            <p:inputText id="contractValue" required="false" label="Wartosc umowy" value="#{employmentBean.contractValue}" />
+            <p:message for="contractValue" errorClass="invalid" />
             
+           
             </h:panelGrid>
             </h:panelGrid>
             

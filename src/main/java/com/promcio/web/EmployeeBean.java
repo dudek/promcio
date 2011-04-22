@@ -212,8 +212,10 @@ public class EmployeeBean implements Serializable {
 		 	else {
 		 		Employment employment = employeeManager.getEmployments(employee.getId()).get(0);
 		 		employmentBean.setContractType(employment.getContractType());
-		 		employmentBean.setHours(employment.getHours());
-		 		employmentBean.setSalary(employment.getSalary());
+		 		employmentBean.setHoursNorm(employment.getHoursNorm());
+		 		employmentBean.setContractValue(employment.getContractValue());
+		 		employmentBean.setPeriod(employment.getPeriod());
+		 		employmentBean.setHourSalary(employment.getHourSalary());
 		 		employmentBean.setId(employment.getId());
 		 	}
 		 	
