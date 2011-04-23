@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import com.promcio.domain.Calendar;
@@ -43,6 +44,15 @@ public class ScheduleManager {
 	}
 	
 	/**
+	 * @param employeeId
+	 * @param month
+	 * @return lista obiektor Schedule dla pracownika o danym id w danym miesiacu
+	 */
+	public List<Schedule> getAllEmployeeMonthSchedules(long employeeId, int month){
+		return castList(Schedule.class, em.createQuery("SELECT DISTINCT s FROM Schedule s WHERE s.calendar.month='"+month+"', IN (s.employees) e WHERE e.id="+employeeId +"'").getResultList());
+	}
+	
+	/**
 	 * Wszystkie grafiki dla danej firmy.
 	 * @param companyId
 	 * @return Zwraca liste obiektow Schedule dla Company o danym id.
@@ -51,6 +61,10 @@ public class ScheduleManager {
 		return castList(Schedule.class, em.createQuery("SELECT DISTINCT s FROM Schedule s, IN (s.employees) e WHERE e.company.id='"+companyId+"'").getResultList());
 	}
 	
+	public List<Schedule> getAllCompanyMonthSchedules(long companyId, int month){
+		return castList(Schedule.class, em.createQuery("SELECT DISTINCT s FROM Schedule s WHERE s.calendar.month='"+month+"', IN (s.employees) e WHERE e.company.id='"+companyId+"'").getResultList());
+	}
+
 	/**
 	 * Testowa metoda, poniewaz najwidoczniej Hibernate nie obsluguje wiecej niz 1 wartosciowania zachlannego w aplikacji dla list
 	 * trzeba jakas pobierac z bazy danych listy powiazanych atrybutow.
@@ -65,17 +79,28 @@ public class ScheduleManager {
 		return schedule.getEmployees();
 	}
 	
-	public void addSchedule(int realTimeStart, int realTimeEnd, Shift shift, Date dateCalendar){
+	/**
+	 * Metoda dodaje do bazy danych obiekt typu Schedule biorac odpowiednie parametry. Pracownicy sa dodawani w osobnej metodzie.
+	 * @param shift
+	 * @param dateCalendar
+	 */
+	public void addSchedule(Shift shift, Date dateCalendar){
 		Calendar calendar = dateToCalendar(dateCalendar);
-		try {
-			em.merge(calendar);
+		try{
+			calendar = (Calendar) em.createQuery("SELECT c FROM Calendar c WHERE c.year='"+ calendar.getYear() +"' AND c.month='"+ calendar.getMonth()+"' AND c.day='"+ calendar.getDay() +"'" ).getSingleResult();
 		}
-		catch(IllegalArgumentException e){
-			em.persist(calendar);
+		catch(NoResultException noResultException){
+			try{
+				em.persist(calendar);
+			}
+			catch(IllegalArgumentException illegalArgumentException){
+				calendar = dateToCalendar(dateCalendar);
+				em.persist(calendar);
+			}
 		}
 		Schedule schedule = new Schedule();
-		schedule.setRealTimeStart(realTimeStart);
-		schedule.setRealTimeEnd(realTimeEnd);
+//		schedule.setRealTimeStart(realTimeStart);
+//		schedule.setRealTimeEnd(realTimeEnd);
 		schedule.setShift(shift);
 		schedule.setCalendar(calendar);
 		

@@ -13,8 +13,8 @@ public class Schedule {
 	
 		private long id;
 		
-		private int realTimeStart;
-		private int realTimeEnd;
+//		private int realTimeStart;
+//		private int realTimeEnd;
 		
 		List<Employee> employees;
 		Shift shift;
@@ -32,21 +32,21 @@ public class Schedule {
 				this.id = id;
 		}
 		
-		public int getRealTimeStart() {
-				return realTimeStart;
-		}
-		
-		public void setRealTimeStart(int realTimeStart) {
-				this.realTimeStart = realTimeStart;
-		}
-		
-		public int getRealTimeEnd() {
-				return realTimeEnd;
-		}
-		
-		public void setRealTimeEnd(int realTimeEnd) {
-				this.realTimeEnd = realTimeEnd;
-		}
+//		public int getRealTimeStart() {
+//				return realTimeStart;
+//		}
+//		
+//		public void setRealTimeStart(int realTimeStart) {
+//				this.realTimeStart = realTimeStart;
+//		}
+//		
+//		public int getRealTimeEnd() {
+//				return realTimeEnd;
+//		}
+//		
+//		public void setRealTimeEnd(int realTimeEnd) {
+//				this.realTimeEnd = realTimeEnd;
+//		}
 		
 		@ManyToMany
 		public List<Employee> getEmployees() {
