@@ -17,12 +17,12 @@
       
     <p:growl id="messages" showDetail="true" />  
   
-    <p:schedule value="#{companyBean.scheduleController.eventModel}"  
+    <p:schedule value="#{scheduleController.eventModel}"
                editable="true" widgetVar="myschedule"  
-               eventSelectListener="#{companyBean.scheduleController.onEventSelect}"  
-               dateSelectListener="#{companyBean.scheduleController.onDateSelect}"  
-               eventMoveListener="#{companyBean.scheduleController.onEventMove}"  
-               eventResizeListener="#{companyBean.scheduleController.onEventResize}"  
+               eventSelectListener="#{scheduleController.onEventSelect}"  
+               dateSelectListener="#{scheduleController.onDateSelect}"  
+               eventMoveListener="#{scheduleController.onEventMove}"  
+               eventResizeListener="#{scheduleController.onEventResize}"  
                onEventMoveUpdate="messages" onEventResizeUpdate="messages"  
                onDateSelectUpdate="eventDetails" onDateSelectComplete="eventDialog.show()"  
                onEventSelectUpdate="eventDetails" onEventSelectComplete="eventDialog.show()">  
@@ -31,29 +31,27 @@
     </p:schedule>  
   <p:dialog widgetVar="eventDialog" header="Event Details" showEffect="clip" hideEffect="clip">  
         <h:panelGrid id="eventDetails" columns="2">  
-            <h:outputLabel for="title" value="Title:" />  
-            <p:inputText id="title" value="#{companyBean.scheduleController.event.title}" />  
-  
-            <h:outputLabel for="from" value="From:" />  
+  			
+  			<h:outputLabel for="employees" value="Pracownik:" />  
+  			<h:selectOneMenu id="employees" value="#{scheduleController.employeeId}">
+  				<f:selectItems value="#{scheduleController.selectEmployees}"/>
+  			</h:selectOneMenu>
+  			
+            <h:outputLabel for="from" value="dd:" />  
             <p:inputMask id="from" mask="99/99/9999"  
-               value="#{companyBean.scheduleController.event.startDate}" >  
+               value="#{scheduleController.event.startDate}" >  
                 <f:convertDateTime pattern="dd/MM/yyyy" />  
             </p:inputMask>  
   
-            <h:outputLabel for="to" value="To:" />  
+            <h:outputLabel for="to" value="do:" />  
             <p:inputMask id="to" mask="99/99/9999"  
-               value="#{companyBean.scheduleController.event.endDate}" >  
+               value="#{scheduleController.event.endDate}" >  
                 <f:convertDateTime pattern="dd/MM/yyyy" />  
             </p:inputMask>  
-  
-            <h:outputLabel for="allDay" value="All Day:" />  
-            <h:selectBooleanCheckbox id="allDay"  
-               value="#{companyBean.scheduleController.event.allDay}" />  
-  
-            <p:commandButton type="reset" value="Reset" />  
-            <p:commandButton value="Save"  
+ 
+            <p:commandButton value="zapisz"  
                oncomplete="myschedule.update();eventDialog.hide();"  
-               actionListener="#{companyBean.scheduleController.addEvent}" />  
+               actionListener="#{scheduleController.addEvent}" />  
         </h:panelGrid>  
     </p:dialog>  
     

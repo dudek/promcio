@@ -27,10 +27,7 @@ public class CompanyBean implements Serializable {
          
          @Inject
          AccountBean accountBean;
- 
-         ScheduleController scheduleController;
          
-         private long id;
  
          @NotNull
          @NotEmpty
@@ -54,15 +51,7 @@ public class CompanyBean implements Serializable {
          /* --------------------------------------- */
  
          public CompanyBean(){
-                 scheduleController = new ScheduleController();
-         }
-         
-         public long getId() {
-                        return id;
-         }
- 
-         public void setId(long id) {
-                        this.id = id;
+                 
          }
  
          public void setName(String name) {
@@ -111,22 +100,14 @@ public class CompanyBean implements Serializable {
  
          public void setNumberOfEmployees(int numberOfEmployees) {
                         this.numberOfEmployees = numberOfEmployees;
-     }
-         
-         public ScheduleController getScheduleController() {
-                        return scheduleController;
          }
- 
-         public void setScheduleController(ScheduleController scheduleController) {
-                        this.scheduleController = scheduleController;
-         }
-         
+
          /* --------------------------------------- */
          // actions
                  
- 
- 
-        public List<Rank> getCompanyRanks(long companyId){
+
+
+		public List<Rank> getCompanyRanks(long companyId){
                  List<Rank> companyRanks = companyManager.getAllCompanyRanks(companyId);
                  return companyRanks;
                  

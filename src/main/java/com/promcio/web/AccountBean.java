@@ -117,6 +117,7 @@ public class AccountBean implements Serializable {
 				 this.company = accountManager.getAccount(login).getCompany();
 				 this.isLogged = true;
 				 this.password = null; // wyrzucamy haslo z pamieci
+			
 
 				 return "home?faces-redirect=true";
 			}
