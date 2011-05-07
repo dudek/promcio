@@ -11,6 +11,7 @@ import com.promcio.domain.Account;
 import com.promcio.domain.Company;
 import com.promcio.domain.Employee;
 import com.promcio.domain.Rank;
+import com.promcio.domain.Shift;
 
 @Stateless
 public class CompanyManager {
@@ -56,6 +57,36 @@ public class CompanyManager {
 			Company company = em.find(Company.class, id);
 
 			em.remove(company);
+	 }
+	 
+	 public void addShift(long companyId, String name, int timeStart, int timeEnd){
+		 	Shift shift = new Shift();
+		 	
+		 	shift.setName(name);
+		 	shift.setTimeStart(timeStart);
+		 	shift.setTimeEnd(timeEnd);
+		 	
+		 	em.find(Company.class, companyId).getShifts().add(shift);
+		 	
+		 	em.persist(shift);
+	 }
+	 
+	 public void updateShift(long id, String name, Integer timeStart, Integer timeEnd){
+		 	Shift shift = em.find(Shift.class, id);
+		 	
+		 	if ( name != null )
+		 		shift.setName(name);
+		 	if ( timeStart != null )
+		 		shift.setTimeStart(timeStart);
+		 	if ( timeEnd != null )
+		 		shift.setTimeEnd(timeEnd);
+		 	
+	 }
+	 
+	 public void removeShift(long id){
+		 	Shift shift = em.find(Shift.class, id);
+		 	
+		 	em.remove(shift);
 	 }
 	 
 	 public void addRank(String name, float hourSalary) {
@@ -123,6 +154,10 @@ public class CompanyManager {
 
 	 public List<Employee> getAllCompanyEmployees(long companyId) {
 			return castList(Employee.class, em.createQuery("SELECT NEW Employee(e.id, e.firstname, e.surname, e.pesel, e.nip, e.yob) FROM Employee e WHERE e.company.id ='" + companyId + "'").getResultList());
+	 }
+	 
+	 public List<Shift> getAllCompanyShifts(long companyId){
+		 	return em.find(Company.class, companyId).getShifts();
 	 }
 	 
 	 public List<Rank> getAllCompanyRanks(long companyId){
