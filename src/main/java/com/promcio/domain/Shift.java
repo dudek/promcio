@@ -40,11 +40,11 @@ public class Shift {
 				this.timeStart = timeStart;
 		}
 		
-		public int getTimeStop() {
+		public int getTimeEnd() {
 				return timeEnd;
 		}
 		
-		public void setTimeStop(int timeEnd) {
+		public void setTimeEnd(int timeEnd) {
 				this.timeEnd = timeEnd;
 		}
 }
