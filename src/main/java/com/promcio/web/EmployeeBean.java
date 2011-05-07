@@ -17,6 +17,7 @@ import com.promcio.domain.EmployeeDetails;
 import com.promcio.domain.Employment;
 import com.promcio.domain.Rank;
 import com.promcio.service.EmployeeManager;
+import com.promcio.service.SearchManager;
 
 @Model
 @Named
@@ -27,6 +28,9 @@ public class EmployeeBean implements Serializable {
 
 	 @Inject
 	 EmployeeManager employeeManager;
+	 @Inject
+	 SearchManager searchManager;
+	 
 	 @Inject
 	 EmployeeDetailsBean employeeDetailsBean;
 	 @Inject
@@ -230,5 +234,9 @@ public class EmployeeBean implements Serializable {
 		 	this.nip = null;
 		 	this.yob = null;
 		 	this.details = null;
+	 }
+	 
+	 public List<Employee> getSearchedEmployees() {
+			return searchManager.searchEmployee();
 	 }
 }

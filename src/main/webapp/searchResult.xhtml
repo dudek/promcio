@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.prime.com.tr/ui" xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+   template="/WEB-INF/templates/default.xhtml">
+   <ui:define name="content">
+      <h:form prependId="false">
+         <p:panel id="panel" style="margin-bottom:10px;">
+            <p:dataTable value="#{employeeBean.searchedEmployees}" var="current" style="text-align: center;">
+
+               <f:facet name="header">
+                 Lista pracowników
+               </f:facet>
+
+               <p:column headerText="Imie">
+                  <h:outputText value="#{current.firstname}" />
+               </p:column>
+
+               <p:column headerText="Nazwisko">
+                  <h:outputText value="#{current.surname}" />
+               </p:column>
+
+               <p:column headerText="PESEL">
+                  <h:outputText value="#{current.pesel}" />
+               </p:column>
+
+               <p:column headerText="Rok urodzenia">
+                  <h:outputText value="#{current.yob}" />
+               </p:column>
+
+               <p:column headerText="NIP">
+                  <h:outputText value="#{current.nip}" />
+               </p:column>
+
+               <p:column headerText="">
+                  <p:commandButton update="panel, display" value="usun" actionListener="#{employeeBean.doRemoveEmployee(current.id)}">
+                  </p:commandButton>
+               </p:column>
+               
+               <p:column headerText="">
+                  <p:commandButton  value="edycja" action="#{employeeBean.doRedirectUpdateEmployee(current.id)}" ajax="false">
+                  </p:commandButton>
+               </p:column>
+
+               <f:facet name="footer">
+                  AP
+               </f:facet>
+
+            </p:dataTable>
+         </p:panel>
+      </h:form>
+   </ui:define>
+</ui:composition>
