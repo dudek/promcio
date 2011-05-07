@@ -47,6 +47,7 @@ public class ScheduleController implements Serializable{
 		private long employeeId;
 		private List<Employee> companyEmployees;
 		
+		private long shiftId;
 		private List<Shift> companyShifts;
 		
         private ScheduleModel eventModel;
@@ -68,7 +69,11 @@ public class ScheduleController implements Serializable{
        	    companyEmployees = companyBean.getCompanyEmployees(accountBean.getCompany().getId());
     	    for(Employee employee : companyEmployees  ) {
     	    	selectEmployees.add(new SelectItem(employee.getId(), "" + employee.getSurname() + " " + employee.getFirstname()));
-    	    }       	
+    	    }     
+    	    companyShifts = companyBean.getCompanyShifts(accountBean.getCompany().getId());
+    	    for(Shift shift : companyShifts ){
+    	    	selectShifts.add(new SelectItem(shift.getId(), "" + shift.getName() + ""));
+    	    }
         }
         
         /* gettery,settery */
@@ -118,17 +123,33 @@ public class ScheduleController implements Serializable{
 			return companyShifts;
 		}
 		
+		public void setShiftId(long shiftId) {
+			this.shiftId = shiftId;
+		}
+
+		public long getShiftId() {
+			return shiftId;
+		}
+		
 		/* Akcje */
         
         public void addEvent(ActionEvent actionEvent) {
 				Employee employee = new Employee();	
+				Shift shift = new Shift();
 				for ( Employee it : companyEmployees ){
 					if ( it.getId() == employeeId ){
 						employee = it;
 						break;
 					}
 				}
-        		( (DefaultScheduleEvent) event ).setTitle(employee.getSurname() + " " + employee.getFirstname());
+				for ( Shift it : companyShifts){
+					if ( it.getId() == shiftId ){
+						shift = it;
+						break;
+					}
+				}
+				
+        		( (DefaultScheduleEvent) event ).setTitle(employee.getSurname() + " " + employee.getFirstname() + " " + shift.getName());
                 if(event.getId() == null)
                         eventModel.addEvent(event);
                 else
@@ -166,6 +187,8 @@ public class ScheduleController implements Serializable{
         private void addMessage(FacesMessage message) {
                 FacesContext.getCurrentInstance().addMessage(null, message);
         }
+
+		
 
 		
 
