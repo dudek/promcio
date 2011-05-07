@@ -28,6 +28,7 @@ import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
 
 import com.promcio.domain.Employee;
+import com.promcio.domain.Shift;
 import com.promcio.service.ScheduleManager;
 
 @ManagedBean
@@ -46,10 +47,13 @@ public class ScheduleController implements Serializable{
 		private long employeeId;
 		private List<Employee> companyEmployees;
 		
+		private List<Shift> companyShifts;
+		
         private ScheduleModel eventModel;
         private ScheduleEvent event;
 
         private List<SelectItem> selectEmployees; 
+        private List<SelectItem> selectShifts;
 
 		public ScheduleController() {
                 eventModel = new DefaultScheduleModel();
@@ -60,6 +64,7 @@ public class ScheduleController implements Serializable{
         @PostConstruct
         public void viewInit(){
        	    selectEmployees = new ArrayList<SelectItem>();
+       	    selectShifts = new ArrayList<SelectItem>();
        	    companyEmployees = companyBean.getCompanyEmployees(accountBean.getCompany().getId());
     	    for(Employee employee : companyEmployees  ) {
     	    	selectEmployees.add(new SelectItem(employee.getId(), "" + employee.getSurname() + " " + employee.getFirstname()));
@@ -96,6 +101,23 @@ public class ScheduleController implements Serializable{
 		public void setSelectEmployees(List<SelectItem> selectEmployees) {
 			this.selectEmployees = selectEmployees;
 		}
+		
+		public void setSelectShifts(List<SelectItem> selectShifts) {
+			this.selectShifts = selectShifts;
+		}
+
+		public List<SelectItem> getSelectShifts() {
+			return selectShifts;
+		}
+		
+		public void setCompanyShifts(List<Shift> companyShifts) {
+			this.companyShifts = companyShifts;
+		}
+
+		public List<Shift> getCompanyShifts() {
+			return companyShifts;
+		}
+		
 		/* Akcje */
         
         public void addEvent(ActionEvent actionEvent) {
@@ -144,6 +166,10 @@ public class ScheduleController implements Serializable{
         private void addMessage(FacesMessage message) {
                 FacesContext.getCurrentInstance().addMessage(null, message);
         }
+
+		
+
+		
 
         
 }

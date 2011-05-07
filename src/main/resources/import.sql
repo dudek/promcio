@@ -19,3 +19,5 @@ insert into account (login, password, company_id, role_id) values ('admin', '25e
 insert into account (login, password, company_id, role_id) values ('user', '63e780c3f321d13109c71bf81805476e', 1, 2)
 
 insert into rank (id, name, hourSalary, company_id) values (1, 'sprzedawca', 6.0 , 2)
+
+insert into shift (id, name, timeStart, timeEnd, company_id) values (1, 'nocna', 19, 7, 2)

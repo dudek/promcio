@@ -13,6 +13,7 @@ import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.NotEmpty;
 import com.promcio.domain.Employee;
 import com.promcio.domain.Rank;
+import com.promcio.domain.Shift;
 import com.promcio.service.CompanyManager;
  
 @Model
@@ -112,6 +113,11 @@ public class CompanyBean implements Serializable {
                  return companyRanks;
                  
          }
+		
+		public List<Shift> getCompanyShifts(long companyId){
+			List<Shift> companyShifts = companyManager.getAllCompanyShifts(companyId);
+			return companyShifts;
+		}
  
          public String doAddCompany(String accountId){
                         companyManager.addCompany(accountId, name, nip, regon);

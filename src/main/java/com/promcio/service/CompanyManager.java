@@ -61,10 +61,13 @@ public class CompanyManager {
 	 
 	 public void addShift(long companyId, String name, int timeStart, int timeEnd){
 		 	Shift shift = new Shift();
+		 	Company company = em.find(Company.class, companyId);
 		 	
 		 	shift.setName(name);
 		 	shift.setTimeStart(timeStart);
 		 	shift.setTimeEnd(timeEnd);
+		 	
+		 	shift.setCompany(company);
 		 	
 		 	em.find(Company.class, companyId).getShifts().add(shift);
 		 	

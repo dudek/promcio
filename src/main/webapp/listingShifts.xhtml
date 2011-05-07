@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.prime.com.tr/ui" template="/WEB-INF/templates/default.xhtml">
+   <ui:define name="content">
+      <h:form prependId="false" id="bv">
+         <p:panel id="panel" header="Edytuj Dane o firmie" style="margin-bottom:10px;">
+            <p:messages id="msgs" showDetail="true" />
+            <p:focus />
+           <center><h:panelGrid columns="3">
+               
+                <p:dataTable value="#{companyBean.getCompanyShifts(accountBean.company.id)}" var="current" style="text-align: center;">
+
+               <f:facet name="header">
+                 Lista zmian
+               </f:facet>
+
+               <p:column headerText="Zmiana">
+                  <h:outputText value="#{current.name}" />
+               </p:column>
+
+               <p:column headerText="rozpoczecie">
+                  <h:outputText value="#{current.timeStart}" />
+               </p:column>
+               
+               <p:column headerText="zakonczenie">
+                  <h:outputText value="#{current.timeEnd}" />
+               </p:column>
+
+               <p:column headerText="">
+                  <p:commandButton update="panel, display" value="usun" actionListener="#{shiftBean.doRemoveShiftCompany(current.id)}">
+                  </p:commandButton>
+               </p:column>
+               
+
+            </p:dataTable>
+            </h:panelGrid></center> 
+            
+            <h:panelGrid>
+            <h:outputLabel for="name" value="zmiana:" style="float: left;" />
+               <p:inputText id="name" required="true" label="name" value="#{shiftBean.name}" />
+               <p:message for="name" errorClass="invalid" />
+
+               <h:outputLabel for="timeStart" value="Rozpoczecie:" style="float: left;" />
+               <p:inputText id="timeStart" required="true" label="timeStart" value="#{shiftBean.timeStart}" />
+               <p:message for="timeStart" errorClass="invalid" />
+               
+               <h:outputLabel for="timeEnd" value="Zakonczenie:" style="float: left;" />
+               <p:inputText id="timeEnd" required="true" label="timeEnd" value="#{shiftBean.timeEnd}" />
+               <p:message for="timeEnd" errorClass="invalid" />
+              
+				<p><p:commandButton update="panel, display, msgs" id="check" actionListener="#{shiftBean.doAddShiftCompany(accountBean.company.id)}" value="Dodaj zmiane" /></p>
+           </h:panelGrid>
+              
+            
+         </p:panel>
+
+      </h:form>
+   </ui:define>
+</ui:composition>

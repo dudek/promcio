@@ -37,6 +37,11 @@
   				<f:selectItems value="#{scheduleController.selectEmployees}"/>
   			</h:selectOneMenu>
   			
+  			<h:outputLabel for="shifts" value="Zmiana:" />  
+  			<h:selectOneMenu id="shifts" value="#{scheduleController.employeeId}">
+  				<f:selectItems value="#{scheduleController.selectShifts}"/>
+  			</h:selectOneMenu>
+  			
             <h:outputLabel for="from" value="dd:" />  
             <p:inputMask id="from" mask="99/99/9999"  
                value="#{scheduleController.event.startDate}" >  
