@@ -3,6 +3,7 @@ package com.promcio.domain;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Shift {
@@ -12,6 +13,8 @@ public class Shift {
 		
 		private int timeStart;
 		private int timeEnd;
+		
+		private Company company;
 		
 		/* --------------------------------------- */
 		@Id
@@ -47,4 +50,14 @@ public class Shift {
 		public void setTimeEnd(int timeEnd) {
 				this.timeEnd = timeEnd;
 		}
+
+		@ManyToOne
+		public Company getCompany() {
+			return company;
+		}
+
+		public void setCompany(Company company) {
+			this.company = company;
+		}
+		
 }

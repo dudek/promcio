@@ -75,7 +75,7 @@ public class Company {
 			this.ranks = ranks;
 	 }
 
-	 @OneToMany
+	 @OneToMany(mappedBy = "company")
 	 public List<Shift> getShifts() {
 		 	return shifts;
 	 }

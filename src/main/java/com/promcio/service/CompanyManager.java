@@ -157,7 +157,7 @@ public class CompanyManager {
 	 }
 	 
 	 public List<Shift> getAllCompanyShifts(long companyId){
-		 	return em.find(Company.class, companyId).getShifts();
+		 	return castList(Shift.class, em.createQuery("SELECT DISTINCT s FROM Shift s WHERE s.company.id='" + companyId + "'").getResultList());
 	 }
 	 
 	 public List<Rank> getAllCompanyRanks(long companyId){
