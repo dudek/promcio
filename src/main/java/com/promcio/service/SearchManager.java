@@ -1,6 +1,7 @@
 package com.promcio.service;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.ejb.SessionContext;
@@ -24,45 +25,47 @@ import com.promcio.domain.Employee;
 @TransactionManagement(TransactionManagementType.BEAN)
 public class SearchManager {
 
-	 // @PersistenceContext
-	 // EntityManagerFactory emf;
 	 @PersistenceContext
-	 EntityManager em; // = emf.createEntityManager();
+	 EntityManager em;
 
 	 @Resource
 	 SessionContext sc;
 
-	 // FullTextEntityManager fullTextEntityManager =
-	 // Search.getFullTextEntityManager(em);
+	 public static <T> List<T> castList(Class<? extends T> clazz, Collection<?> c) {
+			List<T> r = new ArrayList<T>(c.size());
+			for (Object o : c)
+				 r.add(clazz.cast(o));
+			return r;
+	 }
 
-	 public List<Employee> searchEmployee() {
-			String FIRSTNAME = "Michal";
-			List<Employee> result = new ArrayList<Employee>();
+	 public void indexing() {
 			FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(em);
-
-			// em.getTransaction().begin();
-
-			UserTransaction ut = sc.getUserTransaction();
 			try {
 				 System.out.println("0. Indexer");
 				 fullTextEntityManager.createIndexer().startAndWait();
-				 System.out.println("1. In Try");
+			} catch (InterruptedException e) {
+				 e.printStackTrace();
+			}
+	 }
+
+	 public List<Employee> searchEmployee(String value) {
+			List<Employee> result = new ArrayList<Employee>();
+			FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(em);
+
+			UserTransaction ut = sc.getUserTransaction();
+			try {
 				 ut.begin();
 
 				 QueryBuilder qb = fullTextEntityManager.getSearchFactory().buildQueryBuilder().forEntity(Employee.class).get();
-				 org.apache.lucene.search.Query query = qb.keyword().onFields("firstname", "surname").matching(FIRSTNAME).createQuery();
-				 System.out.println("2. After QueryBuilder");
+				 org.apache.lucene.search.Query query = qb.keyword().onFields("firstname", "surname").matching(value).createQuery();
 
 				 // wrap Lucene query in a javax.persistence.Query
 				 javax.persistence.Query persistenceQuery = fullTextEntityManager.createFullTextQuery(query, Employee.class);
-				 System.out.println("3. Query transform");
 
 				 // execute search
-				 result = persistenceQuery.getResultList();
-				 System.out.println("4. Execute Search " + result.size());
+				 result = castList(Employee.class, persistenceQuery.getResultList());
 
 				 ut.commit();
-				 System.out.println("5. After commit");
 
 				 // WTF! OMG! LOL! xD
 			} catch (NotSupportedException e) {
@@ -78,8 +81,6 @@ public class SearchManager {
 			} catch (HeuristicMixedException e) {
 				 e.printStackTrace();
 			} catch (HeuristicRollbackException e) {
-				 e.printStackTrace();
-			} catch (InterruptedException e) {
 				 e.printStackTrace();
 			}
 

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.prime.com.tr/ui" template="/WEB-INF/templates/default.xhtml">
+   <ui:define name="content">
+      <h:form prependId="false" id="bv">
+         #{(searchBean.indexing)}
+         <p:panel id="panel" header="Easy Search" style="margin-bottom:10px;">
+            <p:focus />
+            <h:panelGrid columns="2">
+
+               <p:inputText id="search" value="#{searchBean.value}" required="true" label="Szukaj" />
+               <p:commandButton value="Szukaj" actionListener="#{searchBean.doSearchEmployees}" update="result" />
+
+            </h:panelGrid>
+            
+            <p:dataTable id="result" value="#{searchBean.employees}" var="current" style="text-align: center;">
+
+               <f:facet name="header">
+                 Lista pracowników
+               </f:facet>
+
+               <p:column headerText="Imie">
+                  <h:outputText value="#{current.firstname}" />
+               </p:column>
+
+               <p:column headerText="Nazwisko">
+                  <h:outputText value="#{current.surname}" />
+               </p:column>
+
+               <p:column headerText="PESEL">
+                  <h:outputText value="#{current.pesel}" />
+               </p:column>
+
+               <p:column headerText="Rok urodzenia">
+                  <h:outputText value="#{current.yob}" />
+               </p:column>
+
+               <p:column headerText="NIP">
+                  <h:outputText value="#{current.nip}" />
+               </p:column>
+
+               <p:column headerText="">
+                  <p:commandButton update="result" value="usun" actionListener="#{employeeBean.doRemoveEmployee(current.id)}">
+                  </p:commandButton>
+               </p:column>
+               
+               <p:column headerText="">
+                  <p:commandButton  value="edycja" action="#{employeeBean.doRedirectUpdateEmployee(current.id)}" ajax="false">
+                  </p:commandButton>
+               </p:column>
+
+               <!-- <f:facet name="footer">
+                  AP
+               </f:facet> -->
+
+            </p:dataTable>
+         </p:panel>
+      </h:form>
+   </ui:define>
+</ui:composition>

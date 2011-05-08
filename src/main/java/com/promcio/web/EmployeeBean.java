@@ -235,8 +235,4 @@ public class EmployeeBean implements Serializable {
 		 	this.yob = null;
 		 	this.details = null;
 	 }
-	 
-	 public List<Employee> getSearchedEmployees() {
-			return searchManager.searchEmployee();
-	 }
 }
