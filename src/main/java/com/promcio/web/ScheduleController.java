@@ -132,6 +132,11 @@ public class ScheduleController implements Serializable{
 		}
 		
 		/* Akcje */
+		
+		public void removeEvent(ActionEvent actionEvent){
+			eventModel.deleteEvent(event);
+			event = new DefaultScheduleEvent();
+		}
         
         public void addEvent(ActionEvent actionEvent) {
 				Employee employee = new Employee();	

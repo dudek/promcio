@@ -12,7 +12,7 @@
    <p:layout fullPage="true">
 
       <p:layoutUnit id="top" position="top" resizable="true" height="100" minHeight="100" maxHeight="140">
-         <h:outputText value="Promcio" style="font-size:36px;position:absolute;top:20px;left:100px;" />
+         <h:outputLink value="home.jsf" style="font-size:36px;position:absolute;top:20px;left:100px;">Promcio</h:outputLink>
          <div id="auth">
          <h:form>
          <h:outputLink value="createAccount.jsf" rendered='#{!accountBean.logged}' style="color: gray;">Create Account</h:outputLink>

@@ -42,7 +42,7 @@
   				<f:selectItems value="#{scheduleController.selectShifts}"/>
   			</h:selectOneMenu>
   			
-            <h:outputLabel for="from" value="dd:" />  
+            <h:outputLabel for="from" value="od:" />  
             <p:inputMask id="from" mask="99/99/9999"  
                value="#{scheduleController.event.startDate}" >  
                 <f:convertDateTime pattern="dd/MM/yyyy" />  
@@ -54,9 +54,12 @@
                 <f:convertDateTime pattern="dd/MM/yyyy" />  
             </p:inputMask>  
  
-            <p:commandButton value="zapisz"  
+            <p:commandButton value="Zapisz"  
                oncomplete="myschedule.update();eventDialog.hide();"  
                actionListener="#{scheduleController.addEvent}" />  
+            <p:commandButton value="Usun"  
+               oncomplete="myschedule.update();eventDialog.hide();"  
+               actionListener="#{scheduleController.removeEvent}" />
         </h:panelGrid>  
     </p:dialog>  
     
