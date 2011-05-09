@@ -88,22 +88,25 @@ public class SearchManager {
 	 }
 	 
 	 //TODO zaawansowane wyszukiwanie (by City)
-	 public List<Employee> advancedSearchEmployee(String value) {
+	 public List<Employee> advancedSearchEmployee(String city) {
 			List<Employee> result = new ArrayList<Employee>();
 			FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(em);
 
 			UserTransaction ut = sc.getUserTransaction();
 			try {
+				 System.out.println("0. City: " + city);
 				 ut.begin();
 
 				 QueryBuilder qb = fullTextEntityManager.getSearchFactory().buildQueryBuilder().forEntity(Employee.class).get();
-				 org.apache.lucene.search.Query query = qb.keyword().onFields("details.city").matching(value).createQuery();
+				 org.apache.lucene.search.Query query = qb.keyword().onFields("details.city").matching(city).createQuery();
 
 				 // wrap Lucene query in a javax.persistence.Query
 				 javax.persistence.Query persistenceQuery = fullTextEntityManager.createFullTextQuery(query, Employee.class);
 
 				 // execute search
 				 result = castList(Employee.class, persistenceQuery.getResultList());
+				 
+				 System.out.println("1. Result: " + result.size());
 
 				 ut.commit();
 

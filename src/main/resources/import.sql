@@ -11,6 +11,16 @@ insert into employee (id, firstname, surname, pesel, nip, yob, company_id) value
 insert into employee (id, firstname, surname, pesel, nip, yob, company_id) values (8, 'Scala', 'Johansson', '80010233344', '532-427-74-32', 1980, 1)
 insert into employee (id, firstname, surname, pesel, nip, yob, company_id) values (9, 'Ada', 'Wendows', '76021810012', '647-347-26-63', 1976, 2)
 
+insert into employeedetails (id, city, postcode, street, buildingnumber, apartmentnumber, staircasenumber, phonenumber, email) values (1, 'Gdansk', '86-333', 'Grunwaldzka', '8', '10', 'B', '600-500-400', 'michal.gosc@example.com')
+insert into employeedetails (id, city, postcode, street, buildingnumber, apartmentnumber, staircasenumber, phonenumber, email) values (2, 'Warszawa', '57-333', 'Grunwaldzka', '11', '1', 'G', '600-500-400', 'zosia.sculi@example.com')
+insert into employeedetails (id, city, postcode, street, buildingnumber, apartmentnumber, staircasenumber, phonenumber, email) values (3, 'Sopot', '89-223', 'Szczesliwa', '14', '2', 'A', '600-500-400', 'fox.mulder@example.com')
+insert into employeedetails (id, city, postcode, street, buildingnumber, apartmentnumber, staircasenumber, phonenumber, email) values (4, 'Gdansk', '85-303', 'Polanki', '9', '8', 'X', '600-500-400', 'adam.ark@example.com')
+insert into employeedetails (id, city, postcode, street, buildingnumber, apartmentnumber, staircasenumber, phonenumber, email) values (5, 'Elblag', '74-006', 'Lipowa', '1', '9', 'Y', '600-500-400', 'mateusz.glom@example.com')
+insert into employeedetails (id, city, postcode, street, buildingnumber, apartmentnumber, staircasenumber, phonenumber, email) values (6, 'Szczecin', '20-133', 'Szczecinska', '2', '1', 'U', '601-502-403', 'albert.batman@example.com')
+insert into employeedetails (id, city, postcode, street, buildingnumber, apartmentnumber, staircasenumber, phonenumber, email) values (7, 'Szczecin', '20-133', 'Szczecinska', '2', '1', 'U', '601-502-403', 'albert.batman@example.com')
+insert into employeedetails (id, city, postcode, street, buildingnumber, apartmentnumber, staircasenumber, phonenumber, email) values (8, 'Szczecin', '20-133', 'Szczecinska', '2', '1', 'U', '601-502-403', 'albert.batman@example.com')
+insert into employeedetails (id, city, postcode, street, buildingnumber, apartmentnumber, staircasenumber, phonenumber, email) values (9, 'Szczecin', '20-133', 'Szczecinska', '2', '1', 'U', '601-502-403', 'albert.batman@example.com')
+
 insert into role (id, name) values (1, 'admin')
 insert into role (id, name) values (2, 'company')
 insert into role (id, name) values (3, 'employee')

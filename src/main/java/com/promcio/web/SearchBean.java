@@ -21,6 +21,7 @@ public class SearchBean implements Serializable {
 	 SearchManager searchManager;
 
 	 private String value;
+	 private String city;
 	 private String indexing;
 
 	 private List<Employee> employees = new ArrayList<Employee>();
@@ -33,6 +34,14 @@ public class SearchBean implements Serializable {
 
 	 public void setValue(String value) {
 			this.value = value;
+	 }
+
+	 public String getCity() {
+			return city;
+	 }
+
+	 public void setCity(String city) {
+			this.city = city;
 	 }
 
 	 public List<Employee> getEmployees() {
@@ -56,7 +65,11 @@ public class SearchBean implements Serializable {
 			return indexing;
 	 }
 
-	 public void doSearchEmployees() {
+	 public void doEasySearchEmployees() {
 			this.employees = searchManager.easySearchEmployee(this.value);
+	 }
+
+	 public void doAdvancedSearchEmployees() {
+			this.employees = searchManager.advancedSearchEmployee(this.city);
 	 }
 }

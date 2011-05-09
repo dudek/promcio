@@ -24,8 +24,8 @@ public class EmployeeDetails {
 	 private String phoneNumber;
 	 private String email;
 
-	 @ContainedIn
-	 private Employee employee;
+	 //@ContainedIn
+	 //private Employee employee;
 
 	 /* --------------------------------------- */
 
@@ -103,7 +103,7 @@ public class EmployeeDetails {
 			this.email = email;
 	 }
 
-	 @OneToOne
+	 /*@OneToOne
 	 public Employee getEmployee() {
 			return employee;
 	 }
@@ -111,4 +111,5 @@ public class EmployeeDetails {
 	 public void setEmployee(Employee employee) {
 			this.employee = employee;
 	 }
+	 */
 }

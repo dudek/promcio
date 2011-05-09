@@ -4,12 +4,26 @@
    <ui:define name="content">
       <h:form prependId="false" id="bv">
          #{(searchBean.indexing)}
-         <p:panel id="panel" header="Easy Search" style="margin-bottom:10px;">
+         <p:panel id="panel" header="Advanced Search" style="margin-bottom:10px;">
             <p:focus />
-            <h:panelGrid columns="2">
+            <h:panelGrid columns="4">
 
-               <p:inputText id="search" value="#{searchBean.value}" required="true" label="Szukaj" />
-               <p:commandButton value="Szukaj" actionListener="#{searchBean.doEasySearchEmployees}" update="result" />
+               <h:outputLabel for="city" value="Miasto: " style="float: right;" />
+               <p:inputText id="city" value="#{searchBean.city}" required="true" label="Miasto" />
+               <h:outputLabel for="rank" value="Stanowisko: " style="float: right;" />
+               <p:inputText id="rank" value="#{searchBean.city}" required="true" label="Stanowisko" />
+               
+               <h:outputLabel for="contractType" value="Typ kontraktu: " style="float: right;" />
+               <p:inputText id="contractType" value="#{searchBean.city}" required="true" label="Typ kontraktu" />
+               <h:outputLabel for="hoursNorm" value="Norma godzinowa: " style="float: right;" />
+               <p:inputText id="hoursNorm" value="#{searchBean.city}" required="true" label="Norma godzinowa" />
+               
+               <h:outputLabel for="contractValue" value="Contract Value: " style="float: right;" />
+               <p:inputText id="contractValue" value="#{searchBean.city}" required="true" label="Contract Value" />
+               <h:outputLabel for="hourSalary" value="Stawka godzinowa: " style="float: right;" />
+               <p:inputText id="hourSalary" value="#{searchBean.city}" required="true" label="Stawka godzinowa" />
+               
+               <p:commandButton value="Szukaj" actionListener="#{searchBean.doAdvancedSearchEmployees}" update="result" />
 
             </h:panelGrid>
             

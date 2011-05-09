@@ -108,7 +108,7 @@ public class EmployeeManager {
 			employeeDetails.setPhoneNumber(phoneNumber);
 			employeeDetails.setEmail(email);
 
-			employeeDetails.setEmployee(employee);
+			//employeeDetails.setEmployee(employee);
 			employee.setDetails(employeeDetails);
 			em.persist(employeeDetails);
 	 }	 
