@@ -11,6 +11,7 @@ import javax.persistence.OneToOne;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.IndexedEmbedded;
 import org.hibernate.search.annotations.Store;
 
 @Indexed
@@ -29,6 +30,7 @@ public class Employee {
 	 private String nip;
 	 private int yob;
 
+	 @IndexedEmbedded
 	 private EmployeeDetails details;
 	 private Rank rank;
 	 private List<Employment> employments;

@@ -4,12 +4,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import org.hibernate.search.annotations.ContainedIn;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.Store;
 
 @Entity
 public class EmployeeDetails {
 
 	 private long id;
 
+	 @Field(index=Index.TOKENIZED, store=Store.NO)
 	 private String city;
 	 private String postCode;
 	 private String street;
@@ -19,6 +24,7 @@ public class EmployeeDetails {
 	 private String phoneNumber;
 	 private String email;
 
+	 @ContainedIn
 	 private Employee employee;
 
 	 /* --------------------------------------- */

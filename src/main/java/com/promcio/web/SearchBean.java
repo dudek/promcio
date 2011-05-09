@@ -57,6 +57,6 @@ public class SearchBean implements Serializable {
 	 }
 
 	 public void doSearchEmployees() {
-			this.employees = searchManager.searchEmployee(this.value);
+			this.employees = searchManager.easySearchEmployee(this.value);
 	 }
 }

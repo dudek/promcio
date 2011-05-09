@@ -48,7 +48,7 @@ public class SearchManager {
 			}
 	 }
 
-	 public List<Employee> searchEmployee(String value) {
+	 public List<Employee> easySearchEmployee(String value) {
 			List<Employee> result = new ArrayList<Employee>();
 			FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(em);
 
@@ -84,6 +84,46 @@ public class SearchManager {
 				 e.printStackTrace();
 			}
 
+			return result;
+	 }
+	 
+	 //TODO zaawansowane wyszukiwanie (by City)
+	 public List<Employee> advancedSearchEmployee(String value) {
+			List<Employee> result = new ArrayList<Employee>();
+			FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(em);
+
+			UserTransaction ut = sc.getUserTransaction();
+			try {
+				 ut.begin();
+
+				 QueryBuilder qb = fullTextEntityManager.getSearchFactory().buildQueryBuilder().forEntity(Employee.class).get();
+				 org.apache.lucene.search.Query query = qb.keyword().onFields("details.city").matching(value).createQuery();
+
+				 // wrap Lucene query in a javax.persistence.Query
+				 javax.persistence.Query persistenceQuery = fullTextEntityManager.createFullTextQuery(query, Employee.class);
+
+				 // execute search
+				 result = castList(Employee.class, persistenceQuery.getResultList());
+
+				 ut.commit();
+
+				 // WTF! OMG! LOL! xD
+			} catch (NotSupportedException e) {
+				 e.printStackTrace();
+			} catch (SystemException e) {
+				 e.printStackTrace();
+			} catch (SecurityException e) {
+				 e.printStackTrace();
+			} catch (IllegalStateException e) {
+				 e.printStackTrace();
+			} catch (RollbackException e) {
+				 e.printStackTrace();
+			} catch (HeuristicMixedException e) {
+				 e.printStackTrace();
+			} catch (HeuristicRollbackException e) {
+				 e.printStackTrace();
+			}
+			
 			return result;
 	 }
 }
