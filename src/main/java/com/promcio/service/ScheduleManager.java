@@ -11,6 +11,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import com.promcio.domain.Calendar;
+import com.promcio.domain.Company;
 import com.promcio.domain.Employee;
 import com.promcio.domain.Schedule;
 import com.promcio.domain.Shift;
@@ -48,22 +49,28 @@ public class ScheduleManager {
 	 * @param month
 	 * @return lista obiektor Schedule dla pracownika o danym id w danym miesiacu
 	 */
-	public List<Schedule> getAllEmployeeMonthSchedules(long employeeId, int month){
-		return castList(Schedule.class, em.createQuery("SELECT DISTINCT s FROM Schedule s WHERE s.calendar.month='"+month+"', IN (s.employees) e WHERE e.id="+employeeId +"'").getResultList());
+	public List<Schedule> getAllEmployeeMonthSchedules(long employeeId, int month, int year){
+		return castList(Schedule.class, em.createQuery("SELECT DISTINCT s FROM Schedule s inner join s.employees e WHERE e.id='"+employeeId +"' AND s.calendar.month='"+month+"' AND s.calendar.year='"+year+"'").getResultList());
 	}
+	
+
+	public List<Schedule> getAllCompanySchedules(Company company, int month, int year ){
+		return castList(Schedule.class, em.createQuery("SELECT DISTINCT s FROM Schedule s join fetch s.employees WHERE s.company=:company AND s.calendar.month='"+month+"' AND s.calendar.year='"+year+"'").setParameter("company", company).getResultList());
+	}
+	
 	
 	/**
 	 * Wszystkie grafiki dla danej firmy.
 	 * @param companyId
 	 * @return Zwraca liste obiektow Schedule dla Company o danym id.
 	 */
-	public List<Schedule> getAllCompanySchedules(long companyId){
+/*	public List<Schedule> getAllCompanySchedules(long companyId){
 		return castList(Schedule.class, em.createQuery("SELECT DISTINCT s FROM Schedule s, IN (s.employees) e WHERE e.company.id='"+companyId+"'").getResultList());
 	}
 	
 	public List<Schedule> getAllCompanyMonthSchedules(long companyId, int month){
 		return castList(Schedule.class, em.createQuery("SELECT DISTINCT s FROM Schedule s WHERE s.calendar.month='"+month+"', IN (s.employees) e WHERE e.company.id='"+companyId+"'").getResultList());
-	}
+	}*/
 
 	/**
 	 * Testowa metoda, poniewaz najwidoczniej Hibernate nie obsluguje wiecej niz 1 wartosciowania zachlannego w aplikacji dla list
@@ -79,12 +86,7 @@ public class ScheduleManager {
 		return schedule.getEmployees();
 	}
 	
-	/**
-	 * Metoda dodaje do bazy danych obiekt typu Schedule biorac odpowiednie parametry. Pracownicy sa dodawani w osobnej metodzie.
-	 * @param shift
-	 * @param dateCalendar
-	 */
-	public void addSchedule(Shift shift, Date dateCalendar){
+	public Schedule addSchedule(Company company, Shift shift, Date dateCalendar){
 		Calendar calendar = dateToCalendar(dateCalendar);
 		try{
 			calendar = (Calendar) em.createQuery("SELECT c FROM Calendar c WHERE c.year='"+ calendar.getYear() +"' AND c.month='"+ calendar.getMonth()+"' AND c.day='"+ calendar.getDay() +"'" ).getSingleResult();
@@ -98,18 +100,62 @@ public class ScheduleManager {
 				em.persist(calendar);
 			}
 		}
-		Schedule schedule = new Schedule();
-//		schedule.setRealTimeStart(realTimeStart);
-//		schedule.setRealTimeEnd(realTimeEnd);
-		schedule.setShift(shift);
-		schedule.setCalendar(calendar);
 		
-		em.persist(schedule);
+		Schedule schedule;
+		
+		try{
+			schedule = (Schedule) em.createQuery("SELECT s FROM Schedule s WHERE s.company=:company AND s.shift=:shift AND s.calendar=:calendar").setParameter("company", company).setParameter("shift", shift).setParameter("calendar", calendar).getSingleResult(); 
+		}
+		catch(NoResultException noResultException){
+			schedule = new Schedule();
+//			schedule.setRealTimeStart(realTimeStart);
+//			schedule.setRealTimeEnd(realTimeEnd);
+//			company = em.merge(company);
+			schedule.setCompany(company);
+			schedule.setShift(shift);
+			schedule.setCalendar(calendar);
+			schedule.setEmployees(new ArrayList<Employee>());
+		
+			em.persist(schedule);
+			em.flush();
+		}
+		return schedule;
+	}
+	
+	public Schedule addSchedule(Company company, Shift shift, Calendar calendar){
+		try{
+			calendar = (Calendar) em.createQuery("SELECT c FROM Calendar c WHERE c.year='"+ calendar.getYear() +"' AND c.month='"+ calendar.getMonth()+"' AND c.day='"+ calendar.getDay() +"'" ).getSingleResult();
+		}
+		catch(NoResultException noResultException){
+			em.persist(calendar);
+		}
+		
+		Schedule schedule;
+		
+		try{
+			schedule = (Schedule) em.createQuery("SELECT s FROM Schedule s WHERE s.company=:company AND s.shift=:shift AND s.calendar=:calendar").setParameter("company", company).setParameter("shift", shift).setParameter("calendar", calendar).getSingleResult(); 
+		}
+		catch(NoResultException noResultException){
+			schedule = new Schedule();
+			calendar = em.merge(calendar);
+//			schedule.setRealTimeStart(realTimeStart);
+//			schedule.setRealTimeEnd(realTimeEnd);
+//			company = em.merge(company);
+			schedule.setCompany(company);
+			schedule.setShift(shift);
+			schedule.setCalendar(calendar);
+			schedule.setEmployees(new ArrayList<Employee>());
+		
+			em.persist(schedule);
+			em.flush();
+		}
+		return schedule;
 	}
 	
 	public void addEmployeeToSchedule(Schedule schedule, Employee employee){
-		em.merge(schedule);
-		em.merge(employee);
+		schedule = em.merge(schedule);
+		//employee = em.merge(employee);
+			
 		schedule.getEmployees().add(employee);
 	}
 	
@@ -126,10 +172,7 @@ public class ScheduleManager {
 		
 		em.persist(calendar);
 	}
-	/*TODO
-	 * Prawdopodobnie przydadza sie metody, ktore beda zwracaly List<Schedule> w danym przedziale czasowym.
-	 */
-	
+
 	/** 
 	 * Metoda zamienia obiekt typu java.util.Date na obiekt com.promcio.domain.Calendar.
 	 * @param date

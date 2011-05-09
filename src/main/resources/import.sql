@@ -21,3 +21,11 @@ insert into account (login, password, company_id, role_id) values ('user', '63e7
 insert into rank (id, name, hourSalary, company_id) values (1, 'sprzedawca', 6.0 , 2)
 
 insert into shift (id, name, timeStart, timeEnd, company_id) values (1, 'nocna', 19, 7, 2)
+
+insert into calendar (id, day, month, year) values (1, 10, 4, 2011)
+insert into calendar (id, day, month, year) values (2, 11, 4, 2011)
+insert into schedule (id, calendar_id, company_id, shift_id ) values ( 1, 1, 2, 1)
+insert into schedule (id, calendar_id, company_id, shift_id ) values ( 2, 2, 2, 1)
+insert into schedule_employee (schedule_id, employees_id) values ( 1, 3)
+insert into schedule_employee (schedule_id, employees_id) values ( 2, 3)
+insert into schedule_employee (schedule_id, employees_id) values ( 1, 6)

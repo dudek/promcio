@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 public class Schedule {
 	
 		private long id;
+		private Company company;
 		
 //		private int realTimeStart;
 //		private int realTimeEnd;
@@ -72,4 +73,13 @@ public class Schedule {
 		public void setCalendar(Calendar calendar) {
 				this.calendar = calendar;
 		}
+		@ManyToOne
+		public Company getCompany() {
+			return company;
+		}
+
+		public void setCompany(Company company) {
+			this.company = company;
+		}
+		
 }

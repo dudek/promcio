@@ -48,5 +48,18 @@ public class Calendar {
 		public void setDay(int day) {
 				this.day = day;
 		}
+
+		public Calendar(int year, int month, int day) {
+			super();
+			this.year = year;
+			this.month = month;
+			this.day = day;
+		}
+
+		public Calendar() {
+			super();
+		}
+		
+		
 		
 }
