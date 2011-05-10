@@ -17,9 +17,9 @@ public class Schedule {
 //		private int realTimeStart;
 //		private int realTimeEnd;
 		
-		List<Employee> employees;
-		Shift shift;
-		Calendar calendar;
+		private List<Employee> employees;
+		private Shift shift;
+		private Calendar calendar;
 		
 		/* --------------------------------------- */
 		

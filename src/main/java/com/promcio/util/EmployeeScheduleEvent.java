@@ -36,66 +36,92 @@ public class EmployeeScheduleEvent implements ScheduleEvent, Serializable {
 	public String getId() {
 		return id;
 	}
+	
 	public void setId(String id) {
 		this.id = id;
 	}
+	
 	public String getTitle() {
 		return title;
 	}
+	
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	
 	public Date getStartDate() {
 		return startDate;
 	}
+	
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
+	
 	public Date getEndDate() {
 		return endDate;
 	}
+	
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
+	
 	public boolean isAllDay() {
 		return allDay;
 	}
+	
 	public void setAllDay(boolean allDay) {
 		this.allDay = allDay;
 	}
+	
 	public String getStyleClass() {
 		return styleClass;
 	}
+	
 	public void setStyleClass(String styleClass) {
 		this.styleClass = styleClass;
 	}
+	
 	public Object getData() {
 		return data;
 	}
+	
 	public void setData(Object data) {
 		this.data = data;
 	}
+	
 	public Employee getEmployee() {
 		return employee;
 	}
+	
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
 	}
+	
 	public Shift getShift() {
 		return shift;
 	}
+	
 	public void setShift(Shift shift) {
 		this.shift = shift;
 	}
+	
 	public List<Calendar> getCalendars() {
 		return calendars;
 	}
+	
 	public void setCalendars(List<Calendar> calendars) {
 		this.calendars = calendars;
 	}
 	
+	public EmployeeScheduleEvent(String title, Date startDate, Date endDate) {
+		super();
+		this.title = title;
+		this.startDate = startDate;
+		this.endDate = endDate;
+	}
 	
-	
-	
-	
+	public EmployeeScheduleEvent() {
+		super();
+
+	}
 }

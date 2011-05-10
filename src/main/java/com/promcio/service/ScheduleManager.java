@@ -36,19 +36,10 @@ public class ScheduleManager {
 		return r;
 	}
 	
-	/**
-	 * @param employeeId
-	 * @return Zwraca liste obiektow Schedule dla pracownika o danym id.
-	 */
 	public List<Schedule> getAllEmployeeSchedules(long employeeId){
 		return castList(Schedule.class, em.createQuery("SELECT DISTINCT s FROM Schedule s, IN (s.employees) e WHERE e.id='"+employeeId +"'").getResultList());
 	}
 	
-	/**
-	 * @param employeeId
-	 * @param month
-	 * @return lista obiektor Schedule dla pracownika o danym id w danym miesiacu
-	 */
 	public List<Schedule> getAllEmployeeMonthSchedules(long employeeId, int month, int year){
 		return castList(Schedule.class, em.createQuery("SELECT DISTINCT s FROM Schedule s inner join s.employees e WHERE e.id='"+employeeId +"' AND s.calendar.month='"+month+"' AND s.calendar.year='"+year+"'").getResultList());
 	}
@@ -58,12 +49,19 @@ public class ScheduleManager {
 		return castList(Schedule.class, em.createQuery("SELECT DISTINCT s FROM Schedule s join fetch s.employees WHERE s.company=:company AND s.calendar.month='"+month+"' AND s.calendar.year='"+year+"'").setParameter("company", company).getResultList());
 	}
 	
-	
-	/**
-	 * Wszystkie grafiki dla danej firmy.
-	 * @param companyId
-	 * @return Zwraca liste obiektow Schedule dla Company o danym id.
-	 */
+	public Schedule getSchedule(Shift shift, Calendar calendar){
+		try{
+			calendar = em.merge(calendar);
+		}
+		catch(IllegalArgumentException e){
+			calendar = em.find(Calendar.class, calendar.getId());
+		}
+		try{
+			return (Schedule) em.createQuery("SELECT s FROM Schedule s WHERE s.shift=:shift AND s.calendar=:calendar").setParameter("shift", shift).setParameter("calendar", calendar).getSingleResult();
+		}catch(NoResultException noResultException){
+			return null;
+		}
+	}
 /*	public List<Schedule> getAllCompanySchedules(long companyId){
 		return castList(Schedule.class, em.createQuery("SELECT DISTINCT s FROM Schedule s, IN (s.employees) e WHERE e.company.id='"+companyId+"'").getResultList());
 	}
@@ -147,7 +145,7 @@ public class ScheduleManager {
 			schedule.setEmployees(new ArrayList<Employee>());
 		
 			em.persist(schedule);
-			em.flush();
+			//em.flush();
 		}
 		return schedule;
 	}
@@ -157,6 +155,16 @@ public class ScheduleManager {
 		//employee = em.merge(employee);
 			
 		schedule.getEmployees().add(employee);
+	}
+	
+	public void removeEmployeeFromSchedule(Schedule schedule, Employee employee){
+		schedule = em.merge(schedule);
+		employee = em.find(Employee.class, employee.getId());
+		
+		schedule.getEmployees().remove(employee);
+		
+		if ( schedule.getEmployees().size() < 1 )
+			em.remove(schedule);
 	}
 	
 	public void addCalendarFromDate(Date date){

@@ -32,6 +32,7 @@ import com.promcio.domain.Schedule;
 import com.promcio.domain.Shift;
 import com.promcio.service.CompanyManager;
 import com.promcio.service.ScheduleManager;
+import com.promcio.util.EmployeeScheduleEvent;
 
 @ManagedBean
 @ViewScoped
@@ -62,7 +63,7 @@ public class ScheduleController implements Serializable{
         
 		public ScheduleController() {
                 eventModel = new DefaultScheduleModel();
-                event = new DefaultScheduleEvent();
+                event = new EmployeeScheduleEvent();
                 selectEmployees = new ArrayList<SelectItem>();                              
         }
         
@@ -83,7 +84,7 @@ public class ScheduleController implements Serializable{
     	    for ( Employee employee : companyEmployees){
     	    	List<Schedule> employeeSchedules = scheduleManager.getAllEmployeeMonthSchedules(employee.getId(), calendarDate.get(Calendar.MONTH),calendarDate.get(Calendar.YEAR) );
     	    	for ( Schedule schedule : employeeSchedules){
-    	    		eventModel.addEvent(new DefaultScheduleEvent(employee.getSurname() + " " + employee.getFirstname() + " " + schedule.getShift().getName(), 
+    	    		eventModel.addEvent(new EmployeeScheduleEvent(employee.getSurname() + " " + employee.getFirstname() + " " + schedule.getShift().getName(), 
     	    				scheduleManager.calendarToDate(schedule.getCalendar()), scheduleManager.calendarToDate(schedule.getCalendar() ) ) );
     	    	}
     	     }*/
@@ -91,8 +92,19 @@ public class ScheduleController implements Serializable{
     	     List<Schedule> companySchedules = scheduleManager.getAllCompanySchedules(accountBean.getCompany(), calendarDate.get(Calendar.MONTH),calendarDate.get(Calendar.YEAR));
     	     for ( Schedule schedule : companySchedules){
     	    	 for ( Employee employee : schedule.getEmployees()){
-    	    		 eventModel.addEvent(new DefaultScheduleEvent(employee.getSurname() + " " + employee.getFirstname() + " " + schedule.getShift().getName(), 
-     	    				scheduleManager.calendarToDate(schedule.getCalendar()), scheduleManager.calendarToDate(schedule.getCalendar() ) ) );
+    	    		 event = new EmployeeScheduleEvent(employee.getSurname() + " " + employee.getFirstname() + " " + schedule.getShift().getName(), 
+      	    				scheduleManager.calendarToDate(schedule.getCalendar()), scheduleManager.calendarToDate(schedule.getCalendar() ) );
+    	    		 
+    	    		 ((EmployeeScheduleEvent)event).setEmployee(employee);
+    	    		 ((EmployeeScheduleEvent)event).setShift(schedule.getShift());
+    	    		 
+    	    		 ArrayList<com.promcio.domain.Calendar> calendars = new ArrayList<com.promcio.domain.Calendar>();
+    	    		 calendars.add(schedule.getCalendar());
+    	    		 ((EmployeeScheduleEvent)event).setCalendars(calendars);
+    	    		 
+    	    		 
+    	    		 eventModel.addEvent( event );
+    	    		 
     	    	 }
     	     }
         }
@@ -155,8 +167,12 @@ public class ScheduleController implements Serializable{
 		/* Akcje */
 		
 		public void removeEvent(ActionEvent actionEvent){
+			for ( com.promcio.domain.Calendar calendar : ((EmployeeScheduleEvent)event).getCalendars() ){
+				Schedule schedule = scheduleManager.getSchedule(((EmployeeScheduleEvent)event).getShift(), calendar);
+				scheduleManager.removeEmployeeFromSchedule(schedule, ((EmployeeScheduleEvent)event).getEmployee());
+			}
 			eventModel.deleteEvent(event);
-			event = new DefaultScheduleEvent();
+			event = new EmployeeScheduleEvent();
 		}
         
         public void addEvent(ActionEvent actionEvent) {
@@ -175,34 +191,52 @@ public class ScheduleController implements Serializable{
 					}
 				}
 				
-				Schedule schedule;
-				// przypadek gdy zdarzenie jest jednodniowe
-				if ( event.getStartDate().equals(event.getEndDate()) ){
-					schedule = scheduleManager.addSchedule(accountBean.getCompany(), shift, event.getStartDate());
-					scheduleManager.addEmployeeToSchedule(schedule, employee);
-				}
-				// przypadek gdy zdarzenie jest rozciagniete na kilka dni, trzeba dla kazdego dnia osobny obiekt Schedule utrwalic jesli jeszcze nie ma go w bazie
-				// gdy istnieje dodac do niego pracownika
-				else{
-					com.promcio.domain.Calendar startCalendar = scheduleManager.dateToCalendar(event.getStartDate());
-					int dayDelta = scheduleManager.dateToCalendar(event.getEndDate()).getDay() - startCalendar.getDay() ;  
-					
-					com.promcio.domain.Calendar calendar = new com.promcio.domain.Calendar(startCalendar.getYear(), startCalendar.getMonth(), startCalendar.getDay());
-					for ( int i = 0; i <= dayDelta; i++){
-						schedule = scheduleManager.addSchedule(accountBean.getCompany(), shift, calendar);
-						scheduleManager.addEmployeeToSchedule(schedule, employee);
-						
-						calendar = new com.promcio.domain.Calendar(startCalendar.getYear(), startCalendar.getMonth(), startCalendar.getDay()+1);
-					}
-				}
-				
-        		( (DefaultScheduleEvent) event ).setTitle(employee.getSurname() + " " + employee.getFirstname() + " " + shift.getName());
-                if(event.getId() == null)
-                        eventModel.addEvent(event);
-                else
-                        eventModel.updateEvent(event);
+        		( (EmployeeScheduleEvent) event ).setTitle(employee.getSurname() + " " + employee.getFirstname() + " " + shift.getName());
                 
-                event = new DefaultScheduleEvent();
+        		if(event.getId() == null){
+    				Schedule schedule;
+    				// przypadek gdy zdarzenie jest jednodniowe
+    				if ( event.getStartDate().equals(event.getEndDate()) ){
+    					com.promcio.domain.Calendar calendar = scheduleManager.dateToCalendar(event.getStartDate());
+    					schedule = scheduleManager.addSchedule(accountBean.getCompany(), shift, calendar);
+    					scheduleManager.addEmployeeToSchedule(schedule, employee);
+    					( (EmployeeScheduleEvent) event ).setEmployee(employee);
+    					( (EmployeeScheduleEvent) event ).setShift(shift);
+    					if ( ( (EmployeeScheduleEvent) event ).getCalendars() == null ){
+    						( (EmployeeScheduleEvent) event ).setCalendars(new ArrayList<com.promcio.domain.Calendar>());
+    					}
+    					( (EmployeeScheduleEvent) event ).getCalendars().add( calendar );
+    				}
+    				// przypadek gdy zdarzenie jest rozciagniete na kilka dni, trzeba dla kazdego dnia osobny obiekt Schedule utrwalic jesli jeszcze nie ma go w bazie
+    				// gdy istnieje dodac do niego pracownika
+    				else{
+    					com.promcio.domain.Calendar startCalendar = scheduleManager.dateToCalendar(event.getStartDate());
+    					int dayDelta = scheduleManager.dateToCalendar(event.getEndDate()).getDay() - startCalendar.getDay() ;  
+    					
+    					( (EmployeeScheduleEvent) event ).setEmployee(employee);
+    					( (EmployeeScheduleEvent) event ).setShift(shift);
+    					if ( ( (EmployeeScheduleEvent) event ).getCalendars() == null ){
+    						( (EmployeeScheduleEvent) event ).setCalendars(new ArrayList<com.promcio.domain.Calendar>());
+    					}
+    					
+    					com.promcio.domain.Calendar calendar = new com.promcio.domain.Calendar(startCalendar.getYear(), startCalendar.getMonth(), startCalendar.getDay());
+    					for ( int i = 0; i <= dayDelta; i++){
+    						schedule = scheduleManager.addSchedule(accountBean.getCompany(), shift, calendar);
+    						scheduleManager.addEmployeeToSchedule(schedule, employee);
+    						
+    						( (EmployeeScheduleEvent) event ).getCalendars().add( calendar );
+    						
+    						calendar = new com.promcio.domain.Calendar(calendar.getYear(), calendar.getMonth(), calendar.getDay()+1);
+    					}
+    				}
+    				eventModel.addEvent(event);
+                }               
+                else{
+                	eventModel.updateEvent(event);
+                }
+                       
+                
+                event = new EmployeeScheduleEvent();
         }
         
         public void onEventSelect(ScheduleEntrySelectEvent selectEvent) {
@@ -216,7 +250,7 @@ public class ScheduleController implements Serializable{
     			Calendar calendar =  Calendar.getInstance();
     			calendar.setTime(selectEvent.getDate());
     			calendar.set(Calendar.DAY_OF_MONTH, calendar.get(Calendar.DAY_OF_MONTH)+1);
-    			event = new DefaultScheduleEvent("", calendar.getTime(), calendar.getTime());
+    			event = new EmployeeScheduleEvent("", calendar.getTime(), calendar.getTime());
         }
         
         public void onEventMove(ScheduleEntryMoveEvent event) {
