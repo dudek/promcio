@@ -211,7 +211,7 @@ public class ScheduleController implements Serializable{
     				// gdy istnieje dodac do niego pracownika
     				else{
     					com.promcio.domain.Calendar startCalendar = scheduleManager.dateToCalendar(event.getStartDate());
-    					int dayDelta = scheduleManager.dateToCalendar(event.getEndDate()).getDay() - startCalendar.getDay() ;  
+    					int dayDelta = scheduleManager.dateToCalendar(event.getEndDate()).getDay() - startCalendar.getDay();  
     					
     					( (EmployeeScheduleEvent) event ).setEmployee(employee);
     					( (EmployeeScheduleEvent) event ).setShift(shift);
@@ -230,9 +230,15 @@ public class ScheduleController implements Serializable{
     					}
     				}
     				eventModel.addEvent(event);
-                }               
+                }    
+        		/*
+        		 * Przypadek aktualizacji, najpierw usuniecie a potem dodanie nowej zaktualizowanej pozycji w grafiku
+        		 */
                 else{
-                	eventModel.updateEvent(event);
+                	ScheduleEvent updatedEvent = new EmployeeScheduleEvent(event.getTitle(), event.getStartDate(), event.getEndDate());
+					removeEvent(actionEvent);
+					event = new EmployeeScheduleEvent(updatedEvent.getTitle(), updatedEvent.getStartDate(), updatedEvent.getEndDate());
+					addEvent(actionEvent);
                 }
                        
                 
