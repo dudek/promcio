@@ -51,5 +51,4 @@ public class Rank {
 	 public void setCompany(Company company) {
 		 	this.company = company;
 	 }
-	 
 }

@@ -13,15 +13,15 @@ public class Employment {
 	 // private Calendar contractStart;
 	 // private Calendar contractEnd;
 	 private String contractType;
-	 
+
 	 private int period;
 	 private int hoursNorm;
 	 private float contractValue;
-	 
+
 	 private float hourSalary;
 
 	 private Employee employee;
-	 
+
 	 /* --------------------------------------- */
 
 	 @Id
@@ -43,19 +43,19 @@ public class Employment {
 	 }
 
 	 public float getContractValue() {
-		 	return contractValue;
+			return contractValue;
 	 }
 
 	 public void setContractValue(float contractValue) {
-		 	this.contractValue = contractValue;
+			this.contractValue = contractValue;
 	 }
 
 	 public int getPeriod() {
-		 	return period;
+			return period;
 	 }
 
 	 public void setPeriod(int period) {
-		 	this.period = period;
+			this.period = period;
 	 }
 
 	 public int getHoursNorm() {
@@ -67,19 +67,19 @@ public class Employment {
 	 }
 
 	 public float getHourSalary() {
-		return hourSalary;
+			return hourSalary;
 	 }
 
 	 public void setHourSalary(float hourSalary) {
-		this.hourSalary = hourSalary;
+			this.hourSalary = hourSalary;
 	 }
 
-	@ManyToOne
+	 @ManyToOne
 	 public Employee getEmployee() {
-		 	return employee;
+			return employee;
 	 }
 
 	 public void setEmployee(Employee employee) {
-		 	this.employee = employee;
+			this.employee = employee;
 	 }
 }

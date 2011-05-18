@@ -20,12 +20,12 @@ public class Employee {
 
 	 private long id;
 
-	 @Field(index=Index.TOKENIZED, store=Store.NO)
+	 @Field(index = Index.TOKENIZED, store = Store.NO)
 	 private String firstname;
-	 
-	 @Field(index=Index.TOKENIZED, store=Store.NO)
+
+	 @Field(index = Index.TOKENIZED, store = Store.NO)
 	 private String surname;
-	 
+
 	 private String pesel;
 	 private String nip;
 	 private int yob;

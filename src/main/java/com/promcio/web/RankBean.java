@@ -5,10 +5,6 @@ import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import org.hibernate.validator.constraints.NotEmpty;
-
 import com.promcio.service.CompanyManager;
 
 @Model
@@ -20,13 +16,10 @@ public class RankBean implements Serializable {
 
 	 @Inject
 	 CompanyManager companyManager;
-	 
-	 
+
 	 private String name;
-	 
-	 
 	 private float hourSalary;
-	 
+
 	 /* --------------------------------------- */
 
 	 public void setName(String name) {
@@ -46,21 +39,21 @@ public class RankBean implements Serializable {
 	 }
 
 	 /* --------------------------------------- */
-	 //actions
-	 
-	 public String doAddRankCompany(long companyId){
-		 	companyManager.addRank(companyId, name, hourSalary);
-		 	return null;
+	 // actions
+
+	 public String doAddRankCompany(long companyId) {
+			companyManager.addRank(companyId, name, hourSalary);
+			return null;
 	 }
-	 
-	 public String doRemoveRankCompany(long rankId){
-		 	companyManager.removeRank(rankId);
-		 	return null;
+
+	 public String doRemoveRankCompany(long rankId) {
+			companyManager.removeRank(rankId);
+			return null;
 	 }
-	 
-	 public String doUpdateRankCompany(long rankId){
-		 	companyManager.updateRank(rankId, name, hourSalary );
-		 	return null;
+
+	 public String doUpdateRankCompany(long rankId) {
+			companyManager.updateRank(rankId, name, hourSalary);
+			return null;
 	 }
 
 }

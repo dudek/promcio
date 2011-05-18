@@ -14,7 +14,7 @@ public class EmployeeDetails {
 
 	 private long id;
 
-	 @Field(index=Index.TOKENIZED, store=Store.NO)
+	 @Field(index = Index.TOKENIZED, store = Store.NO)
 	 private String city;
 	 private String postCode;
 	 private String street;
@@ -24,8 +24,8 @@ public class EmployeeDetails {
 	 private String phoneNumber;
 	 private String email;
 
-	 //@ContainedIn
-	 //private Employee employee;
+	 @ContainedIn
+	 private Employee employee;
 
 	 /* --------------------------------------- */
 
@@ -103,7 +103,7 @@ public class EmployeeDetails {
 			this.email = email;
 	 }
 
-	 /*@OneToOne
+	 @OneToOne(mappedBy = "details")
 	 public Employee getEmployee() {
 			return employee;
 	 }
@@ -111,5 +111,5 @@ public class EmployeeDetails {
 	 public void setEmployee(Employee employee) {
 			this.employee = employee;
 	 }
-	 */
+
 }

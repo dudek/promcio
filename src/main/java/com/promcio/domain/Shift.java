@@ -59,5 +59,4 @@ public class Shift {
 		public void setCompany(Company company) {
 			this.company = company;
 		}
-		
 }

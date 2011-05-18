@@ -36,11 +36,11 @@ public class EmployeeManager {
 
 			em.persist(employee);
 	 }
-	 
+
 	 public void addEmployee(long companyId, String firstname, String surname, String pesel, String nip, int yob) {
 			Company company = em.find(Company.class, companyId);
-		 	Employee employee = new Employee();
-			
+			Employee employee = new Employee();
+
 			employee.setFirstname(firstname);
 			employee.setSurname(surname);
 			employee.setPesel(pesel);
@@ -49,10 +49,10 @@ public class EmployeeManager {
 
 			employee.setCompany(company);
 			company.getEmployees().add(employee);
-			
+
 			em.persist(employee);
 	 }
-	 
+
 	 public void updateEmployee(long id, String firstname, String surname, String pesel, String nip, Integer yob) {
 			Employee employee = em.find(Employee.class, id);
 
@@ -68,15 +68,12 @@ public class EmployeeManager {
 	 public void removeEmployee(long id) {
 			Employee employee = em.find(Employee.class, id);
 			EmployeeDetails details = employee.getDetails();
-			if ( ( details  ) != null )
-				em.remove(details);
+			if ((details) != null) em.remove(details);
 			List<Employment> employments = employee.getEmployments();
-			if ( employments != null )
-				for(Employment employment : employments)
-					em.remove(employment);
+			if (employments != null) for (Employment employment : employments)
+				 em.remove(employment);
 			Company company = employee.getCompany();
-			if ( company != null )
-				employee.getCompany().getEmployees().remove(employee);
+			if (company != null) employee.getCompany().getEmployees().remove(employee);
 			em.remove(employee);
 	 }
 
@@ -97,7 +94,7 @@ public class EmployeeManager {
 
 	 public void addEmployeeDetails(long employeeId, String city, String postCode, String street, String buildingNumber, String apartmentNumber, String staircaseNumber, String phoneNumber, String email) {
 			Employee employee = em.find(Employee.class, employeeId);
-		 	EmployeeDetails employeeDetails = new EmployeeDetails();
+			EmployeeDetails employeeDetails = new EmployeeDetails();
 
 			employeeDetails.setCity(city);
 			employeeDetails.setPostCode(postCode);
@@ -108,11 +105,11 @@ public class EmployeeManager {
 			employeeDetails.setPhoneNumber(phoneNumber);
 			employeeDetails.setEmail(email);
 
-			//employeeDetails.setEmployee(employee);
+			employeeDetails.setEmployee(employee);
 			employee.setDetails(employeeDetails);
 			em.persist(employeeDetails);
-	 }	 
-	 
+	 }
+
 	 public void updateEmployeeDetails(long employeeId, String city, String postCode, String street, String buildingNumber, String apartmentNumber, String staircaseNumber, String phoneNumber, String email) {
 			EmployeeDetails details = (EmployeeDetails) em.createQuery("SELECT d FROM EmployeeDetails d WHERE d.employee.id='" + employeeId + "'").getSingleResult();
 
@@ -130,7 +127,7 @@ public class EmployeeManager {
 
 	 public void removeEmployeeDetails(long id) {
 			EmployeeDetails employeDetails = em.find(EmployeeDetails.class, id);
-			
+
 			em.remove(employeDetails);
 	 }
 
@@ -145,10 +142,10 @@ public class EmployeeManager {
 
 			em.persist(employment);
 	 }
-	 
+
 	 public void addEmployment(long employeeId, String contractType, float contractValue, int period, int hoursNorm, float hourSalary) {
 			Employee employee = em.find(Employee.class, employeeId);
-		 	Employment employment = new Employment();
+			Employment employment = new Employment();
 
 			employment.setContractType(contractType);
 			employment.setContractValue(contractValue);
@@ -175,10 +172,9 @@ public class EmployeeManager {
 
 	 public void removeEmployment(long id) {
 			Employment employment = em.find(Employment.class, id);
-			
+
 			Employee employee = employment.getEmployee();
-			if ( employee != null )
-				employee.getEmployments().remove(employment);	
+			if (employee != null) employee.getEmployments().remove(employment);
 			em.remove(employment);
 	 }
 
@@ -216,16 +212,13 @@ public class EmployeeManager {
 	 public List<Employee> getAllEmployees() {
 			return castList(Employee.class, em.createQuery("SELECT NEW Employee(e.id, e.firstname, e.surname, e.pesel, e.nip, e.yob) FROM Employee e").getResultList());
 	 }
-	 
-	 
-	 public Employee getFullEmployee(long id){
-		 	return em.find(Employee.class, id);
+
+	 public Employee getFullEmployee(long id) {
+			return em.find(Employee.class, id);
 	 }
-	 
-	 //Tymczasowa metoda poniewaz nie dziala wartosciowanie zachlanne
-	 public List<Employment> getEmployments (long employeeId) {
-		 	return em.createQuery("SELECT e FROM Employment e WHERE e.employee.id = '"+ employeeId +"'").getResultList();
-		 	
+
+	 // Tymczasowa metoda poniewaz nie dziala wartosciowanie zachlanne
+	 public List<Employment> getEmployments(long employeeId) {
+			return em.createQuery("SELECT e FROM Employment e WHERE e.employee.id = '" + employeeId + "'").getResultList();
 	 }
-	 
 }
