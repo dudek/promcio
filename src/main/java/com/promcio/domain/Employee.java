@@ -30,6 +30,7 @@ public class Employee {
 	 private String nip;
 	 private int yob;
 
+	 private Account account;
 	 @IndexedEmbedded
 	 private EmployeeDetails details;
 	 private Rank rank;
@@ -102,6 +103,15 @@ public class Employee {
 
 	 public void setNip(String nip) {
 			this.nip = nip;
+	 }
+
+	 @OneToOne
+	 public Account getAccount() {
+			return account;
+	 }
+
+	 public void setAccount(Account account) {
+			this.account = account;
 	 }
 
 	 @OneToOne

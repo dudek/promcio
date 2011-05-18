@@ -41,6 +41,7 @@ public class AccountManager {
 			Company company = em.find(Company.class, companyId);
 
 			account.setCompany(company);
+			company.setAccount(account);
 
 			// em.persist(account)
 	 }

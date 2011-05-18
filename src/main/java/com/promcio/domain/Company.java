@@ -7,6 +7,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Company {
@@ -17,6 +18,8 @@ public class Company {
 	 private String nip;
 	 private String regon;
 
+	 private Account account;
+	 
 	 private List<Employee> employees;
 	 private List<Rank> ranks;
 	 private List<Shift> shifts;
@@ -55,6 +58,15 @@ public class Company {
 
 	 public void setRegon(String regon) {
 			this.regon = regon;
+	 }
+
+	 @OneToOne
+	 public Account getAccount() {
+	 	 return account;
+	 }
+
+	 public void setAccount(Account account) {
+	 	 this.account = account;
 	 }
 
 	 @OneToMany(mappedBy = "company", fetch = FetchType.EAGER, cascade = CascadeType.ALL)

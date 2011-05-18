@@ -44,7 +44,7 @@ public class Account {
 			this.role = role;
 	 }
 
-	 @OneToOne
+	 @OneToOne(mappedBy = "account")
 	 public Employee getEmployee() {
 			return employee;
 	 }
@@ -53,7 +53,7 @@ public class Account {
 			this.employee = employee;
 	 }
 
-	 @OneToOne
+	 @OneToOne(mappedBy = "account")
 	 public Company getCompany() {
 			return company;
 	 }

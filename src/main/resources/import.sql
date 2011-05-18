@@ -1,5 +1,12 @@
-insert into company (id, name, nip, regon) values (1, 'LG', '4631246319', '634124827')
-insert into company (id, name, nip, regon) values (2, 'Microsoft Corp.', '6324613294', '732647327')
+insert into role (id, name) values (1, 'admin')
+insert into role (id, name) values (2, 'company')
+insert into role (id, name) values (3, 'employee')
+
+insert into account (login, password, role_id) values ('admin', '25e4ee4e9229397b6b17776bfceaf8e7', 1)
+insert into account (login, password, role_id) values ('user', '63e780c3f321d13109c71bf81805476e', 2)
+
+insert into company (id, name, nip, regon, account_login) values (1, 'LG', '4631246319', '634124827', 'user')
+insert into company (id, name, nip, regon, account_login) values (2, 'Microsoft Corp.', '6324613294', '732647327', 'admin')
 
 insert into rank (id, name, hourSalary, company_id) values (1, 'sprzedawca', 6.0, 1)
 insert into rank (id, name, hourSalary, company_id) values (2, 'kurier', 4.0, 1)
@@ -30,13 +37,6 @@ insert into employee (id, firstname, surname, pesel, nip, yob, company_id, detai
 insert into employee (id, firstname, surname, pesel, nip, yob, company_id, details_id, rank_id) values (7, 'Lucjan', 'Prawy', '84060612345', '642-346-32-82', 1984, 2, 7, 4)
 insert into employee (id, firstname, surname, pesel, nip, yob, company_id, details_id, rank_id) values (8, 'Scala', 'Johansson', '80010233344', '532-427-74-32', 1980, 1, 8, 6)
 insert into employee (id, firstname, surname, pesel, nip, yob, company_id, details_id, rank_id) values (9, 'Ada', 'Wendows', '76021810012', '647-347-26-63', 1976, 2, 9, 5)
-
-insert into role (id, name) values (1, 'admin')
-insert into role (id, name) values (2, 'company')
-insert into role (id, name) values (3, 'employee')
-
-insert into account (login, password, company_id, role_id) values ('admin', '25e4ee4e9229397b6b17776bfceaf8e7', 2, 1)
-insert into account (login, password, company_id, role_id) values ('user', '63e780c3f321d13109c71bf81805476e', 1, 2)
 
 insert into calendar (id, day, month, year) values (1, 10, 4, 2011)
 insert into calendar (id, day, month, year) values (2, 11, 4, 2011)
