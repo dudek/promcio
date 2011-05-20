@@ -16,6 +16,7 @@ import com.promcio.domain.Employee;
 import com.promcio.domain.EmployeeDetails;
 import com.promcio.domain.Employment;
 import com.promcio.domain.Rank;
+import com.promcio.service.CompanyManager;
 import com.promcio.service.EmployeeManager;
 import com.promcio.service.SearchManager;
 
@@ -28,6 +29,8 @@ public class EmployeeBean implements Serializable {
 
 	 @Inject
 	 EmployeeManager employeeManager;
+	 @Inject
+	 CompanyManager companyManager;
 	 @Inject
 	 SearchManager searchManager;
 
@@ -61,6 +64,7 @@ public class EmployeeBean implements Serializable {
 	 private Company company;
 
 	 private Long updId;
+	 private Employee selectedEmployee;
 
 	 /* --------------------------------------- */
 
@@ -142,6 +146,14 @@ public class EmployeeBean implements Serializable {
 
 	 public long getUpdId() {
 			return updId;
+	 }
+
+	 public Employee getSelectedEmployee() {
+			return selectedEmployee;
+	 }
+
+	 public void setSelectedEmployee(Employee selectedEmployee) {
+			this.selectedEmployee = selectedEmployee;
 	 }
 
 	 /* --------------------------------------- */

@@ -126,6 +126,11 @@ public class CompanyManager {
 
 			em.remove(rank);
 	 }
+	 
+	 public Rank getRank(long id) {
+			// TODO do naprawy
+			return (Rank) em.createQuery("SELECT DISTINCT r FROM Rank r, Player p WHERE p.id='" + id + "' and r.id=p.rank_id").getSingleResult();
+	 }
 
 	 public void joinCompanyWithEmployee(long companyId, long employeeId) {
 			Company company = em.find(Company.class, companyId);
