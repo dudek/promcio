@@ -14,6 +14,7 @@ import com.promcio.domain.Calendar;
 import com.promcio.domain.Company;
 import com.promcio.domain.Employee;
 import com.promcio.domain.Schedule;
+import com.promcio.domain.Settlement;
 import com.promcio.domain.Shift;
 
 /**
@@ -179,6 +180,99 @@ public class ScheduleManager {
 		calendar.setYear(year);
 		
 		em.persist(calendar);
+	}
+	
+	public Settlement addSettlementForEmployee(Employee employee, int month, int year){
+		Settlement settlement;
+		try{
+			settlement = (Settlement) em.createQuery("SELECT s FROM Settlement s WHERE s.employee=:employee AND s.month=:month AND s.year=:year").setParameter("employee", employee).setParameter("month", month).setParameter("year", year).getSingleResult();
+			return settlement;
+		}catch ( NoResultException e ){
+			settlement = new Settlement();
+		
+			settlement.setMonth(month);
+			settlement.setYear(year);
+			settlement.setEmployee(employee);
+			settlement.setWorkTime(0);
+			
+			em.persist(settlement);
+			return settlement;
+		}
+	}
+	
+	
+	public Settlement getSettlement(Employee employee, int month, int year){
+		Settlement settlement;
+		try{
+			settlement = (Settlement) em.createQuery("SELECT s FROM Settlement s WHERE s.employee=:employee AND s.month=:month AND s.year=:year").setParameter("employee", employee).setParameter("month", month).setParameter("year", year).getSingleResult();
+			return settlement;
+		}catch ( NoResultException e ){
+			return null;
+		}
+	}
+	
+	public void addWorkTimeToSettlement(Employee employee, int month, int year, float workTime){
+		Settlement settlement;
+		try{
+			settlement = (Settlement) em.createQuery("SELECT s FROM Settlement s WHERE s.employee=:employee AND s.month=:month AND s.year=:year").setParameter("employee", employee).setParameter("month", month).setParameter("year", year).getSingleResult();
+		}catch ( NoResultException e){
+			settlement = addSettlementForEmployee(employee, month, year);
+		}
+		em.merge(settlement);
+		settlement.setWorkTime(settlement.getWorkTime()+workTime);
+		
+	}
+	
+	public void addWorkTimeToSettlement(Employee employee, int month, int year, Shift shift){
+		Settlement settlement;
+		try{
+			settlement = (Settlement) em.createQuery("SELECT s FROM Settlement s WHERE s.employee=:employee AND s.month=:month AND s.year=:year").setParameter("employee", employee).setParameter("month", month).setParameter("year", year).getSingleResult();
+		}catch ( NoResultException e){
+			settlement = addSettlementForEmployee(employee, month, year);
+		}
+		em.merge(settlement);
+		settlement.setWorkTime(settlement.getWorkTime() + getWorkTimeFromShift(shift));
+		
+	}
+	
+	public void removeWorkTimeFromSettlement(Employee employee, int month, int year, float workTime){
+		Settlement settlement;
+		try{
+			settlement = (Settlement) em.createQuery("SELECT s FROM Settlement s WHERE s.employee=:employee AND s.month=:month").setParameter("employee", employee).setParameter("month", month).getSingleResult();
+		}catch ( NoResultException e){
+			settlement = addSettlementForEmployee(employee, month, year);
+		}
+		em.merge(settlement);
+		float newWorkTime = settlement.getWorkTime() - workTime;
+		if ( newWorkTime >= 0  )
+			settlement.setWorkTime(newWorkTime);
+		else
+			settlement.setWorkTime(0);
+	}
+	
+	public void removeWorkTimeFromSettlement(Employee employee, int month, int year, Shift shift){
+		Settlement settlement;
+		try{
+			settlement = (Settlement) em.createQuery("SELECT s FROM Settlement s WHERE s.employee=:employee AND s.month=:month").setParameter("employee", employee).setParameter("month", month).getSingleResult();
+		}catch ( NoResultException e){
+			settlement = addSettlementForEmployee(employee, month, year);
+		}
+		em.merge(settlement);
+		float newWorkTime = settlement.getWorkTime() - getWorkTimeFromShift(shift);
+		if ( newWorkTime >= 0  )
+			settlement.setWorkTime(newWorkTime);
+		else
+			settlement.setWorkTime(0);
+	}
+
+	
+	public float getWorkTimeFromShift(Shift shift){
+		int timeStart = shift.getTimeStart();
+		int timeEnd = shift.getTimeEnd();
+		int delta = timeEnd - timeStart;
+		float workTime = ( delta ) > 0 ? delta/100 : (-delta)/100;
+		float minutes = ( (workTime - new Float(workTime).intValue()) * 100 )/60;
+		return new Float(workTime).intValue() + minutes;
 	}
 
 	/** 

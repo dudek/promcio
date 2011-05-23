@@ -107,6 +107,44 @@ public class ScheduleController implements Serializable{
     	    		 
     	    	 }
     	     }
+    	     
+    	     /* Dla urposzczenia pobranie dla miesiaca w przod i w tyl */
+    	     companySchedules = scheduleManager.getAllCompanySchedules(accountBean.getCompany(), calendarDate.get(Calendar.MONTH)-1,calendarDate.get(Calendar.YEAR));
+    	     for ( Schedule schedule : companySchedules){
+    	    	 for ( Employee employee : schedule.getEmployees()){
+    	    		 event = new EmployeeScheduleEvent(employee.getSurname() + " " + employee.getFirstname() + " " + schedule.getShift().getName(), 
+      	    				scheduleManager.calendarToDate(schedule.getCalendar()), scheduleManager.calendarToDate(schedule.getCalendar() ) );
+    	    		 
+    	    		 ((EmployeeScheduleEvent)event).setEmployee(employee);
+    	    		 ((EmployeeScheduleEvent)event).setShift(schedule.getShift());
+    	    		 
+    	    		 ArrayList<com.promcio.domain.Calendar> calendars = new ArrayList<com.promcio.domain.Calendar>();
+    	    		 calendars.add(schedule.getCalendar());
+    	    		 ((EmployeeScheduleEvent)event).setCalendars(calendars);
+    	    		 
+    	    		 
+    	    		 eventModel.addEvent( event );
+    	    		 
+    	    	 }
+    	     }
+    	     companySchedules = scheduleManager.getAllCompanySchedules(accountBean.getCompany(), calendarDate.get(Calendar.MONTH)+1,calendarDate.get(Calendar.YEAR));
+    	     for ( Schedule schedule : companySchedules){
+    	    	 for ( Employee employee : schedule.getEmployees()){
+    	    		 event = new EmployeeScheduleEvent(employee.getSurname() + " " + employee.getFirstname() + " " + schedule.getShift().getName(), 
+      	    				scheduleManager.calendarToDate(schedule.getCalendar()), scheduleManager.calendarToDate(schedule.getCalendar() ) );
+    	    		 
+    	    		 ((EmployeeScheduleEvent)event).setEmployee(employee);
+    	    		 ((EmployeeScheduleEvent)event).setShift(schedule.getShift());
+    	    		 
+    	    		 ArrayList<com.promcio.domain.Calendar> calendars = new ArrayList<com.promcio.domain.Calendar>();
+    	    		 calendars.add(schedule.getCalendar());
+    	    		 ((EmployeeScheduleEvent)event).setCalendars(calendars);
+    	    		 
+    	    		 
+    	    		 eventModel.addEvent( event );
+    	    		 
+    	    	 }
+    	     }
         }
         
         /* gettery,settery */
@@ -170,6 +208,7 @@ public class ScheduleController implements Serializable{
 			for ( com.promcio.domain.Calendar calendar : ((EmployeeScheduleEvent)event).getCalendars() ){
 				Schedule schedule = scheduleManager.getSchedule(((EmployeeScheduleEvent)event).getShift(), calendar);
 				scheduleManager.removeEmployeeFromSchedule(schedule, ((EmployeeScheduleEvent)event).getEmployee());
+				scheduleManager.removeWorkTimeFromSettlement(((EmployeeScheduleEvent)event).getEmployee(), calendar.getMonth(), calendar.getYear(), ((EmployeeScheduleEvent)event).getShift());
 			}
 			eventModel.deleteEvent(event);
 			event = new EmployeeScheduleEvent();
@@ -200,6 +239,10 @@ public class ScheduleController implements Serializable{
     					com.promcio.domain.Calendar calendar = scheduleManager.dateToCalendar(event.getStartDate());
     					schedule = scheduleManager.addSchedule(accountBean.getCompany(), shift, calendar);
     					scheduleManager.addEmployeeToSchedule(schedule, employee);
+    					
+    					//dodanie czasu pracy pracownika do jego rozliczenia
+    					scheduleManager.addWorkTimeToSettlement(employee, calendar.getMonth(), calendar.getYear(), scheduleManager.getWorkTimeFromShift(shift));
+    					
     					( (EmployeeScheduleEvent) event ).setEmployee(employee);
     					( (EmployeeScheduleEvent) event ).setShift(shift);
     					if ( ( (EmployeeScheduleEvent) event ).getCalendars() == null ){
@@ -223,6 +266,9 @@ public class ScheduleController implements Serializable{
     					for ( int i = 0; i <= dayDelta; i++){
     						schedule = scheduleManager.addSchedule(accountBean.getCompany(), shift, calendar);
     						scheduleManager.addEmployeeToSchedule(schedule, employee);
+    						
+    						//dodanie czasu pracy pracownika do jego rozliczenia
+    						scheduleManager.addWorkTimeToSettlement(employee, calendar.getMonth(), calendar.getYear(), scheduleManager.getWorkTimeFromShift(shift));
     						
     						( (EmployeeScheduleEvent) event ).getCalendars().add( calendar );
     						

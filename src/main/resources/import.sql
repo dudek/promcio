@@ -16,7 +16,11 @@ insert into rank (id, name, hourSalary, company_id) values (5, 'manager', 6.0, 2
 insert into rank (id, name, hourSalary, company_id) values (6, 'konsultant it', 6.0, 1)
 insert into rank (id, name, hourSalary, company_id) values (7, 'mechanik', 6.0, 2)
 
-insert into shift (id, name, timeStart, timeEnd, company_id) values (1, 'nocna', 19, 7, 2)
+insert into shift (id, name, timeStart, timeEnd, company_id) values (1, 'nocna', 1900, 700, 2)
+insert into shift (id, name, timeStart, timeEnd, company_id) values (2, 'dzienna 1', 700, 1500, 2)
+insert into shift (id, name, timeStart, timeEnd, company_id) values (3, 'dzienna 2', 700, 1900, 2)
+
+insert into shift (id, name, timeStart, timeEnd, company_id) values (4, 'biuro', 800, 1600, 1)
 
 insert into employeedetails (id, city, postcode, street, buildingnumber, apartmentnumber, staircasenumber, phonenumber, email) values (1, 'Gdansk', '86-333', 'Grunwaldzka', '8', '10', 'B', '600-500-400', 'michal.gosc@example.com')
 insert into employeedetails (id, city, postcode, street, buildingnumber, apartmentnumber, staircasenumber, phonenumber, email) values (2, 'Warszawa', '57-333', 'Grunwaldzka', '11', '1', 'G', '600-500-400', 'zosia.sculi@example.com')
@@ -45,3 +49,6 @@ insert into schedule (id, calendar_id, company_id, shift_id ) values (2, 2, 2, 1
 insert into schedule_employee (schedule_id, employees_id) values (1, 3)
 insert into schedule_employee (schedule_id, employees_id) values (2, 3)
 insert into schedule_employee (schedule_id, employees_id) values (1, 6)
+
+insert into settlement (id, month, year, worktime, employee_id) values ( 1, 4, 2011, 24, 3)
+insert into settlement (id, month, year, worktime, employee_id) values ( 2, 4, 2011, 12, 6)
