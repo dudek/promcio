@@ -5,48 +5,70 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Model;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.promcio.domain.Employee;
 import com.promcio.domain.Settlement;
+import com.promcio.domain.Shift;
+import com.promcio.service.CompanyManager;
 import com.promcio.service.ScheduleManager;
 
-@Model
-@Named
-@SessionScoped
+@ManagedBean
+@ViewScoped
 public class SettlementBean  implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+		private static final long serialVersionUID = 1L;
 	
-	 @Inject
-	 ScheduleManager scheduleManager;
-	 
+	 	@Inject
+	 	private ScheduleManager scheduleManager;
+		@Inject
+		private CompanyManager companyManager;
+		@Inject
+		private AccountBean accountBean;
+	 	
 	 	private long id;
 		private int month;
 		private int year;
 		private float workTime;
+		
+		private long employeeId;
+		
+		private List<Employee> companyEmployees;
 		
 		private List<SelectItem> months;
 		private List<SelectItem> years;
 		
 		private Employee employee; 
 		
+	    private List<SelectItem> selectEmployees; 
 		private List<Settlement> settlements;
 		
-		
-		public String getEmployeeSettlements() {
+		@PostConstruct
+		public void viewInit(){
+			selectEmployees = new ArrayList<SelectItem>();
+			companyEmployees = companyManager.getAllCompanyEmployees(accountBean.getCompany().getId());
+    	    for(Employee employee : companyEmployees  ) {
+    	    	selectEmployees.add(new SelectItem(employee.getId(), "" + employee.getSurname() + " " + employee.getFirstname()));
+    	    } 
+    	    
+    	    // inicjalizacja years
+			int actualYear = Calendar.getInstance().get(Calendar.YEAR);
+			years = new ArrayList<SelectItem>();
+			SelectItem options = new SelectItem();
 			
-			settlements = new ArrayList<Settlement>();
+			for (int i = 1989; i <= actualYear; i++){
+				options = new SelectItem(i, ""+ i);
+				years.add(options);
+			}
 			
-			settlements.add(scheduleManager.getSettlement(employee, month, year));
-			return null;
-		}
-		
-		public List<SelectItem> getMonths() {
+			// inicjalizacja moths
 			months = new ArrayList<SelectItem>();
 			
 			SelectItem option = new SelectItem(0, "styczen");
@@ -73,21 +95,30 @@ public class SettlementBean  implements Serializable {
 			months.add(option);
 			option = new SelectItem(11, "grudzień");
 			months.add(option);
+		}
+		
+		
+		public String getEmployeeSettlements() {
+			Employee employee = new Employee();	
+			for ( Employee it : companyEmployees ){
+				if ( it.getId() == employeeId ){
+					employee = it;
+					break;
+				}
+			}
 			
-				return months;
+			
+			settlements = new ArrayList<Settlement>();
+			
+			settlements.add(scheduleManager.getSettlement(employee, month, year));
+			return null;
+		}
+		
+		public List<SelectItem> getMonths() {
+			return months;
 		}
 		
 		public List<SelectItem> getYears() {
-			
-			int actualYear = Calendar.getInstance().get(Calendar.YEAR);
-			years = new ArrayList<SelectItem>();
-			SelectItem options = new SelectItem();
-			
-			for (int i = 1989; i <= actualYear; i++){
-				options = new SelectItem(i, ""+ i);
-				years.add(options);
-			}
-			
 			return years;
 		}
 		
@@ -142,6 +173,21 @@ public class SettlementBean  implements Serializable {
 
 		public List<Settlement> getSettlements() {
 			return settlements;
+		}
+
+
+		public long getEmployeeId() {
+			return employeeId;
+		}
+
+
+		public void setEmployeeId(long employeeId) {
+			this.employeeId = employeeId;
+		}
+
+
+		public List<SelectItem> getSelectEmployees() {
+			return selectEmployees;
 		}
 
 

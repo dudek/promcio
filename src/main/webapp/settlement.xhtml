@@ -9,19 +9,22 @@
             <h:panelGrid columns="2">
             
             	<h:outputLabel for="employees" value="Pracownik:" />  
-  				<h:selectOneMenu id="employees" value="#{scheduleController.employeeId}">
-  					<f:selectItems value="#{scheduleController.selectEmployees}"/>
+  				<h:selectOneMenu id="employees" value="#{settlementBean.employeeId}">
+  					<f:selectItems value="#{settlementBean.selectEmployees}"/>
   				</h:selectOneMenu>
             
 				<h:outputLabel for="month" value="Miesiac:" />  
-  				<h:selectOneMenu id="months" value="#{SettlementBean.month}">
+  				<h:selectOneMenu id="month" value="#{settlementBean.month}">
   					<f:selectItems value="#{settlementBean.months}"/>
   				</h:selectOneMenu>
   				
   				<h:outputLabel for="year" value="Rok:" />  
-  				<h:selectOneMenu id="years" value="#{SettlementBean.year}">
+  				<h:selectOneMenu id="year" value="#{settlementBean.year}">
   					<f:selectItems value="#{settlementBean.years}"/>
   				</h:selectOneMenu>
+  				
+            </h:panelGrid>
+            
   				
   				<p:dataTable value="#{settlementBean.settlements}" var="current" style="text-align: center;">
 
@@ -29,15 +32,13 @@
                 Rozliczenie godzin pracy
                </f:facet>
 
-               <p:column headerText="Godziny przepracowane w danym okresie">
+               <p:column headerText="Godziny przepracowane w miesiącu">
                   <h:outputText value="#{current.workTime}" />
                </p:column>
 
               
 
             </p:dataTable>
-  				
-            </h:panelGrid>
             <p><p:commandButton update="panel, display, msgs" id="check" actionListener="#{settlementBean.getEmployeeSettlements}" value="Generuj" /></p>
          </p:panel>
 
