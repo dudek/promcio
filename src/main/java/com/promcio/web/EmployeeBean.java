@@ -236,6 +236,11 @@ public class EmployeeBean implements Serializable {
 
 			return "editEmployee?faces-redirect=true";
 	 }
+	 
+	 public List<Employment> getAllEmployments(long id) {
+			System.out.println("EMPLOYEE ID " + id);
+			return employeeManager.getEmployments(id);
+	 }
 
 	 public void doClearFields() {
 			this.updId = null;

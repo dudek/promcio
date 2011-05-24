@@ -42,6 +42,8 @@ insert into employee (id, firstname, surname, pesel, nip, yob, company_id, detai
 insert into employee (id, firstname, surname, pesel, nip, yob, company_id, details_id, rank_id) values (8, 'Scala', 'Johansson', '80010233344', '532-427-74-32', 1980, 1, 8, 6)
 insert into employee (id, firstname, surname, pesel, nip, yob, company_id, details_id, rank_id) values (9, 'Ada', 'Wendows', '76021810012', '647-347-26-63', 1976, 2, 9, 5)
 
+insert into employment (id, contracttype, period, hoursnorm, contractvalue, hoursalary, employee_id) values (1, 'Zlecenie', 10, 8, 10000.0, 20, 7)
+
 insert into calendar (id, day, month, year) values (1, 10, 4, 2011)
 insert into calendar (id, day, month, year) values (2, 11, 4, 2011)
 insert into schedule (id, calendar_id, company_id, shift_id ) values (1, 1, 2, 1)

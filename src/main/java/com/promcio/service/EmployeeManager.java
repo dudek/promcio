@@ -217,8 +217,7 @@ public class EmployeeManager {
 			return em.find(Employee.class, id);
 	 }
 
-	 // Tymczasowa metoda poniewaz nie dziala wartosciowanie zachlanne
 	 public List<Employment> getEmployments(long employeeId) {
-			return em.createQuery("SELECT e FROM Employment e WHERE e.employee.id = '" + employeeId + "'").getResultList();
+			return castList(Employment.class, em.createQuery("SELECT e FROM Employment e WHERE e.employee.id = '" + employeeId + "'").getResultList());
 	 }
 }

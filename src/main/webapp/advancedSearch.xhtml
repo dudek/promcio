@@ -97,7 +97,7 @@
 
                </h:panelGrid>
 
-               <p:dataTable value="#{employeeBean.selectedEmployee.employment}" var="empl" style="text-align: center;">
+               <p:dataTable value="#{employeeBean.getAllEmployments(employeeBean.selectedEmployee.id)}" var="empl" style="text-align: center;">
 
                   <f:facet name="header">Lista zatrudnień</f:facet>
 
