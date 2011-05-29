@@ -4,19 +4,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.SessionScoped;
-import javax.enterprise.inject.Model;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
-import javax.inject.Named;
-
 import com.promcio.domain.Employee;
 import com.promcio.domain.Settlement;
-import com.promcio.domain.Shift;
 import com.promcio.service.CompanyManager;
 import com.promcio.service.ScheduleManager;
 

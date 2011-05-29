@@ -57,7 +57,6 @@ public class EmployeeBean implements Serializable {
 	 private String nip;
 	 private Integer yob;
 
-	 // private Employment employment;
 	 private EmployeeDetails details;
 	 private Rank rank;
 	 private List<Employment> employments;
@@ -203,8 +202,7 @@ public class EmployeeBean implements Serializable {
 			this.pesel = employee.getPesel();
 			this.nip = employee.getNip();
 			this.yob = employee.getYob();
-			// this.employment =
-			// this.details = employee.getDetails();
+			this.rank = employee.getRank();
 
 			if (employee.getDetails() == null) {
 				 employeeDetailsBean.doAddEmployeeDetails(updId);
@@ -222,9 +220,7 @@ public class EmployeeBean implements Serializable {
 			if (employeeManager.getEmployments(employee.getId()).size() <= 0) {
 				 employmentBean.doAddEmploymentEmployee(updId);
 				 employmentBean.setId(employeeManager.getEmployments(employee.getId()).get(0).getId());
-			}
-
-			else {
+			} else {
 				 Employment employment = employeeManager.getEmployments(employee.getId()).get(0);
 				 employmentBean.setContractType(employment.getContractType());
 				 employmentBean.setHoursNorm(employment.getHoursNorm());
@@ -236,10 +232,23 @@ public class EmployeeBean implements Serializable {
 
 			return "editEmployee?faces-redirect=true";
 	 }
-	 
-	 public List<Employment> getAllEmployments(long id) {
-			System.out.println("EMPLOYEE ID " + id);
-			return employeeManager.getEmployments(id);
+
+	 public String doRedirectEmployeeDetails(long id) {
+			Employee employee = employeeManager.getFullEmployee(id);
+			this.updId = id;
+			this.firstname = employee.getFirstname();
+			this.surname = employee.getSurname();
+			this.pesel = employee.getPesel();
+			this.nip = employee.getNip();
+			this.yob = employee.getYob();
+			this.details = employee.getDetails();
+			this.rank = employee.getRank();
+			// this.employments = employee.getEmployments();
+			return "employeeDetails?faces-redirect=true";
+	 }
+
+	 public List<Employment> getAllEmployments() {
+			return employeeManager.getEmployments(this.updId);
 	 }
 
 	 public void doClearFields() {

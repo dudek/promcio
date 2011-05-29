@@ -49,6 +49,14 @@ public class Employee {
 			this.yob = yob;
 	 }
 
+	 public Employee(long id, String firstname, String surname, Rank rank) {
+			super();
+			this.id = id;
+			this.firstname = firstname;
+			this.surname = surname;
+			this.rank = rank;
+	 }
+
 	 public Employee() {
 			super();
 	 }

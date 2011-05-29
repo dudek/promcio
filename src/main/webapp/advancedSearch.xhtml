@@ -7,137 +7,41 @@
             <p:focus />
 
             <p:dataTable var="current" value="#{companyBean.getCompanyEmployees(accountBean.company.id)}" paginator="true" rows="10"
-               selection="#{employeeBean.selectedEmployee}" selectionMode="single" onRowSelectComplete="employeeDialog.show()"
-               onRowSelectUpdate="display" style="text-align: center;">
+               style="text-align: center;">
 
                <f:facet name="header">Lista pracowników</f:facet>
 
-               <p:column filterBy="#{current.firstname}">
+               <p:column>
                   <f:facet name="header">
                      <h:outputText value="Imie" />
                   </f:facet>
                   <h:outputText value="#{current.firstname}" />
                </p:column>
 
-               <p:column filterBy="#{current.surname}">
+               <p:column>
                   <f:facet name="header">
                      <h:outputText value="Nazwisko" />
                   </f:facet>
                   <h:outputText value="#{current.surname}" />
                </p:column>
 
-               <p:column filterBy="#{current.yob}">
-                  <f:facet name="header">
-                     <h:outputText value="Rok urodzenia" />
-                  </f:facet>
-                  <h:outputText value="#{current.yob}" />
-               </p:column>
-
-               <p:column filterBy="#{current.pesel}">
-                  <f:facet name="header">
-                     <h:outputText value="PESEL" />
-                  </f:facet>
-                  <h:outputText value="#{current.pesel}" />
-               </p:column>
-
-               <p:column filterBy="#{current.nip}">
-                  <f:facet name="header">
-                     <h:outputText value="NIP" />
-                  </f:facet>
-                  <h:outputText value="#{current.nip}" />
-               </p:column>
-
-               <p:column filterBy="#{current.rank.name}">
+               <p:column>
                   <f:facet name="header">
                      <h:outputText value="Stanowisko" />
                   </f:facet>
                   <h:outputText value="#{current.rank.name}" />
                </p:column>
 
-               <p:column filterBy="#{current.rank.hourSalary}">
-                  <f:facet name="header">
-                     <h:outputText value="Stawka godz." />
-                  </f:facet>
-                  <h:outputText value="#{current.rank.hourSalary}" />
-               </p:column>
-
-               <p:column headerText="">
-                  <p:commandButton value="edycja" action="#{employeeBean.doRedirectUpdateEmployee(current.id)}" ajax="false" />
-               </p:column>
-
-               <p:column headerText="">
+               <p:column style="width:64px">
                   <p:commandButton update="result" value="usuń" actionListener="#{employeeBean.doRemoveEmployee(current.id)}" />
+               </p:column>
+
+               <p:column style="width:32px">
+                  <p:commandButton action="#{employeeBean.doRedirectEmployeeDetails(current.id)}" ajax="false" image="ui-icon ui-icon-search" />
                </p:column>
 
             </p:dataTable>
 
-            <p:dialog header="Employee Detail" widgetVar="employeeDialog" resizable="true" width="700" height="300" showEffect="explode"
-               hideEffect="explode">
-               <h:panelGrid id="display" columns="2" cellpadding="4">
-
-                  <f:facet name="header">
-                     <h:outputText value="#{employeeBean.selectedEmployee.firstname}" />
-                     <h:outputText value="  #{employeeBean.selectedEmployee.surname}" />
-                  </f:facet>
-
-                  <h:outputText value="Rok urodzenia:" />
-                  <h:outputText value="#{employeeBean.selectedEmployee.yob}" />
-
-                  <h:outputText value="PESEL:" />
-                  <h:outputText value="#{employeeBean.selectedEmployee.pesel}" />
-
-                  <h:outputText value="NIP:" />
-                  <h:outputText value="#{employeeBean.selectedEmployee.nip}" />
-
-                  <h:outputText value="Stanowisko:" />
-                  <h:outputText value="#{employeeBean.selectedEmployee.rank.name}" />
-
-                  <h:outputText value="Stawka godzinowa:" />
-                  <h:outputText value="#{employeeBean.selectedEmployee.rank.hourSalary}" />
-
-               </h:panelGrid>
-
-               <p:dataTable value="#{employeeBean.getAllEmployments(employeeBean.selectedEmployee.id)}" var="empl" style="text-align: center;">
-
-                  <f:facet name="header">Lista zatrudnień</f:facet>
-
-                  <p:column filterBy="#{empl.contractType}">
-                     <f:facet name="header">
-                        <h:outputText value="Contract Type" />
-                     </f:facet>
-                     <h:outputText value="#{empl.contractType}" />
-                  </p:column>
-
-                  <p:column filterBy="#{empl.period}">
-                     <f:facet name="header">
-                        <h:outputText value="Perion" />
-                     </f:facet>
-                     <h:outputText value="#{empl.period}" />
-                  </p:column>
-
-                  <p:column filterBy="#{empl.hoursNorm}">
-                     <f:facet name="header">
-                        <h:outputText value="Hours Norm" />
-                     </f:facet>
-                     <h:outputText value="#{empl.hoursNorm}" />
-                  </p:column>
-
-                  <p:column filterBy="#{empl.contractValue}">
-                     <f:facet name="header">
-                        <h:outputText value="Contract Value" />
-                     </f:facet>
-                     <h:outputText value="#{empl.contractValue}" />
-                  </p:column>
-
-                  <p:column filterBy="#{empl.hourSalary}">
-                     <f:facet name="header">
-                        <h:outputText value="Hour Salary" />
-                     </f:facet>
-                     <h:outputText value="#{empl.hourSalary}" />
-                  </p:column>
-
-               </p:dataTable>
-            </p:dialog>
          </p:panel>
       </h:form>
    </ui:define>

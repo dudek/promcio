@@ -126,11 +126,6 @@ public class CompanyManager {
 
 			em.remove(rank);
 	 }
-	 
-	 public Rank getRank(long id) {
-			// TODO do naprawy
-			return (Rank) em.createQuery("SELECT DISTINCT r FROM Rank r, Player p WHERE p.id='" + id + "' and r.id=p.rank_id").getSingleResult();
-	 }
 
 	 public void joinCompanyWithEmployee(long companyId, long employeeId) {
 			Company company = em.find(Company.class, companyId);
@@ -161,7 +156,7 @@ public class CompanyManager {
 	 }
 
 	 public List<Employee> getAllCompanyEmployees(long companyId) {
-			return castList(Employee.class, em.createQuery("SELECT NEW Employee(e.id, e.firstname, e.surname, e.pesel, e.nip, e.yob) FROM Employee e WHERE e.company.id ='" + companyId + "'").getResultList());
+			return castList(Employee.class, em.createQuery("SELECT NEW Employee(e.id, e.firstname, e.surname, e.rank) FROM Employee e WHERE e.company.id ='" + companyId + "'").getResultList());
 	 }
 	 
 	 public List<Shift> getAllCompanyShifts(long companyId){

@@ -214,7 +214,8 @@ public class EmployeeManager {
 	 }
 
 	 public Employee getFullEmployee(long id) {
-			return em.find(Employee.class, id);
+			return (Employee) em.createQuery("SELECT DISTINCT e FROM Employee e WHERE e.id = '" + id + "'").getSingleResult();
+			// return em.find(Employee.class, id);
 	 }
 
 	 public List<Employment> getEmployments(long employeeId) {
