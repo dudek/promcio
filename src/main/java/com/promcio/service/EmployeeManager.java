@@ -2,10 +2,14 @@ package com.promcio.service;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
+import com.promcio.domain.Calendar;
 import com.promcio.domain.Company;
 import com.promcio.domain.Employee;
 import com.promcio.domain.EmployeeDetails;
@@ -17,6 +21,8 @@ public class EmployeeManager {
 
 	 @PersistenceContext
 	 EntityManager em;
+	 @Inject
+	 ScheduleManager scheduleManager;
 
 	 public static <T> List<T> castList(Class<? extends T> clazz, Collection<?> c) {
 			List<T> r = new ArrayList<T>(c.size());
@@ -143,10 +149,16 @@ public class EmployeeManager {
 			em.persist(employment);
 	 }
 
-	 public void addEmployment(long employeeId, String contractType, float contractValue, int period, int hoursNorm, float hourSalary) {
+	 public void addEmployment(long employeeId, String contractType, Date startDate, Date endDate, float contractValue, int period, int hoursNorm, float hourSalary) {
 			Employee employee = em.find(Employee.class, employeeId);
 			Employment employment = new Employment();
 
+			Calendar from = scheduleManager.addOrGetCalendarFromDate(startDate);
+			Calendar to = scheduleManager.addOrGetCalendarFromDate(endDate);
+			
+			employment.setStartDate(from);
+			employment.setEndDate(to);
+			
 			employment.setContractType(contractType);
 			employment.setContractValue(contractValue);
 			employment.setPeriod(period);
@@ -158,9 +170,15 @@ public class EmployeeManager {
 			em.persist(employment);
 	 }
 
-	 public void updateEmployment(long id, String contractType, float contractValue, int period, int hoursNorm, float hourSalary) {
+	 public void updateEmployment(long id, String contractType, Date startDate, Date endDate, float contractValue, int period, int hoursNorm, float hourSalary) {
 			Employment employment = em.find(Employment.class, id);
 
+			Calendar from = scheduleManager.addOrGetCalendarFromDate(startDate);
+			Calendar to = scheduleManager.addOrGetCalendarFromDate(endDate);
+			
+			employment.setStartDate(from);
+			employment.setEndDate(to);
+			
 			employment.setContractType(contractType);
 			employment.setContractValue(contractValue);
 			employment.setPeriod(period);

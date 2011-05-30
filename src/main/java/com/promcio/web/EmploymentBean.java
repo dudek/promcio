@@ -1,6 +1,8 @@
 package com.promcio.web;
 
 import java.io.Serializable;
+import java.util.Date;
+
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Model;
 import javax.faces.application.FacesMessage;
@@ -29,7 +31,8 @@ public class EmploymentBean implements Serializable {
 	 @NotEmpty
 	 private String contractType;
 
-	 
+	 private Date startDate;
+	 private Date endDate;
 	 
 	 private int period;
 	 private int hoursNorm;
@@ -93,17 +96,34 @@ public class EmploymentBean implements Serializable {
 	 
 	 public void setId(long id) {
 			this.id = id;
-		}
+	 }
 
-		public long getId() {
+	 public long getId() {
 			return id;
-		}
+	 }
 	 
+	 public Date getStartDate() {
+		 	return startDate;
+	 }
+
+	 public void setStartDate(Date startDate) {
+		  	this.startDate = startDate;
+	 }
+
+	 public Date getEndDate() {
+		 	return endDate;
+	 }
+
+	 public void setEndDate(Date endDate) {
+			this.endDate = endDate;
+	 }
+		
 	 /* --------------------------------------- */
 	 // actions
-	 
-	 public String doAddEmploymentEmployee(long employeeId){
-		 	employeeManager.addEmployment(employeeId, contractType, contractValue, period, hoursNorm, hourSalary);
+	
+
+	public String doAddEmploymentEmployee(long employeeId){
+		 	employeeManager.addEmployment(employeeId, contractType, startDate, endDate, contractValue, period, hoursNorm, hourSalary);
 		 	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO:", "Umowa dodana!"));
 		 	return null;
 	 }
@@ -116,7 +136,7 @@ public class EmploymentBean implements Serializable {
 	 
 
 	 public String doUpdateEmploymentEmployee(){
-		 	employeeManager.updateEmployment(id, contractType,  contractValue, period, hoursNorm, hourSalary);
+		 	employeeManager.updateEmployment(id, contractType, startDate, endDate, contractValue, period, hoursNorm, hourSalary);
 		 	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "INFO:", "Umowa poprawiona !"));
 		 	return null;
 	 }

@@ -10,8 +10,8 @@ public class Employment {
 
 	 private long id;
 
-	 // private Calendar contractStart;
-	 // private Calendar contractEnd;
+	 private Calendar startDate;
+	 private Calendar endDate;
 	 private String contractType;
 
 	 private int period;
@@ -81,5 +81,23 @@ public class Employment {
 
 	 public void setEmployee(Employee employee) {
 			this.employee = employee;
+	 }
+
+	 @ManyToOne
+	 public Calendar getStartDate() {
+		 	return startDate;
+	 }
+
+	 public void setStartDate(Calendar startDate) {
+		 	this.startDate = startDate;
+	 }
+
+	 @ManyToOne
+	 public Calendar getEndDate() {
+			return endDate;
+	 }
+
+	 public void setEndDate(Calendar endDate) {
+		 	this.endDate = endDate;
 	 }
 }

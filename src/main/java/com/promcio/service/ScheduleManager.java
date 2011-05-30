@@ -173,6 +173,17 @@ public class ScheduleManager {
 		em.persist(calendar);
 	}
 	
+	public Calendar addOrGetCalendarFromDate(Date date){
+		Calendar calendar = dateToCalendar(date);
+		try{
+			calendar = (Calendar) em.createQuery("SELECT c FROM Calendar c WHERE c.year='"+ calendar.getYear() +"' AND c.month='"+ calendar.getMonth()+"' AND c.day='"+ calendar.getDay() +"'" ).getSingleResult();
+		}
+		catch(NoResultException noResultException){
+			em.persist(calendar);
+		}
+		return calendar;
+	}
+	
 	public void addCalendar(int day, int month, int year){
 		Calendar calendar = new Calendar();
 		calendar.setDay(day);

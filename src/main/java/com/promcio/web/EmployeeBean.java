@@ -1,6 +1,7 @@
 package com.promcio.web;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Model;
@@ -11,6 +12,8 @@ import javax.inject.Named;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.NotEmpty;
+
+import com.promcio.domain.Calendar;
 import com.promcio.domain.Company;
 import com.promcio.domain.Employee;
 import com.promcio.domain.EmployeeDetails;
@@ -18,6 +21,7 @@ import com.promcio.domain.Employment;
 import com.promcio.domain.Rank;
 import com.promcio.service.CompanyManager;
 import com.promcio.service.EmployeeManager;
+import com.promcio.service.ScheduleManager;
 import com.promcio.service.SearchManager;
 
 @Model
@@ -31,6 +35,8 @@ public class EmployeeBean implements Serializable {
 	 EmployeeManager employeeManager;
 	 @Inject
 	 CompanyManager companyManager;
+	 @Inject
+	 ScheduleManager scheduleManager;
 	 @Inject
 	 SearchManager searchManager;
 
@@ -222,6 +228,22 @@ public class EmployeeBean implements Serializable {
 				 employmentBean.setId(employeeManager.getEmployments(employee.getId()).get(0).getId());
 			} else {
 				 Employment employment = employeeManager.getEmployments(employee.getId()).get(0);
+				 
+				 Calendar startDate = employment.getStartDate();
+				 Calendar endDate = employment.getEndDate();
+				 Date from;
+				 Date to;
+				 
+				 if ( startDate != null && endDate != null ){
+					 from = scheduleManager.calendarToDate(startDate);
+					 to = scheduleManager.calendarToDate(endDate);
+				 }
+				 else{
+					 from = null;
+					 to = null;
+				 }
+				 employmentBean.setStartDate(from);
+				 employmentBean.setEndDate(to);
 				 employmentBean.setContractType(employment.getContractType());
 				 employmentBean.setHoursNorm(employment.getHoursNorm());
 				 employmentBean.setContractValue(employment.getContractValue());

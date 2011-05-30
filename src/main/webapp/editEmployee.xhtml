@@ -78,6 +78,20 @@
             <p:inputText id="contractType" required="false" label="Typ umowy" value="#{employmentBean.contractType}" />
             <p:message for="contractType" errorClass="invalid" />
             
+            <h:outputLabel for="from" value="Początek umowy" style="float: right;" />  
+            <p:inputMask id="from" mask="99/99/9999"  
+               value="#{employmentBean.startDate}" >  
+                <f:convertDateTime pattern="dd/MM/yyyy" />  
+            </p:inputMask>  
+             <p:message for="from" errorClass="invalid" />
+            
+            <h:outputLabel for="to" value="Koniec umowy" style="float: right;"/>  
+            <p:inputMask id="to" mask="99/99/9999"  
+               value="#{employmentBean.endDate}" >  
+                <f:convertDateTime pattern="dd/MM/yyyy" />  
+            </p:inputMask>  
+             <p:message for="to" errorClass="invalid" />
+            
             <h:outputLabel for="hourSalary" value="Wynagrodzenie za godzine" style="float: right;" />
             <p:inputText id="hourSalary" required="false" label="Wynagrodzenie za godzine" value="#{employmentBean.hourSalary}" />
             <p:message for="hourSalary" errorClass="invalid" />
