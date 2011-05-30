@@ -26,20 +26,38 @@
             </h:panelGrid>
             
   				
-  				<p:dataTable value="#{settlementBean.settlements}" var="current" style="text-align: center;">
+  				<p:dataTable value="#{settlementBean.generatedSettlements}" var="current" style="text-align: center;">
 
                <f:facet name="header">
                 Rozliczenie godzin pracy
                </f:facet>
 
-               <p:column headerText="Godziny przepracowane w miesiącu">
-                  <h:outputText value="#{current.workTime}" />
+               <p:column headerText="Godziny w miesiącu">
+                  <h:outputText value="#{current.monthHours}" />
+               </p:column>
+               
+               <p:column headerText="Docelowe godziny w miesiącu">
+                  <h:outputText value="#{current.monthHoursTarget}" />
                </p:column>
 
-              
+               <p:column headerText="Godziny w okresie rozliczeniowym">
+                  <h:outputText value="#{current.periodHours}" />
+               </p:column>
+               
+               <p:column headerText="Docelowe godziny w okresie rozliczeniowym">
+                  <h:outputText value="#{current.periodHoursTarget}" />
+               </p:column>
+               
+               <p:column headerText="Okres rozliczeniowy (w miesiącach)">
+                  <h:outputText value="#{current.period}" />
+               </p:column>
+               
+               <p:column headerText="Nadgodziny/brakujące godziny (w miesiącu)">
+                  <h:outputText value="#{current.monthOvertime}" />
+               </p:column>
 
             </p:dataTable>
-            <p><p:commandButton update="panel, display, msgs" id="check" actionListener="#{settlementBean.getEmployeeSettlements}" value="Generuj" /></p>
+            <p><p:commandButton update="panel, display, msgs" id="check" actionListener="#{settlementBean.generate}" value="Generuj" /></p>
          </p:panel>
 
       </h:form>

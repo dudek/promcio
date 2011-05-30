@@ -30,6 +30,13 @@
                <p:column headerText="NIP">
                   <h:outputText value="#{current.nip}" />
                </p:column>
+               
+               <p:column>
+                  <f:facet name="header">
+                     <h:outputText value="Stanowisko" />
+                  </f:facet>
+                  <h:outputText value="#{current.rank.name}" />
+               </p:column>
 
                <p:column headerText="">
                   <p:commandButton update="panel, display" value="usun" actionListener="#{employeeBean.doRemoveEmployee(current.id)}">

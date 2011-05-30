@@ -39,7 +39,7 @@ public class Employee {
 
 	 /* --------------------------------------- */
 
-	 public Employee(long id, String firstname, String surname, String pesel, String nip, int yob) {
+	 public Employee(long id, String firstname, String surname, String pesel, String nip, int yob, Rank rank) {
 			super();
 			this.id = id;
 			this.firstname = firstname;
@@ -47,6 +47,7 @@ public class Employee {
 			this.pesel = pesel;
 			this.nip = nip;
 			this.yob = yob;
+			this.rank = rank;
 	 }
 
 	 public Employee(long id, String firstname, String surname, Rank rank) {
