@@ -42,7 +42,16 @@ insert into employee (id, firstname, surname, pesel, nip, yob, company_id, detai
 insert into employee (id, firstname, surname, pesel, nip, yob, company_id, details_id, rank_id) values (8, 'Scala', 'Johansson', '80010233344', '532-427-74-32', 1980, 1, 8, 6)
 insert into employee (id, firstname, surname, pesel, nip, yob, company_id, details_id, rank_id) values (9, 'Ada', 'Wendows', '76021810012', '647-347-26-63', 1976, 2, 9, 5)
 
-insert into employment (id, contracttype, period, hoursnorm, contractvalue, hoursalary, employee_id) values (1, 'Zlecenie', 10, 8, 10000.0, 20, 7)
+insert into employment (id, contracttype, period, hoursnorm, contractvalue, hoursalary, employee_id) values (1, 'Zlecenie', 3, 480, 10000.0, 0, 7)
+insert into employment (id, contracttype, period, hoursnorm, contractvalue, hoursalary, employee_id) values (2, 'Zlecenie', 3, 480, 12000.0, 0, 8)
+insert into employment (id, contracttype, period, hoursnorm, contractvalue, hoursalary, employee_id) values (3, 'Zlecenie', 3, 240, 20000.0, 0, 9)
+insert into employment (id, contracttype, period, hoursnorm, contractvalue, hoursalary, employee_id) values (4, 'Oprace', 1, 160, 0.0, 8, 1)
+insert into employment (id, contracttype, period, hoursnorm, contractvalue, hoursalary, employee_id) values (5, 'Oprace', 1, 160, 0.0, 8, 2)
+insert into employment (id, contracttype, period, hoursnorm, contractvalue, hoursalary, employee_id) values (6, 'Oprace', 1, 160, 0.0, 8, 3)
+insert into employment (id, contracttype, period, hoursnorm, contractvalue, hoursalary, employee_id) values (7, 'Oprace', 1, 80, 0.0, 10, 4)
+insert into employment (id, contracttype, period, hoursnorm, contractvalue, hoursalary, employee_id) values (8, 'Oprace', 1, 80, 0.0, 10, 5)
+insert into employment (id, contracttype, period, hoursnorm, contractvalue, hoursalary, employee_id) values (9, 'Oprace', 1, 80, 0.0, 12, 6)
+
 
 insert into calendar (id, day, month, year) values (1, 10, 4, 2011)
 insert into calendar (id, day, month, year) values (2, 11, 4, 2011)
