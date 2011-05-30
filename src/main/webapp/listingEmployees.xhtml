@@ -39,13 +39,12 @@
                </p:column>
 
                <p:column headerText="">
-                  <p:commandButton update="panel, display" value="usun" actionListener="#{employeeBean.doRemoveEmployee(current.id)}">
+                  <p:commandButton update="panel, display" value="usuń" actionListener="#{employeeBean.doRemoveEmployee(current.id)}">
                   </p:commandButton>
                </p:column>
                
-               <p:column headerText="">
-                  <p:commandButton  value="edycja" action="#{employeeBean.doRedirectUpdateEmployee(current.id)}" ajax="false">
-                  </p:commandButton>
+               <p:column style="width:32px">
+                  <p:commandButton action="#{employeeBean.doRedirectEmployeeDetails(current.employee.id)}" ajax="false" image="ui-icon ui-icon-search" />
                </p:column>
 
                <f:facet name="footer">

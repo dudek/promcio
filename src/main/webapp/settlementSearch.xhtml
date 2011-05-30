@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.prime.com.tr/ui" template="/WEB-INF/templates/default.xhtml">
+   <ui:define name="content">
+      <h:form prependId="false" id="bv">
+         <p:panel id="panel" header="Wyszukiwanie pracowników wg rozliczeń" style="margin-bottom:10px;">
+            <p:messages id="msgs" showDetail="true" />
+            <p:focus />
+            <h:panelGrid columns="2">
+
+               <h:outputLabel for="month" value="Miesiąc:" />
+               <h:selectOneMenu id="month" value="#{searchBean.month}">
+                  <f:selectItems value="#{searchBean.months}" />
+               </h:selectOneMenu>
+
+               <h:outputLabel for="year" value="Rok:" />
+               <h:selectOneMenu id="year" value="#{searchBean.year}">
+                  <f:selectItems value="#{searchBean.years}" />
+               </h:selectOneMenu>
+
+               <h:outputLabel for="year" value="Kryterium:" />
+               <h:selectOneRadio value="#{searchBean.overtimeOrNot}">
+                  <f:selectItems value="#{searchBean.overtimeOrNotList}" />
+               </h:selectOneRadio>
+
+               <p:commandButton update="display, msgs" id="check" actionListener="#{searchBean.generateEmployeeSettlements}" value="Szukaj" />
+
+            </h:panelGrid>
+
+            <p:dataTable id="display" var="current" value="#{searchBean.employeeSettlements}" paginator="true" rows="10" style="text-align: center;">
+
+               <f:facet name="header">Lista pracowników</f:facet>
+
+               <p:column>
+                  <f:facet name="header">
+                     <h:outputText value="Imię" />
+                  </f:facet>
+                  <h:outputText value="#{current.employee.firstname}" />
+               </p:column>
+
+               <p:column>
+                  <f:facet name="header">
+                     <h:outputText value="Nazwisko" />
+                  </f:facet>
+                  <h:outputText value="#{current.employee.surname}" />
+               </p:column>
+
+               <p:column headerText="Okres rozliczeniowy (w miesiącach)">
+                  <h:outputText value="#{current.period}" />
+               </p:column>
+               
+               <p:column headerText="Docelowe godziny w miesiącu" sortBy="#{current.monthHoursTarget}">
+                  <h:outputText value="#{current.monthHoursTarget}" />
+               </p:column>
+
+               <p:column headerText="Nadgodziny/brakujące godziny (w miesiącu)" sortBy="#{current.monthOvertime}">
+                  <h:outputText value="#{current.monthOvertime}" />
+               </p:column>
+
+               <p:column style="width:32px">
+                  <p:commandButton action="#{employeeBean.doRedirectEmployeeDetails(current.employee.id)}" ajax="false" image="ui-icon ui-icon-search" />
+               </p:column>
+
+            </p:dataTable>
+
+         </p:panel>
+      </h:form>
+   </ui:define>
+</ui:composition>
