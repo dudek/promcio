@@ -5,32 +5,52 @@
       <h:form prependId="false" id="bv">
          <p:panel id="panel" header="Detale Pracownika" style="margin-bottom:10px;">
 
-            <h:panelGrid id="display" columns="2" cellpadding="4">
+            <h:panelGrid id="display" columns="4" cellpadding="4">
 
-               <f:facet name="header">
-                  <h:outputText value="#{employeeBean.updId}" />
-                  <h:outputText value="  #{employeeBean.firstname}" />
+               <f:facet name="header" style="font-family: Georgia, 'Times New Roman', Times, serif;text-transform: uppercase;font-size: 20px;">
+                  <h:outputText value="#{employeeBean.firstname}" />
                   <h:outputText value="  #{employeeBean.surname}" />
                </f:facet>
 
                <h:outputLabel value="Rok urodzenia:" style="float: right;font-weight:bold;" />
                <h:outputText value="#{employeeBean.yob}" />
 
+               <h:outputLabel value="Miasto:" style="float: right;font-weight:bold;" />
+               <h:outputText value="#{employeeDetailsBean.city}" />
+
                <h:outputLabel value="PESEL:" style="float: right;font-weight:bold;" />
                <h:outputText value="#{employeeBean.pesel}" />
+
+               <h:outputLabel value="Kod pocztowy:" style="float: right;font-weight:bold;" />
+               <h:outputText value="#{employeeDetailsBean.postCode}" />
 
                <h:outputLabel value="NIP:" style="float: right;font-weight:bold;" />
                <h:outputText value="#{employeeBean.nip}" />
 
+               <h:outputLabel value="Ulica:" style="float: right;font-weight:bold;" />
+               <h:outputText value="#{employeeDetailsBean.street}" />
+
+               <h:outputLabel value="Numer telefonu:" style="float: right;font-weight:bold;" />
+               <h:outputText value="#{employeeDetailsBean.phoneNumber}" />
+
+               <h:outputLabel value="Numer domu:" style="float: right;font-weight:bold;" />
+               <h:outputText value="#{employeeDetailsBean.buildingNumber}" />
+
                <h:outputLabel value="Stanowisko:" style="float: right;font-weight:bold;" />
                <h:outputText value="#{employeeBean.rank.name}" />
+
+               <h:outputLabel value="Numer mieszkania:" style="float: right;font-weight:bold;" />
+               <h:outputText value="#{employeeDetailsBean.apartmentNumber}" />
 
                <h:outputLabel value="Stawka godzinowa:" style="float: right;font-weight:bold;" />
                <h:outputText value="#{employeeBean.rank.hourSalary}" />
 
+               <h:outputLabel value="Klatka:" style="float: right;font-weight:bold;" />
+               <h:outputText value="#{employeeDetailsBean.staircaseNumber}" />
+
             </h:panelGrid>
 
-            <p:dataTable value="#{employeeBean.allEmployments}" var="empl" style="text-align: center;">
+            <p:dataTable value="#{employeeBean.allEmployments}" var="empl" style="text-align: center; width: 70%; margin: 30px 0;">
 
                <f:facet name="header">Lista zatrudnień</f:facet>
 
@@ -70,7 +90,7 @@
                </p:column>
 
             </p:dataTable>
-            
+
             <p:commandButton value="edycja" action="#{employeeBean.doRedirectUpdateEmployee(employeeBean.updId)}" ajax="false" />
 
          </p:panel>

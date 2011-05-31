@@ -12,7 +12,6 @@ import javax.inject.Named;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.NotEmpty;
-
 import com.promcio.domain.Calendar;
 import com.promcio.domain.Company;
 import com.promcio.domain.Employee;
@@ -228,19 +227,18 @@ public class EmployeeBean implements Serializable {
 				 employmentBean.setId(employeeManager.getEmployments(employee.getId()).get(0).getId());
 			} else {
 				 Employment employment = employeeManager.getEmployments(employee.getId()).get(0);
-				 
+
 				 Calendar startDate = employment.getStartDate();
 				 Calendar endDate = employment.getEndDate();
 				 Date from;
 				 Date to;
-				 
-				 if ( startDate != null && endDate != null ){
-					 from = scheduleManager.calendarToDate(startDate);
-					 to = scheduleManager.calendarToDate(endDate);
-				 }
-				 else{
-					 from = null;
-					 to = null;
+
+				 if (startDate != null && endDate != null) {
+						from = scheduleManager.calendarToDate(startDate);
+						to = scheduleManager.calendarToDate(endDate);
+				 } else {
+						from = null;
+						to = null;
 				 }
 				 employmentBean.setStartDate(from);
 				 employmentBean.setEndDate(to);
@@ -266,6 +264,15 @@ public class EmployeeBean implements Serializable {
 			this.details = employee.getDetails();
 			this.rank = employee.getRank();
 			// this.employments = employee.getEmployments();
+
+			employeeDetailsBean.setApartmentNumber(this.details.getApartmentNumber());
+			employeeDetailsBean.setBuildingNumber(this.details.getBuildingNumber());
+			employeeDetailsBean.setCity(this.details.getCity());
+			employeeDetailsBean.setEmail(this.details.getEmail());
+			employeeDetailsBean.setPhoneNumber(this.details.getPhoneNumber());
+			employeeDetailsBean.setPostCode(this.details.getPostCode());
+			employeeDetailsBean.setStaircaseNumber(this.details.getStaircaseNumber());
+			employeeDetailsBean.setStreet(this.details.getStreet());
 			return "employeeDetails?faces-redirect=true";
 	 }
 
