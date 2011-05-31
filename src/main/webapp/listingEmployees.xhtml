@@ -5,7 +5,15 @@
    <ui:define name="content">
       <h:form prependId="false">
          <p:panel id="panel" style="margin-bottom:10px;">
-            <p:dataTable value="#{companyBean.getCompanyEmployees(accountBean.company.id)}" var="current" style="text-align: center;">
+
+            <h:panelGrid columns="2">
+
+               <h:outputLabel value="Pracownicy z zakończonym kontraktem " />
+               <p:commandButton update="display" id="check" actionListener="#{searchBean.getEmployeesWithEndedContract}" value="Pokaż" />
+
+            </h:panelGrid>
+
+            <p:dataTable id="display" value="#{searchBean.companyEmployees}" var="current" style="text-align: center;">
 
                <f:facet name="header">
                  Lista pracowników
@@ -19,36 +27,33 @@
                   <h:outputText value="#{current.surname}" />
                </p:column>
 
-               <p:column headerText="PESEL">
-                  <h:outputText value="#{current.pesel}" />
-               </p:column>
-
                <p:column headerText="Rok urodzenia">
                   <h:outputText value="#{current.yob}" />
                </p:column>
 
-               <p:column headerText="NIP">
-                  <h:outputText value="#{current.nip}" />
+               <p:column headerText="Początek kontraktu">
+                  <h:outputText value="#{current.employments[0].startDate.day}/" />
+                  <h:outputText value="#{current.employments[0].startDate.month}/" />
+                  <h:outputText value="#{current.employments[0].startDate.year}" />
                </p:column>
-               
-               <p:column>
-                  <f:facet name="header">
-                     <h:outputText value="Stanowisko" />
-                  </f:facet>
-                  <h:outputText value="#{current.rank.name}" />
+
+               <p:column headerText="Koniec kontraktu">
+                  <h:outputText value="#{current.employments[0].endDate.day}/" />
+                  <h:outputText value="#{current.employments[0].endDate.month}/" />
+                  <h:outputText value="#{current.employments[0].endDate.year}" />
                </p:column>
 
                <p:column headerText="">
                   <p:commandButton update="panel, display" value="usuń" actionListener="#{employeeBean.doRemoveEmployee(current.id)}">
                   </p:commandButton>
                </p:column>
-               
+
                <p:column style="width:32px">
-                  <p:commandButton action="#{employeeBean.doRedirectEmployeeDetails(current.employee.id)}" ajax="false" image="ui-icon ui-icon-search" />
+                  <p:commandButton action="#{employeeBean.doRedirectEmployeeDetails(current.id)}" ajax="false" image="ui-icon ui-icon-search" />
                </p:column>
 
                <f:facet name="footer">
-                  Liczba pracowników: #{(companyBean.numberOfEmployees)}
+                  Liczba pracowników: #{(searchBean.numberOfEmployees)}
                </f:facet>
 
             </p:dataTable>

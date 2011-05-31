@@ -13,15 +13,13 @@
 
       <p:layoutUnit id="top" position="top" resizable="true" height="100" minHeight="100" maxHeight="140">
          <h:outputLink value="home.jsf" style="font-size:36px;position:absolute;top:20px;left:100px;">Promcio</h:outputLink>
-         <div id="auth">
-         <h:form>
-         <h:outputLink value="createAccount.jsf" rendered='#{!accountBean.logged}' style="color: gray;">Create Account</h:outputLink>
-         <h:outputText value="Welcome #{accountBean.login}" rendered='#{accountBean.logged}'/> | 
+         <div id="auth"><h:form>
+            <h:outputLink value="createAccount.jsf" rendered='#{!accountBean.logged}' style="color: gray;">Create Account</h:outputLink>
+            <h:outputText value="Welcome #{accountBean.login}" rendered='#{accountBean.logged}' /> | 
          <h:outputLink value="signIn.jsf" rendered='#{!accountBean.logged}' style="color: gray;">Sign In</h:outputLink>
-         <p:commandLink action="#{accountBean.signOut}" ajax="false" rendered='#{accountBean.logged}' style="color: gray;">Sign Out | </p:commandLink>
-         <h:outputLink value="changePassword.jsf" rendered='#{accountBean.logged}' style="color: gray;" update="display">Zmiana Hasła</h:outputLink>
-         </h:form>
-         </div>
+            <p:commandLink action="#{accountBean.signOut}" ajax="false" rendered='#{accountBean.logged}' style="color: gray;">Sign Out | </p:commandLink>
+            <h:outputLink value="changePassword.jsf" rendered='#{accountBean.logged}' style="color: gray;" update="display">Zmiana Hasła</h:outputLink>
+         </h:form></div>
       </p:layoutUnit>
 
       <p:layoutUnit id="bottom" position="bottom" height="50" zindex="0" scrollable="null">
@@ -31,50 +29,45 @@
       </p:layoutUnit>
 
       <p:layoutUnit id="left" position="left" width="170" resizable="null" closable="null" collapsible="true">
-         
-      <h:form>  
-    <p:accordionPanel autoHeight="false" dynamic="true" cache="true">  
-        <p:tab title="Navigation">  
-            <h:panelGrid columns="2" cellpadding="10">  
-            <h:outputLink value="home.jsf" update="display">Home</h:outputLink>
-            </h:panelGrid>  
-        </p:tab>  
-        <p:tab title="Pracownicy" rendered="#{accountBean.logged}" >  
-            <h:panelGrid columns="1" cellpadding="10">
-               <h:outputLink value="listingEmployees.jsf" ajax="true" update="center">Zarządanie pracownikami</h:outputLink>
-               <p:commandLink value="Dodawanie pracownika" action="#{employeeBean.doRedirectAddEmployee()}" ajax="false" />
-            </h:panelGrid>  
-        </p:tab>   
-        <p:tab title="Firma" rendered="#{accountBean.logged}" >  
-            <h:panelGrid columns="1" cellpadding="10">
-               <h:outputLink value="companyDetails.jsf">Info o firmie</h:outputLink>
-            </h:panelGrid> 
-            <h:panelGrid columns="1" cellpadding="10">
-               <h:outputLink value="listingRanks.jsf">Zarzadzanie stanowiskami</h:outputLink>
-            </h:panelGrid> 
-            <h:panelGrid columns="1" cellpadding="10">
-               <h:outputLink value="listingShifts.jsf">Zarzadzanie zmianami</h:outputLink>
-            </h:panelGrid>
-        </p:tab>   
-        <p:tab title="Grafik" rendered="#{accountBean.logged}" >  
-            <h:panelGrid columns="1" cellpadding="10">
-               <h:outputLink value="schedule.jsf">Zarządzanie grafikiem</h:outputLink>
-            </h:panelGrid>
-            <h:panelGrid columns="1" cellpadding="10">
-               <h:outputLink value="settlement.jsf">Rozliczenia</h:outputLink>
-            </h:panelGrid>
-            <h:panelGrid columns="1" cellpadding="10">
-               <h:outputLink value="settlementSearch.jsf">Wyszukiwanie rozliczeń</h:outputLink>
-            </h:panelGrid> 
-        </p:tab>
-        <p:tab title="Wyszukiwanie" rendered="#{accountBean.logged}" >  
-            <h:panelGrid columns="1" cellpadding="10">
-               <h:outputLink value="easySearch.jsf">Szukanie proste</h:outputLink>
-            </h:panelGrid> 
-        </p:tab>
-    </p:accordionPanel>  
-  
-</h:form>
+
+         <h:form>
+            <p:accordionPanel autoHeight="false" dynamic="true" cache="true">
+               <p:tab title="Navigation">
+                  <h:panelGrid columns="2" cellpadding="10">
+                     <h:outputLink value="home.jsf" update="display">Home</h:outputLink>
+                  </h:panelGrid>
+               </p:tab>
+               <p:tab title="Pracownicy" rendered="#{accountBean.logged}">
+                  <h:panelGrid columns="1" cellpadding="10">
+                     <h:outputLink value="listingEmployees.jsf" ajax="true" update="center">Zarządanie pracownikami</h:outputLink>
+                     <p:commandLink value="Dodawanie pracownika" action="#{employeeBean.doRedirectAddEmployee()}" ajax="false" />
+                  </h:panelGrid>
+               </p:tab>
+               <p:tab title="Firma" rendered="#{accountBean.logged}">
+                  <h:panelGrid columns="1" cellpadding="10">
+                     <h:outputLink value="companyDetails.jsf">Info o firmie</h:outputLink>
+                  </h:panelGrid>
+                  <h:panelGrid columns="1" cellpadding="10">
+                     <h:outputLink value="listingRanks.jsf">Zarzadzanie stanowiskami</h:outputLink>
+                  </h:panelGrid>
+                  <h:panelGrid columns="1" cellpadding="10">
+                     <h:outputLink value="listingShifts.jsf">Zarzadzanie zmianami</h:outputLink>
+                  </h:panelGrid>
+               </p:tab>
+               <p:tab title="Grafik" rendered="#{accountBean.logged}">
+                  <h:panelGrid columns="1" cellpadding="10">
+                     <h:outputLink value="schedule.jsf">Zarządzanie grafikiem</h:outputLink>
+                  </h:panelGrid>
+                  <h:panelGrid columns="1" cellpadding="10">
+                     <h:outputLink value="settlement.jsf">Rozliczenia</h:outputLink>
+                  </h:panelGrid>
+                  <h:panelGrid columns="1" cellpadding="10">
+                     <h:outputLink value="settlementSearch.jsf">Wyszukiwanie rozliczeń</h:outputLink>
+                  </h:panelGrid>
+               </p:tab>
+            </p:accordionPanel>
+
+         </h:form>
       </p:layoutUnit>
 
       <p:layoutUnit id="center" position="center" scrollable="true">
@@ -84,6 +77,6 @@
       </p:layoutUnit>
 
    </p:layout>
-   
+
 </h:body>
 </html>

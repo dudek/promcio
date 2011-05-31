@@ -12,9 +12,11 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.NotEmpty;
 import com.promcio.domain.Employee;
+import com.promcio.domain.Employment;
 import com.promcio.domain.Rank;
 import com.promcio.domain.Shift;
 import com.promcio.service.CompanyManager;
+import com.promcio.service.EmployeeManager;
 
 @Model
 @Named
@@ -25,6 +27,8 @@ public class CompanyBean implements Serializable {
 
 	 @Inject
 	 CompanyManager companyManager;
+	 @Inject
+	 EmployeeManager employeeManager;
 
 	 @Inject
 	 AccountBean accountBean;
@@ -123,7 +127,12 @@ public class CompanyBean implements Serializable {
 	 }
 
 	 public List<Employee> getCompanyEmployees(long companyId) {
+			List<Employment> employments;
 			List<Employee> companyEmployees = companyManager.getAllCompanyEmployees(companyId);
+			for (Employee e : companyEmployees) {
+				 employments = employeeManager.getEmployments(e.getId());
+				 if (employments != null ) e.setEmployments(employments);
+			}
 			numberOfEmployees = companyEmployees.size();
 			return companyEmployees;
 	 }

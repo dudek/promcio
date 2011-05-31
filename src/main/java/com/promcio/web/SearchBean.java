@@ -3,6 +3,7 @@ package com.promcio.web;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -42,6 +43,10 @@ public class SearchBean implements Serializable {
 	 private List<Employee> employees = new ArrayList<Employee>();
 	 // --------
 
+	 private int actualDay;
+	 private int actualMonth;
+	 private int actualYear;
+
 	 private int month;
 	 private int year;
 	 private int overtimeOrNot;
@@ -52,12 +57,26 @@ public class SearchBean implements Serializable {
 
 	 private List<Employee> companyEmployees;
 	 private List<EmployeeSettlements> employeeSettlements;
+	 private List<Employment> employments;
+
+	 private int numberOfEmployees;
 
 	 /* --------------------------------------- */
 
 	 @PostConstruct
 	 public void viewInit() {
 			companyEmployees = companyManager.getAllCompanyEmployees(accountBean.getCompany().getId());
+			for (Employee e : companyEmployees) {
+				 employments = employeeManager.getEmployments(e.getId());
+				 if (employments != null) e.setEmployments(employments);
+			}
+			numberOfEmployees = companyEmployees.size();
+			
+			actualDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+			actualMonth = Calendar.getInstance().get(Calendar.MONTH);
+			actualYear = Calendar.getInstance().get(Calendar.YEAR);
+
+			System.out.println("\n" + actualDay + "/" + actualMonth + "/" + actualYear + "\n");
 
 			// inicjalizacja overtimeOrNotList
 			overtimeOrNotList = new ArrayList<SelectItem>();
@@ -65,7 +84,6 @@ public class SearchBean implements Serializable {
 			overtimeOrNotList.add(new SelectItem(1, "Brakujące godziny"));
 
 			// inicjalizacja years
-			int actualYear = Calendar.getInstance().get(Calendar.YEAR);
 			years = new ArrayList<SelectItem>();
 
 			for (int i = 2002; i <= actualYear; i++) {
@@ -281,6 +299,22 @@ public class SearchBean implements Serializable {
 			this.overtimeOrNotList = overtimeOrNotList;
 	 }
 
+	 public List<Employee> getCompanyEmployees() {
+	 	 return companyEmployees;
+	 }
+
+	 public void setCompanyEmployees(List<Employee> companyEmployees) {
+	 	 this.companyEmployees = companyEmployees;
+	 }
+
+	 public int getNumberOfEmployees() {
+			return numberOfEmployees;
+	 }
+
+	 public void setNumberOfEmployees(int numberOfEmployees) {
+			this.numberOfEmployees = numberOfEmployees;
+	 }
+
 	 /* --------------------------------------- */
 	 // actions
 
@@ -306,5 +340,17 @@ public class SearchBean implements Serializable {
 						else if (overtimeOrNot == 1 && es.getMonthOvertime() < 0) employeeSettlements.add(es);
 				 }
 			}
+	 }
+
+	 public void getEmployeesWithEndedContract() {
+			for(Iterator<Employee> it = companyEmployees.iterator(); it.hasNext();) {
+          Employee e = it.next();
+          if (e.getEmployments().get(0).getEndDate().getYear() >= actualYear && 
+ 							 ((e.getEmployments().get(0).getEndDate().getMonth() == actualMonth &&
+ 							 e.getEmployments().get(0).getEndDate().getDay() > actualDay) || 
+ 							 e.getEmployments().get(0).getEndDate().getMonth() > actualMonth)) {
+ 						it.remove();
+ 				 }
+      }
 	 }
 }
