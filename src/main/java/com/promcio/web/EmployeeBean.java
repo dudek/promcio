@@ -265,14 +265,16 @@ public class EmployeeBean implements Serializable {
 			this.rank = employee.getRank();
 			// this.employments = employee.getEmployments();
 
-			employeeDetailsBean.setApartmentNumber(this.details.getApartmentNumber());
-			employeeDetailsBean.setBuildingNumber(this.details.getBuildingNumber());
-			employeeDetailsBean.setCity(this.details.getCity());
-			employeeDetailsBean.setEmail(this.details.getEmail());
-			employeeDetailsBean.setPhoneNumber(this.details.getPhoneNumber());
-			employeeDetailsBean.setPostCode(this.details.getPostCode());
-			employeeDetailsBean.setStaircaseNumber(this.details.getStaircaseNumber());
-			employeeDetailsBean.setStreet(this.details.getStreet());
+			if ( this.details != null ){
+				employeeDetailsBean.setApartmentNumber(this.details.getApartmentNumber());
+				employeeDetailsBean.setBuildingNumber(this.details.getBuildingNumber());
+				employeeDetailsBean.setCity(this.details.getCity());
+				employeeDetailsBean.setEmail(this.details.getEmail());
+				employeeDetailsBean.setPhoneNumber(this.details.getPhoneNumber());
+				employeeDetailsBean.setPostCode(this.details.getPostCode());
+				employeeDetailsBean.setStaircaseNumber(this.details.getStaircaseNumber());
+				employeeDetailsBean.setStreet(this.details.getStreet());
+			}
 			return "employeeDetails?faces-redirect=true";
 	 }
 

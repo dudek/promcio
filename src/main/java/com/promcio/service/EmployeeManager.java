@@ -152,12 +152,15 @@ public class EmployeeManager {
 	 public void addEmployment(long employeeId, String contractType, Date startDate, Date endDate, float contractValue, int period, int hoursNorm, float hourSalary) {
 			Employee employee = em.find(Employee.class, employeeId);
 			Employment employment = new Employment();
-
-			Calendar from = scheduleManager.addOrGetCalendarFromDate(startDate);
-			Calendar to = scheduleManager.addOrGetCalendarFromDate(endDate);
 			
-			employment.setStartDate(from);
-			employment.setEndDate(to);
+			if ( startDate != null && endDate != null){
+				Calendar from = scheduleManager.addOrGetCalendarFromDate(startDate);
+				Calendar to = scheduleManager.addOrGetCalendarFromDate(endDate);
+				
+				employment.setStartDate(from);
+				employment.setEndDate(to);				
+			}
+
 			
 			employment.setContractType(contractType);
 			employment.setContractValue(contractValue);
@@ -173,11 +176,13 @@ public class EmployeeManager {
 	 public void updateEmployment(long id, String contractType, Date startDate, Date endDate, float contractValue, int period, int hoursNorm, float hourSalary) {
 			Employment employment = em.find(Employment.class, id);
 
-			Calendar from = scheduleManager.addOrGetCalendarFromDate(startDate);
-			Calendar to = scheduleManager.addOrGetCalendarFromDate(endDate);
-			
-			employment.setStartDate(from);
-			employment.setEndDate(to);
+			if ( startDate != null && endDate != null){
+				Calendar from = scheduleManager.addOrGetCalendarFromDate(startDate);
+				Calendar to = scheduleManager.addOrGetCalendarFromDate(endDate);
+				
+				employment.setStartDate(from);
+				employment.setEndDate(to);				
+			}
 			
 			employment.setContractType(contractType);
 			employment.setContractValue(contractValue);
