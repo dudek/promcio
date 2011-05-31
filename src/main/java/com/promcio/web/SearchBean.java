@@ -353,4 +353,14 @@ public class SearchBean implements Serializable {
  				 }
       }
 	 }
+	 
+	 public void doRemoveEmployee(long id) {
+			employeeManager.removeEmployee(id);
+			companyEmployees = companyManager.getAllCompanyEmployees(accountBean.getCompany().getId());
+			for (Employee e : companyEmployees) {
+				 employments = employeeManager.getEmployments(e.getId());
+				 if (employments != null) e.setEmployments(employments);
+			}
+			numberOfEmployees = companyEmployees.size();
+	 }
 }
