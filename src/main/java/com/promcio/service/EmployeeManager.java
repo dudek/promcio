@@ -15,6 +15,8 @@ import com.promcio.domain.Employee;
 import com.promcio.domain.EmployeeDetails;
 import com.promcio.domain.Employment;
 import com.promcio.domain.Rank;
+import com.promcio.domain.Schedule;
+import com.promcio.domain.Settlement;
 
 @Stateless
 public class EmployeeManager {
@@ -75,11 +77,30 @@ public class EmployeeManager {
 			Employee employee = em.find(Employee.class, id);
 			EmployeeDetails details = employee.getDetails();
 			if ((details) != null) em.remove(details);
-			List<Employment> employments = employee.getEmployments();
-			if (employments != null) for (Employment employment : employments)
-				 em.remove(employment);
+			List<Employment> employments = em.createQuery("SELECT e FROM Employment e WHERE e.employee=:employee").setParameter("employee", employee).getResultList();
+			if (employments != null){
+				for (Employment employment : employments)
+					 em.remove(employment);
+			}
 			Company company = employee.getCompany();
 			if (company != null) employee.getCompany().getEmployees().remove(employee);
+			
+			em.createQuery("DELETE FROM Settlement s WHERE s.employee=:employee").setParameter("employee", employee).executeUpdate();
+			/* Zapytanie natywane SQL ponieważ sypało wyjątkami korzystając JPQL 
+			 */
+			em.createNativeQuery("DELETE FROM Schedule_Employee WHERE employees_id=:id").setParameter("id", employee.getId()).executeUpdate();
+			
+//			ArrayList<Settlement> employeeSettlements =  (ArrayList<Settlement>) em.createQuery("SELECT s FROM Settlement s WHERE s.employee=:employee").setParameter("employee", employee).getResultList();
+//			for ( Settlement it : employeeSettlements ){
+//				it = em.find(Settlement.class, it.getId());
+//				em.remove(it);
+//			}
+//			ArrayList<Schedule> employeeSchedules = (ArrayList<Schedule>) em.createQuery("SELECT s FROM Schedule s, IN (s.employees) e WHERE e.id=:id").setParameter("id", employee.getId()).getResultList();
+//			for ( Schedule schedule : employeeSchedules ){
+//				schedule = em.find(Schedule.class, schedule.getId());
+//				schedule.getEmployees().remove(employee);
+//			}
+			
 			em.remove(employee);
 	 }
 
